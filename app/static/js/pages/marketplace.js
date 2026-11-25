@@ -252,6 +252,31 @@
     $('origin-wrap').hidden = !artist;
     $('origin-wrap').querySelector('textarea').required = artist;
   };
+  document.querySelectorAll('.password-toggle').forEach((button) => {
+    button.addEventListener('click', () => {
+      const input = button.parentElement.querySelector('input');
+      const visible = input.type === 'password';
+      input.type = visible ? 'text' : 'password';
+      button.setAttribute('aria-pressed', String(visible));
+      button.setAttribute(
+        'aria-label',
+        visible ? 'Hide password' : 'Show password',
+      );
+      button.querySelector('.eye-icon').hidden = visible;
+      button.querySelector('.eye-off-icon').hidden = !visible;
+    });
+  });
+  document.querySelectorAll('#login-form, #register-form').forEach((form) => {
+    form.addEventListener('reset', () => {
+      const button = form.querySelector('.password-toggle');
+      const input = button.parentElement.querySelector('input');
+      input.type = 'password';
+      button.setAttribute('aria-pressed', 'false');
+      button.setAttribute('aria-label', 'Show password');
+      button.querySelector('.eye-icon').hidden = false;
+      button.querySelector('.eye-off-icon').hidden = true;
+    });
+  });
   $('register-form').onsubmit = (e) => {
     e.preventDefault();
     const form = e.currentTarget;

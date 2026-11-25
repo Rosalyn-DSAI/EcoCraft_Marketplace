@@ -363,6 +363,38 @@ a {
 .inline-form input {
   margin-top: 5px;
 }
+.password-input {
+  display: block;
+  position: relative;
+  margin-top: 5px;
+}
+.password-input input {
+  margin-top: 0;
+  padding-right: 44px;
+}
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 7px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 5px;
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+}
+.password-toggle:hover {
+  background: var(--mint);
+  color: var(--ink);
+}
+.password-toggle svg {
+  width: 20px;
+  height: 20px;
+}
 .two {
   display: flex;
   gap: 12px;
