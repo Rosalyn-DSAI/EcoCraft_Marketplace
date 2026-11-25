@@ -103,7 +103,14 @@ def update_product(item_id):
         return api_error('CONFLICT', 'Sustainability of listed products is managed by EcoCraft admins', 409)
     if existing.get('approvalStatus') == 'rejected':
         changes.update({'approvalStatus': 'pending_review', 'listProduct': False})
-    db.products.update_one({'_id': existing['_id'], 'artistId': g.current_user['_id']}, {'$set': stamp_update(changes)})
+    result = db.products.update_one(
+        {'_id': existing['_id'], 'artistId': g.current_user['_id'],
+         'approvalStatus': existing.get('approvalStatus'), 'listProduct': existing.get('listProduct'),
+         'active': {'$ne': False}},
+        {'$set': stamp_update(changes)},
+    )
+    if result.matched_count == 0:
+        return api_error('CONFLICT', 'Product status changed; refresh and try again', 409)
     return jsonify(product=jsonify_doc(db.products.find_one({'_id': existing['_id']}))), 200
 
 
