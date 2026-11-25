@@ -44,7 +44,7 @@ Product `sustainability` is `{practices, summary, certifications}`. Artists writ
 
 ## Product and image lifecycle
 
-Artist creation sets `approvalStatus: pending_review` and `listProduct: false`. Editing a rejected product resubmits it for review. Editing a listed product saves directly, but sustainability is admin-managed and cannot be changed by the artist. Admin approval lists the product. Deleting a product is a soft delete: it sets `active: false` and removes the product from every cart, so existing orders and reviews keep their references. Ordered products also reject direct inventory replacement.
+Artist creation sets `active: true`, `approvalStatus: pending_review` and `listProduct: false`. Editing a rejected product resubmits it for review. Editing a listed product saves directly, but sustainability is admin-managed and cannot be changed by the artist. Admin approval lists the product. Deleting a product is a soft delete: it sets `active: false` without modifying carts, so existing orders and reviews keep their references. Cart lines remain visible as unavailable until removed by the customer. Ordered products also reject direct inventory replacement.
 
 File uploads use a protected artist endpoint with the same write and seed guards. The endpoint raises the multipart body limit independently of the 16 KB JSON limit. The adapter checks a 4 MB file-size limit and PNG, JPEG, or WebP signatures, then sends a server-authenticated request to Cloudinary. Only the resulting HTTPS URL is stored on the product. Signature checks do not fully decode an image. Existing HTTPS URLs bypass uploading. Unchanged image arrays are preserved during edits. Unused uploaded images are not deleted automatically.
 

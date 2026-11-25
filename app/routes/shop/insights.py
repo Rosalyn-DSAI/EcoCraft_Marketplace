@@ -2,7 +2,6 @@
 from datetime import datetime, timezone
 from decimal import Decimal
 
-from bson import ObjectId
 from flask import g, jsonify, request
 
 from ...db import get_database
@@ -26,9 +25,9 @@ def insights_window(args):
 
 
 def artist_orders_in(db, artist_id, lo, hi):
-    """Group the artist's own order items by order for orders placed in [lo,hi); the order _id carries its placement time."""
+    """Group the artist's own order items by order for orders created in [lo,hi)."""
     pipeline = [
-        {'$match': {'_id': {'$gte': ObjectId.from_datetime(lo), '$lt': ObjectId.from_datetime(hi)}, 'items.productSnapshot.artistId': artist_id}},
+        {'$match': {'createdAt': {'$gte': lo, '$lt': hi}, 'items.productSnapshot.artistId': artist_id}},
         {'$unwind': '$items'},
         {'$match': {'items.productSnapshot.artistId': artist_id}},
         {'$project': {'_id': 1, 'item': '$items'}},

@@ -24,7 +24,7 @@ def add_review():
     denied = written()
     if denied:
         return denied
-    data = obj(request.get_json(silent=True), {'productId', 'orderId', 'rating', 'comment'}, ('productId', 'orderId', 'rating', 'comment'))
+    data = obj(request.get_json(silent=True), {'productId', 'orderId', 'rating', 'comment'}, ('productId', 'orderId', 'rating'))
     pid = oid(data['productId'])
     order_id = oid(data['orderId'])
     rating = whole(data['rating'], 'rating', 1, 5)
@@ -38,7 +38,7 @@ def add_review():
     if db.reviews.find_one({'customerId': g.current_user['_id'], 'productId': pid, 'orderId': order_id, 'active': {'$ne': False}}):
         return api_error('DUPLICATE', 'You have already reviewed this item', 409)
     doc = {'_id': ObjectId(), 'productId': pid, 'customerId': g.current_user['_id'], 'orderId': order_id, 'rating': rating, 'active': True}
-    doc['comment'] = string(data['comment'], 'comment', 1000, 0)
+    doc['comment'] = string(data.get('comment', ''), 'comment', 1000, 0)
     db.reviews.insert_one(stamp_insert(doc))
     return jsonify(review=jsonify_doc(doc)), 201
 
