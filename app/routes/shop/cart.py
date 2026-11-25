@@ -1,8 +1,13 @@
 """Customer cart: read, add, change quantity and remove items with stock and seed-policy checks."""
+import hashlib
+import json
+
 from bson import ObjectId
 from flask import g, jsonify, request
+from pymongo import ReturnDocument
+from pymongo.errors import DuplicateKeyError
 
-from ...db import get_database, stamp_update, utc_now
+from ...db import get_database, stamp_insert, stamp_update
 from ...domain.validation import obj, whole
 from ...security import api_error, auth_required
 from .common import LISTED_PRODUCT, artist_is_eligible, demo_product, eligible_artist_ids, jsonify_doc, oid, safe, shop_bp, written
@@ -16,18 +21,53 @@ def get_cart():
     db = get_database()
     doc = db.cart.find_one({'customerId': g.current_user['_id']})
     if not doc:
-        return jsonify(cart={'customerId': str(g.current_user['_id']), 'items': []}), 200
+        return jsonify(cart={'customerId': str(g.current_user['_id']), 'items': [], 'revision': cart_revision(None)}), 200
     return jsonify(cart=cart_payload(db, doc)), 200
 
 
 def cart_payload(db, doc):
-    """Return the cart with product display details; lines whose product or artist is unavailable get product null."""
+    """Return available product details or only a title for unavailable cart lines."""
     cart = jsonify_doc(doc)
+    cart['revision'] = cart_revision(doc)
     ids = [x['productId'] for x in doc.get('items', [])]
     eligible = set(eligible_artist_ids(db))
     products = {p['_id']: p for p in db.products.find({'_id': {'$in': ids}, **LISTED_PRODUCT}, {'title': 1, 'price': 1, 'category': 1, 'images': 1, 'inventory': 1, 'artistId': 1})}
-    cart['items'] = [{'productId': str(x['productId']), 'quantity': x['quantity'], 'product': cart_product(visible_product(products.get(x['productId']), eligible))} for x in doc.get('items', [])]
+    unavailable_ids = [pid for pid in ids if not visible_product(products.get(pid), eligible)]
+    titles = {p['_id']: p.get('title') for p in db.products.find({'_id': {'$in': unavailable_ids}}, {'title': 1})} if unavailable_ids else {}
+    cart['items'] = []
+    for item in doc.get('items', []):
+        pid = item['productId']
+        product = cart_product(visible_product(products.get(pid), eligible))
+        line = {'productId': str(pid), 'quantity': item['quantity'], 'product': product}
+        if product is None:
+            line['productTitle'] = titles.get(pid)
+        cart['items'].append(line)
     return cart
+
+
+def cart_revision(cart):
+    """Represent the cart state using its identity, timestamp and exact item contents."""
+    if cart is None:
+        return 'empty'
+    state = {'id': str(cart['_id']), 'updatedAt': jsonify_doc(cart.get('updatedAt')),
+             'items': jsonify_doc(cart['items'])}
+    encoded = json.dumps(state, sort_keys=True, separators=(',', ':')).encode('utf-8')
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def cart_snapshot_filter(cart):
+    """Match the exact state read, including legacy carts without updatedAt."""
+    return {'_id': cart['_id'], 'customerId': cart['customerId'],
+            'items': cart['items'],
+            'updatedAt': cart['updatedAt'] if 'updatedAt' in cart else {'$exists': False}}
+
+
+def cart_conflict():
+    return api_error('CART_CONFLICT', 'Your cart changed. Refresh it and try again.', 409)
+
+
+def revision_matches(cart):
+    return request.headers.get('X-Cart-Revision') == cart_revision(cart)
 
 
 def visible_product(p, eligible_artists):
@@ -57,7 +97,7 @@ def cart_product(p):
 @auth_required('customer')
 @safe
 def cart_add():
-    """Add or merge a cart item after eligibility/stock checks; array replacement is not transactional."""
+    """Add or merge a cart item with an optimistic concurrency check."""
     denied = written()
     if denied:
         return denied
@@ -71,7 +111,9 @@ def cart_add():
     if not demo_product(db, product):
         return api_error('SEEDED_RECORD_PROTECTED', 'Demo purchases use newly registered artists and their products only', 403)
     existing = db.cart.find_one({'customerId': g.current_user['_id']})
-    items = existing['items'][:] if existing else []
+    if not revision_matches(existing):
+        return cart_conflict()
+    items = [dict(item) for item in existing['items']] if existing else []
     match = next((x for x in items if x['productId'] == pid), None)
     total = (match['quantity'] if match else 0) + qty
     if total > 100:
@@ -83,8 +125,22 @@ def cart_add():
         match['quantity'] = total
     else:
         items.append({'productId': pid, 'quantity': qty})
-    db.cart.update_one({'customerId': g.current_user['_id']}, {'$set': stamp_update({'items': items}), '$setOnInsert': {'_id': ObjectId(), 'customerId': g.current_user['_id'], 'createdAt': utc_now()}}, upsert=True)
-    return jsonify(cart=cart_payload(db, db.cart.find_one({'customerId': g.current_user['_id']}))), 200
+    if existing is None:
+        cart = stamp_insert({'_id': ObjectId(), 'customerId': g.current_user['_id'], 'items': items})
+        try:
+            db.cart.insert_one(cart)
+        except DuplicateKeyError:
+            if db.cart.find_one({'customerId': g.current_user['_id']}):
+                return cart_conflict()
+            raise
+        cart = db.cart.find_one({'_id': cart['_id'], 'customerId': g.current_user['_id']})
+        if cart is None:
+            return cart_conflict()
+    else:
+        cart = db.cart.find_one_and_update(cart_snapshot_filter(existing), {'$set': stamp_update({'items': items})}, return_document=ReturnDocument.AFTER)
+        if cart is None:
+            return cart_conflict()
+    return jsonify(cart=cart_payload(db, cart)), 200
 
 
 @shop_bp.patch('/cart/items/<item_id>')
@@ -100,6 +156,8 @@ def cart_quantity(item_id):
     pid = oid(item_id)
     db = get_database()
     cart = db.cart.find_one({'customerId': g.current_user['_id']})
+    if not revision_matches(cart):
+        return cart_conflict()
     if not cart or not any(x['productId'] == pid for x in cart['items']):
         return api_error('NOT_FOUND', 'Cart item not found', 404)
     product = db.products.find_one({'_id': pid, **LISTED_PRODUCT})
@@ -109,8 +167,10 @@ def cart_quantity(item_id):
     if qty > available:
         return api_error('OUT_OF_STOCK', f'Cannot set quantity above {available}. Only {available} available in stock', 409)
     items = [{**x, 'quantity': qty} if x['productId'] == pid else x for x in cart['items']]
-    db.cart.update_one({'_id': cart['_id'], 'customerId': g.current_user['_id']}, {'$set': stamp_update({'items': items})})
-    return jsonify(cart=cart_payload(db, db.cart.find_one({'_id': cart['_id']}))), 200
+    updated = db.cart.find_one_and_update(cart_snapshot_filter(cart), {'$set': stamp_update({'items': items})}, return_document=ReturnDocument.AFTER)
+    if updated is None:
+        return cart_conflict()
+    return jsonify(cart=cart_payload(db, updated)), 200
 
 
 @shop_bp.delete('/cart/items/<item_id>')
@@ -124,7 +184,11 @@ def cart_remove(item_id):
     pid = oid(item_id)
     db = get_database()
     cart = db.cart.find_one({'customerId': g.current_user['_id']})
+    if not revision_matches(cart):
+        return cart_conflict()
     if not cart or not any(x['productId'] == pid for x in cart['items']):
         return api_error('NOT_FOUND', 'Cart item not found', 404)
-    db.cart.update_one({'_id': cart['_id'], 'customerId': g.current_user['_id']}, {'$pull': {'items': {'productId': pid}}, '$set': stamp_update({})})
-    return jsonify(cart=cart_payload(db, db.cart.find_one({'_id': cart['_id']}))), 200
+    updated = db.cart.find_one_and_update(cart_snapshot_filter(cart), {'$pull': {'items': {'productId': pid}}, '$set': stamp_update({})}, return_document=ReturnDocument.AFTER)
+    if updated is None:
+        return cart_conflict()
+    return jsonify(cart=cart_payload(db, updated)), 200

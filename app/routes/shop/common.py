@@ -1,5 +1,5 @@
 """Shared blueprint, request parsing and seed-policy helpers for the marketplace API."""
-from datetime import datetime
+from datetime import datetime, timezone
 from decimal import Decimal
 from functools import wraps
 
@@ -13,6 +13,10 @@ from ...security import api_error, can_edit_user, require_write_enabled
 shop_bp = Blueprint('shop', __name__)
 
 
+class CartChanged(Exception):
+    """Abort an in-progress transaction when the cart changed."""
+
+
 def safe(fn):
     """Convert expected input/database exceptions to predictable JSON without leaking details."""
     @wraps(fn)
@@ -21,6 +25,8 @@ def safe(fn):
             return fn(*a, **k)
         except BadInput as exc:
             return api_error('VALIDATION_ERROR', str(exc), 400)
+        except CartChanged:
+            return api_error('CART_CONFLICT', 'Your cart changed. Refresh it and try again.', 409)
         except DuplicateKeyError:
             return api_error('DUPLICATE', 'A matching record already exists', 409)
         except (PyMongoError, ValueError):
@@ -45,6 +51,8 @@ def jsonify_doc(value):
     if isinstance(value, Decimal):
         return format(value, '.2f')
     if isinstance(value, datetime):
+        if value.utcoffset() is None:
+            value = value.replace(tzinfo=timezone.utc)
         return value.isoformat()
     if isinstance(value, list):
         return [jsonify_doc(v) for v in value]

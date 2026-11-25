@@ -100,6 +100,9 @@
     const h = { Accept: 'application/json' };
     if (body !== undefined) h['Content-Type'] = 'application/json';
     if (state.token) h.Authorization = 'Bearer ' + state.token;
+    if (method !== 'GET' && (path.startsWith('/cart/items') || path === '/orders/checkout')) {
+      h['X-Cart-Revision'] = state.cart?.revision || '';
+    }
     const response = await fetch('/api' + path, {
       method,
       headers: h,
@@ -112,8 +115,11 @@
     } catch {
       throw Error('API returned a non-JSON response');
     }
-    if (!response.ok)
-      throw Error(data?.error?.message || `HTTP ${response.status}`);
+    if (!response.ok) {
+      const error = Error(data?.error?.message || `HTTP ${response.status}`);
+      error.code = data?.error?.code;
+      throw error;
+    }
     return data;
   }
   async function run(fn) {
@@ -1236,7 +1242,7 @@
             const p = x.product;
             const pid = esc(x.productId);
             if (!p)
-              return `<article class="cart-line is-unavailable"><div class="cart-info"><h3>Product ${esc(x.productId.slice(-8))}</h3><p class="error-text">This product is no longer available. Remove it to continue.</p><div class="actions"><button class="danger-btn" data-remove-cart="${pid}">Remove</button></div></div></article>`;
+              return `<article class="cart-line is-unavailable"><div class="cart-info"><h3>${esc(x.productTitle || 'Product unavailable')}</h3><p class="error-text">This product is no longer available. Remove it to continue.</p><div class="actions"><button class="danger-btn" data-remove-cart="${pid}">Remove</button></div></div></article>`;
             const available = Number(p.quantityAvailable) || 0;
             const outOfStock = available <= 0;
             const short = !outOfStock && x.quantity > available;
@@ -1284,6 +1290,11 @@
     updateCartControls();
     try {
       await fn();
+    } catch (err) {
+      if (err?.code === 'CART_CONFLICT') {
+        await refreshCart();
+      }
+      throw err;
     } finally {
       cartVersion++;
       cartBusy = false;

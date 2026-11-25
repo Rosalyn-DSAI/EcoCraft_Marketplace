@@ -81,7 +81,13 @@
           `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="4" class="mp-dot"><title>${esc(data[i].label)}: ${esc(fmt(data[i].value))}</title></circle>`,
       )
       .join('');
-    return `<svg viewBox="0 0 ${W} ${H}" class="mp-svg" role="img" aria-label="${esc(opts.label || 'Line chart')}">${grid}<path d="${area}" class="mp-area"/><path d="${path}" class="mp-line"/>${dots}${xLabels}</svg>`;
+    const tableRows = data
+      .map(
+        (p) =>
+          `<tr><th scope="row">${esc(p.label)}</th><td>${esc(fmt(p.value))}</td></tr>`,
+      )
+      .join('');
+    return `<svg viewBox="0 0 ${W} ${H}" class="mp-svg" role="img" aria-label="${esc(opts.label || 'Line chart')}">${grid}<path d="${area}" class="mp-area"/><path d="${path}" class="mp-line"/>${dots}${xLabels}</svg><details><summary>View chart data</summary><table class="mp-table"><caption>${esc(opts.label || 'Line chart')}</caption><thead><tr><th scope="col">Period</th><th scope="col">Value</th></tr></thead><tbody>${tableRows}</tbody></table></details>`;
   }
 
   function donut(items, opts = {}) {

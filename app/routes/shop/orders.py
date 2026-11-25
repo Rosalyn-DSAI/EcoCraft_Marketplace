@@ -8,7 +8,14 @@ from ...db import get_client, get_database, stamp_insert, stamp_update
 from ...domain.orders import amounts, order_status, order_totals, parse_address
 from ...domain.validation import BadInput, obj, string, whole
 from ...security import api_error, auth_required, can_edit_user
-from .common import ELIGIBLE_ARTIST, LISTED_PRODUCT, jsonify_doc, oid, safe, shop_bp, written
+from .cart import cart_conflict, cart_snapshot_filter, revision_matches
+from .common import CartChanged, ELIGIBLE_ARTIST, LISTED_PRODUCT, jsonify_doc, oid, safe, shop_bp, written
+
+
+def artist_order_items(order, artist_id):
+    """Return only the artist's items with their original order indices."""
+    return [{**item, 'itemIndex': i} for i, item in enumerate(order['items'])
+            if item['productSnapshot']['artistId'] == artist_id]
 
 
 @shop_bp.post('/orders/checkout')
@@ -27,6 +34,8 @@ def checkout():
     with get_client().start_session() as session:
         with session.start_transaction():
             cart = db.cart.find_one({'customerId': g.current_user['_id']}, session=session)
+            if not revision_matches(cart):
+                return cart_conflict()
             if not cart or not cart.get('items'):
                 raise BadInput('Cart is empty')
             items = []
@@ -35,11 +44,11 @@ def checkout():
                 qty = whole(chosen['quantity'], 'quantity', 1, 100)
                 product = db.products.find_one({'_id': pid, **LISTED_PRODUCT}, session=session)
                 if not product:
-                    raise BadInput('A cart product is no longer available')
+                    raise BadInput('A cart product is no longer available. Refresh your cart and remove it to continue.')
                 artist = db.users.find_one({'_id': product['artistId'], **ELIGIBLE_ARTIST}, session=session)
                 if not artist or not can_edit_user(artist):
                     raise BadInput(f"{product['title']} is not available because its artist is not accepting orders. Remove it to continue.")
-                result = db.products.update_one({'_id': pid, 'inventory.quantityAvailable': {'$gte': qty}}, {'$inc': {'inventory.quantityAvailable': -qty}, '$set': stamp_update({})}, session=session)
+                result = db.products.update_one({'_id': pid, **LISTED_PRODUCT, 'inventory.quantityAvailable': {'$gte': qty}}, {'$inc': {'inventory.quantityAvailable': -qty}, '$set': stamp_update({})}, session=session)
                 if result.modified_count != 1:
                     raise BadInput('Not enough stock for ' + product['title'])
                 price = product['price'].to_decimal()
@@ -48,7 +57,9 @@ def checkout():
             totals = {k: Decimal128(v) for k, v in order_totals(items).items()}
             order = {'_id': ObjectId(), 'customerId': g.current_user['_id'], 'items': items, 'shippingAddress': address, 'totals': totals, 'orderStatus': 'pending'}
             db.orders.insert_one(stamp_insert(order), session=session)
-            db.cart.delete_one({'_id': cart['_id'], 'customerId': g.current_user['_id']}, session=session)
+            result = db.cart.delete_one(cart_snapshot_filter(cart), session=session)
+            if result.deleted_count != 1:
+                raise CartChanged()
     return jsonify(order=jsonify_doc(order), message='Order placed (coursework demo; no payment processed)'), 201
 
 
@@ -76,7 +87,7 @@ def artist_sales():
     # Keep only current artist's item details (avoid disclosure of other artists' sales).
     results = []
     for doc in docs:
-        results.append({'orderId': str(doc['_id']), 'createdAt': jsonify_doc(doc.get('createdAt')), 'items': jsonify_doc([{**x, 'itemIndex': i} for i, x in enumerate(doc['items']) if x['productSnapshot']['artistId'] == g.current_user['_id']])})
+        results.append({'orderId': str(doc['_id']), 'createdAt': jsonify_doc(doc.get('createdAt')), 'items': jsonify_doc(artist_order_items(doc, g.current_user['_id']))})
     return jsonify(sales=results), 200
 
 
@@ -145,4 +156,6 @@ def ship_item(order_id, idx):
             item['shipping']['shippedAt'] = datetime.now(timezone.utc)
             item['shipping']['trackingNumber'] = tracking
             db.orders.update_one({'_id': o}, {'$set': stamp_update({'items': order['items'], 'orderStatus': order_status(order['items'])})}, session=session)
-    return jsonify(order=jsonify_doc(db.orders.find_one({'_id': o}))), 200
+    visible_order = {'_id': order['_id'], 'createdAt': order.get('createdAt'),
+                     'items': artist_order_items(order, g.current_user['_id'])}
+    return jsonify(order=jsonify_doc(visible_order)), 200

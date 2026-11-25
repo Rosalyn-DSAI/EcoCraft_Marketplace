@@ -11,9 +11,12 @@ from ...security import api_error, artist_not_approved_message, auth_required
 from .common import add_rating_summaries, demo_artist, jsonify_doc, oid, safe, shop_bp, written
 
 
-def own_product(db, product_id):
+def own_product(db, product_id, include_inactive=False):
     """Find an artist-owned editable product; deny another artist's or original seed product."""
-    doc = db.products.find_one({'_id': product_id, 'artistId': g.current_user['_id'], 'active': {'$ne': False}})
+    query = {'_id': product_id, 'artistId': g.current_user['_id']}
+    if not include_inactive:
+        query['active'] = {'$ne': False}
+    doc = db.products.find_one(query)
     if not doc:
         return None
     if not demo_artist(db, doc['artistId']):
@@ -73,7 +76,7 @@ def create_product():
         return denied
     fields = parse_product(request.get_json(silent=True))
     fields['price'] = Decimal128(fields['price'])
-    doc = {'_id': ObjectId(), 'artistId': g.current_user['_id'], **fields, 'commissionRate': 10, 'approvalStatus': 'pending_review', 'listProduct': False}
+    doc = {'_id': ObjectId(), 'artistId': g.current_user['_id'], **fields, 'commissionRate': 10, 'approvalStatus': 'pending_review', 'listProduct': False, 'active': True}
     get_database().products.insert_one(stamp_insert(doc))
     return jsonify(product=jsonify_doc(doc), message='Product submitted for admin approval'), 201
 
@@ -126,7 +129,7 @@ def delete_product(item_id):
     artist_id = g.current_user['_id']
     product_id = oid(item_id)
     try:
-        existing = own_product(db, product_id)
+        existing = own_product(db, product_id, include_inactive=True)
     except PyMongoError:
         current_app.logger.exception('Product delete failed at ownership lookup: product=%s artist=%s', item_id, artist_id)
         raise
@@ -140,9 +143,5 @@ def delete_product(item_id):
         raise
     if result.matched_count != 1:
         current_app.logger.warning('Product delete matched %s documents: product=%s artist=%s', result.matched_count, item_id, artist_id)
-    try:
-        db.cart.update_many({'items.productId': existing['_id']}, {'$pull': {'items': {'productId': existing['_id']}}, '$set': stamp_update({})})
-    except PyMongoError:
-        current_app.logger.exception('Product delete failed at cart cleanup: product=%s artist=%s', item_id, artist_id)
-        raise
+        return api_error('NOT_FOUND', 'Editable product not found', 404)
     return jsonify(message='Product deleted'), 200
