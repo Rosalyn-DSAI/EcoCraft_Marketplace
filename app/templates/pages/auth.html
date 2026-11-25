@@ -1,0 +1,73 @@
+<section class="page" id="page-auth" hidden>
+  <div class="section-heading">
+    <div>
+      <p class="kicker">YOUR ECOCRAFT JOURNEY</p>
+      <h2>Welcome in</h2>
+    </div>
+  </div>
+  <div class="dual">
+    <article class="panel">
+      <h3>Sign in</h3>
+      <p class="hint">
+        Use your registered account or an existing team admin account.
+      </p>
+      <form id="login-form" class="form">
+        <label
+          >Email
+          <input
+            type="email"
+            name="email"
+            required
+            autocomplete="username" /></label
+        ><label
+          >Password
+          <input
+            type="password"
+            name="password"
+            required
+            autocomplete="current-password" /></label
+        ><button class="primary">Sign in →</button>
+      </form>
+    </article>
+    <article class="panel">
+      <h3>Create an account</h3>
+      <p class="hint">
+        Customers can sign in immediately. New artists require an admin's
+        approval.
+      </p>
+      <form id="register-form" class="form">
+        <div class="two">
+          <label
+            >First name
+            <input name="firstName" maxlength="100" required /></label
+          ><label
+            >Last name <input name="lastName" maxlength="100" required
+          /></label>
+        </div>
+        <label>Email <input type="email" name="email" required /></label
+        ><label
+          >Password
+          <input
+            name="password"
+            type="password"
+            minlength="10"
+            maxlength="128"
+            autocomplete="new-password"
+            required /></label
+        ><label
+          >Account type<select id="register-role" name="role">
+            <option value="customer">Customer</option>
+            <option value="artist">Artist</option>
+          </select></label
+        ><label id="origin-wrap" hidden
+          >My maker story<textarea
+            name="originStory"
+            maxlength="2000"
+            rows="3"
+            placeholder="Tell us about your sustainable art"
+          ></textarea></label
+        ><button class="primary">Create account →</button>
+      </form>
+    </article>
+  </div>
+</section>

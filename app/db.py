@@ -1,10 +1,31 @@
 """Shared MongoDB client; never opens a connection just by importing the app."""
+from datetime import datetime, timezone
+
 from flask import current_app
 from pymongo import MongoClient
 
 
 class DatabaseConfigurationError(Exception):
     """Expected configuration problem (credentials or host missing)."""
+
+
+def utc_now():
+    return datetime.now(timezone.utc)
+
+
+def stamp_insert(doc):
+    """Set createdAt and updatedAt (equal) on a new document before insert_one."""
+    now = utc_now()
+    doc["createdAt"] = now
+    doc["updatedAt"] = now
+    return doc
+
+
+def stamp_update(changes):
+    """Return a $set dict with updatedAt refreshed; createdAt is never overwritten."""
+    changes.pop("createdAt", None)
+    changes["updatedAt"] = utc_now()
+    return changes
 
 
 def get_client():

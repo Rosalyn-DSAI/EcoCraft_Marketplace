@@ -1,0 +1,117 @@
+<section class="page" id="page-catalog">
+  <div id="catalog-home">
+    <section class="collection-block" aria-labelledby="thoughtful-title">
+      <div class="section-heading inner">
+        <h3>
+          <button
+            id="thoughtful-title"
+            class="collection-title"
+            type="button"
+            data-collection-all
+          >
+            Thoughtful Finds
+          </button>
+        </h3>
+      </div>
+      <p class="hint">
+        A curated mix of sustainable, handmade, and unique products.
+      </p>
+      <div
+        id="featured-rail"
+        class="product-rail"
+        tabindex="0"
+        aria-label="Thoughtful Finds products"
+      ></div>
+    </section>
+    <section class="collection-block" aria-labelledby="makers-title">
+      <div class="section-heading inner">
+        <h3>
+          <button
+            id="makers-title"
+            class="collection-title"
+            type="button"
+            data-makers-all
+          >
+            Meet the Makers
+          </button>
+        </h3>
+      </div>
+      <p class="hint">Meet the artists behind the products.</p>
+      <div
+        id="makers-rail"
+        class="product-rail"
+        tabindex="0"
+        aria-label="Meet the Makers"
+      ></div>
+    </section>
+    <section class="collection-block" aria-labelledby="stories-title">
+      <div class="section-heading inner">
+        <h3 id="stories-title">Spaces &amp; Stories</h3>
+      </div>
+      <p class="hint">
+        Explore products by the categories already in the EcoCraft catalog.
+      </p>
+      <div id="theme-collections"></div>
+    </section>
+    <section class="collection-block" aria-labelledby="recent-title">
+      <div class="section-heading inner">
+        <h3 id="recent-title">Give It Another Look</h3>
+      </div>
+      <p class="hint">Recommended based on the products you view and buy.</p>
+      <!-- Placeholder: replace with recommendations from Neo4j (graph of views and past orders) cached in Redis. -->
+      <div class="recommendations-placeholder panel" role="note">
+        <p class="hint">
+          Personalized picks are coming soon.
+        </p>
+      </div>
+    </section>
+  </div>
+  <div id="catalog-view" hidden>
+    <div class="section-heading">
+      <div>
+        <p class="kicker">CURATED AND CONSCIOUS</p>
+        <h2 id="collection-title">All products</h2>
+      </div>
+      <button class="outline" id="catalog-home-button" type="button">
+        Back to Explore
+      </button>
+    </div>
+    <div class="catalog-results-column">
+      <p
+        id="catalog-results"
+        class="catalog-meta hint"
+        role="status"
+        aria-live="polite"
+      ></p>
+      <div id="product-list" class="product-grid"></div>
+      <nav
+        id="catalog-pagination"
+        class="catalog-pagination"
+        aria-label="Catalog pages"
+        hidden
+      >
+        <button id="catalog-prev" class="outline" type="button">
+          Previous
+        </button>
+        <span id="catalog-page-label" class="hint" aria-live="polite"></span>
+        <button id="catalog-next" class="outline" type="button">Next</button>
+      </nav>
+    </div>
+  </div>
+  <section id="product-detail-view" aria-label="Product details" hidden>
+    <button id="product-detail-back" class="outline" type="button">
+      Back to products
+    </button>
+    <h2 id="product-detail-title" tabindex="-1"></h2>
+    <div id="product-detail-content"></div>
+    <div class="panel" id="reviews-panel" hidden>
+      <div class="spaced">
+        <h3>Product reviews</h3>
+        <button class="outline" id="close-reviews" type="button">
+          Close reviews
+        </button>
+      </div>
+      <div id="reviews-list"></div>
+    </div>
+  </section>
+</section>

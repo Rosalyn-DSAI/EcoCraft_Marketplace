@@ -5,9 +5,9 @@ from flask import Blueprint, current_app, g, jsonify, request
 from pymongo.errors import DuplicateKeyError, PyMongoError
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from ..db import get_database
-from ..security import api_error, auth_required, create_access_token, public_user, require_write_enabled, is_valid_jwt_secret, can_edit_user
-from ..validation import clean_email, validate_profile_changes, validate_registration
+from ..db import get_database, stamp_insert, stamp_update
+from ..security import api_error, artist_not_approved_message, auth_required, create_access_token, public_user, require_write_enabled, is_valid_jwt_secret, can_edit_user
+from ..domain.accounts import clean_email, validate_profile_changes, validate_registration
 
 auth_bp = Blueprint("auth", __name__)
 
@@ -18,7 +18,8 @@ def register():
     protected = require_write_enabled()
     if protected is not None:
         return protected
-    data, problem = validate_registration(request.get_json(silent=True))
+    payload = request.get_json(silent=True)
+    data, problem, field = validate_registration(payload)
     if problem:
         return api_error("VALIDATION_ERROR", problem, 400)
     role = data["role"]
@@ -32,7 +33,7 @@ def register():
     if role == "artist":
         document["artistProfile"] = {"originStory": data["originStory"], "onboardingStatus": "request_received"}
     try:
-        result = get_database().users.insert_one(document)
+        result = get_database().users.insert_one(stamp_insert(document))
     except DuplicateKeyError:
         return api_error("ACCOUNT_EXISTS", "Email or user identifier is already registered", 409)
     except PyMongoError:
@@ -64,8 +65,10 @@ def login():
     # Password first to avoid revealing onboarding status to random callers.
     if user is None or not check_password_hash(user.get("passwordHash", ""), password):
         return api_error("INVALID_CREDENTIALS", "Invalid email or password", 401)
+    if user.get("active") is False:
+        return api_error("ACCOUNT_DISABLED", "This account is no longer active", 403)
     if user["role"] == "artist" and user.get("artistProfile", {}).get("onboardingStatus") != "approved":
-        return api_error("ARTIST_NOT_APPROVED", "Your artist registration is still under review or has not been approved", 403)
+        return api_error("ARTIST_NOT_APPROVED", artist_not_approved_message(user), 403)
     token, seconds = create_access_token(user)
     return jsonify(accessToken=token, tokenType="Bearer", expiresIn=seconds, user=public_user(user)), 200
 
@@ -86,17 +89,47 @@ def update_my_profile():
         return protected
     if not can_edit_user(g.current_user):
         return api_error("SEEDED_RECORD_PROTECTED", "Original team sample accounts are read-only in this demo", 403)
-    changes, problem = validate_profile_changes(request.get_json(silent=True))
+    changes, problem = validate_profile_changes(request.get_json(silent=True), g.current_user.get("role"))
     if problem:
         return api_error("VALIDATION_ERROR", problem, 400)
     try:
         db = get_database()
         db.users.update_one(
             {"_id": g.current_user["_id"], "userID": g.current_user["userID"]},
-            {"$set": changes},
+            {"$set": stamp_update(changes)},
         )
         user = db.users.find_one({"_id": g.current_user["_id"]})
     except PyMongoError:
         current_app.logger.exception("MongoDB profile update failed")
         return api_error("DATABASE_UNAVAILABLE", "Could not update the profile", 503)
+    return jsonify(user=public_user(user)), 200
+
+
+ADDRESS_FIELDS = ("street", "city", "state", "zipCode", "country")
+
+
+@auth_bp.put("/me/address")
+@auth_required("customer")
+def set_my_address():
+    """Create or replace the customer's single address at personalInfo.address (existing schema field)."""
+    protected = require_write_enabled()
+    if protected is not None:
+        return protected
+    if not can_edit_user(g.current_user):
+        return api_error("SEEDED_RECORD_PROTECTED", "Original team sample accounts are read-only in this demo", 403)
+    payload = request.get_json(silent=True)
+    if (not isinstance(payload, dict) or set(payload) - set(ADDRESS_FIELDS)
+            or any(not isinstance(payload.get(f), str) or not payload.get(f).strip() or len(payload.get(f).strip()) > 120 for f in ADDRESS_FIELDS)):
+        return api_error("VALIDATION_ERROR", "Street, city, state, ZIP code and country are required (max 120 characters each)", 400)
+    address = {f: payload[f].strip() for f in ADDRESS_FIELDS}
+    try:
+        db = get_database()
+        db.users.update_one(
+            {"_id": g.current_user["_id"], "userID": g.current_user["userID"]},
+            {"$set": stamp_update({"personalInfo.address": address})},
+        )
+        user = db.users.find_one({"_id": g.current_user["_id"]})
+    except PyMongoError:
+        current_app.logger.exception("MongoDB address save failed")
+        return api_error("DATABASE_UNAVAILABLE", "Could not save the address", 503)
     return jsonify(user=public_user(user)), 200

@@ -48,6 +48,14 @@ Thumbs.db
 dump/
 backups/
 
-# Keep the schema/index snapshot required by the project tests
-reports/*
-!reports/atlas_schema_audit.json
+
+# Local development scripts (tests, ingestion, validation); share by email, not Git
+test_scripts/
+
+# Atlas audit reports (local runs; the committed snapshot stays tracked)
+reports/
+
+# Local design and team tracking notes
+docs/UI_PAGES_DESIGN_FLASK.md
+docs/change_tracker.md
+

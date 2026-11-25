@@ -1,0 +1,39 @@
+<section class="page" id="page-customer-cart" hidden>
+  <button class="outline" type="button" data-page="catalog">
+    Back to shop
+  </button>
+  <div class="section-heading inner">
+    <h3>Your shopping cart</h3>
+    <button class="secondary" id="cart-refresh">Refresh cart</button>
+  </div>
+  <div class="inner cart-page">
+    <div id="cart-items" class="cart-list"></div>
+    <div class="cart-footer">
+      <button
+        class="primary"
+        id="checkout-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="checkout-panel"
+      >
+        Checkout
+      </button>
+    </div>
+    <article class="panel checkout-panel" id="checkout-panel" hidden>
+      <h4>Shipping address</h4>
+      <p class="hint">Educational demonstration only. No real payments.</p>
+      <div class="spaced address-confirm">
+        <div id="address-summary"></div>
+        <button class="outline" id="edit-checkout-address" type="button">Edit</button>
+      </div>
+      <label class="confirm-address"
+        ><input type="checkbox" id="confirm-address" /> I confirm this is my shipping address</label
+      >
+      <div>
+        <button class="primary" id="place-order" type="button" disabled>
+          Place order
+        </button>
+      </div>
+    </article>
+  </div>
+</section>

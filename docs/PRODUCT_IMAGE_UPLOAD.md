@@ -34,7 +34,7 @@ Accepted formats: JPEG, PNG and WebP, up to **4 MB** per upload. The backend che
 
 ## Editing or replacing a photo
 
-Use **Edit** on one of your eligible listings. You can keep the existing image, provide a different HTTPS URL, upload a replacement, or remove the image. Editing an approved product sends it back for admin review.
+Use **Edit** on one of your eligible listings. You can keep the existing image, provide a different HTTPS URL, upload a replacement, or remove the image. Editing a listed product saves directly; editing a rejected product sends it back for admin review.
 
 ## Troubleshooting
 

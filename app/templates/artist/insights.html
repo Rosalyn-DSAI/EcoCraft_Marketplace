@@ -1,0 +1,56 @@
+<section class="page mp-page" id="page-artist-insights" hidden>
+  <button class="outline" type="button" data-page="dashboard">
+    Back to dashboard
+  </button>
+  <div class="section-heading mp-header">
+    <div>
+      <p class="kicker">ARTIST INSIGHTS</p>
+      <h2>My insights</h2>
+      <p class="mp-tagline"><em>Your sales and payouts at a glance.</em></p>
+    </div>
+    <div class="mp-toolbar">
+      <label
+        >Time period
+        <select id="ai-range">
+          <option value="7d">Last 7 Days</option>
+          <option value="30d" selected>Last 30 Days</option>
+          <option value="3m">Last 3 Months</option>
+          <option value="6m">Last 6 Months</option>
+          <option value="year">This Year</option>
+        </select></label
+      >
+      <button class="outline" type="button" id="ai-refresh">Refresh</button>
+    </div>
+  </div>
+  <p class="mp-meta">
+    <span id="ai-period-label"></span>
+    <span id="ai-refreshed"></span>
+  </p>
+
+  <section class="mp-section" aria-labelledby="ai-kpi-title">
+    <div class="mp-section-head">
+      <h3 id="ai-kpi-title">Sales &amp; payouts</h3>
+      <p class="hint">
+        Cancelled orders are excluded from sales, commission, and net payout.
+      </p>
+    </div>
+    <div class="mp-kpis" id="ai-kpis"></div>
+  </section>
+
+  <div class="mp-grid">
+    <section class="mp-section" aria-labelledby="ai-status-title">
+      <div class="mp-section-head">
+        <h3 id="ai-status-title">Order status</h3>
+        <p class="hint">Shipped, pending, and cancelled orders in this period.</p>
+      </div>
+      <div id="ai-status"></div>
+    </section>
+    <section class="mp-section" aria-labelledby="ai-top-title">
+      <div class="mp-section-head">
+        <h3 id="ai-top-title">Top-selling products</h3>
+        <p class="hint">Ranked by gross sales in this period.</p>
+      </div>
+      <div id="ai-top"></div>
+    </section>
+  </div>
+</section>

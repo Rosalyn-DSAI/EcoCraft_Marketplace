@@ -1,0 +1,50 @@
+<section class="page" id="page-admin-profile" hidden>
+  <button class="outline" type="button" data-page="dashboard">
+    Back to dashboard
+  </button>
+  <div class="section-heading inner"><h3>My account</h3></div>
+  <div id="admin-profile"></div>
+</section>
+<section class="page" id="page-admin-artists" hidden>
+  <button class="outline" type="button" data-page="dashboard">
+    Back to dashboard
+  </button>
+  <div class="section-heading inner">
+    <h3>Artists Onboarding</h3>
+    <button class="secondary" id="approvals-refresh">Refresh artists</button>
+  </div>
+  <div class="approval-layout">
+    <div id="admin-artists" class="stack"></div>
+    <nav
+      id="approval-states"
+      class="approval-states"
+      aria-label="Approval states"
+    ></nav>
+  </div>
+</section>
+<section class="page" id="page-admin-products" hidden>
+  <button class="outline" type="button" data-page="dashboard">
+    Back to dashboard
+  </button>
+  <div class="section-heading inner">
+    <h3>Review Products</h3>
+    <button class="secondary" id="moderation-refresh">Refresh products</button>
+  </div>
+  <div class="approval-layout curate-layout">
+    <div id="admin-products" class="stack"></div>
+    <aside
+      class="artist-filter"
+      aria-label="Filter products by artist"
+      tabindex="0"
+    >
+      <h4>Filter by artist</h4>
+      <input
+        id="artist-search"
+        type="search"
+        placeholder="Search first name, last name, or email"
+        aria-label="Search approved artists"
+      />
+      <div id="artist-filter-list" class="artist-filter-list"></div>
+    </aside>
+  </div>
+</section>

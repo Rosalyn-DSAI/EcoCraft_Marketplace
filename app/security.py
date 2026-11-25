@@ -14,6 +14,21 @@ from .db import get_database
 # Seed users have IDs such as ART001 / CUS001; their profiles remain read-only.
 WEB_USER_PREFIXES = ("WEB26-CUS-", "WEB26-ART-")
 
+# Messages for artists who cannot sign in yet; keys match artistProfile.onboardingStatus values.
+ARTIST_ONBOARDING_MESSAGES = {
+    "request_received": "Your artist application has been received. We will ask you for documents shortly.",
+    "waiting_for_documents": "Please send the documents we requested. We will review them once received.",
+    "received_documents": "Your documents were received and your profile is under review.",
+    "rejected": "Your artist application was not approved. Please contact support for details.",
+    None: "Your artist registration is still in progress. You can sign in once it is approved.",
+}
+
+
+def artist_not_approved_message(user):
+    """Return the onboarding-specific sign-in message for an artist who is not approved."""
+    status = user.get("artistProfile", {}).get("onboardingStatus")
+    return ARTIST_ONBOARDING_MESSAGES.get(status, ARTIST_ONBOARDING_MESSAGES[None])
+
 
 def is_valid_jwt_secret(secret):
     """Reject short or unchanged placeholder signing secrets."""
@@ -105,8 +120,10 @@ def auth_required(*roles):
                 return api_error("DATABASE_UNAVAILABLE", "Database temporarily unavailable", 503)
             if user is None:
                 return api_error("INVALID_TOKEN", "Account no longer exists", 401)
+            if user.get("active") is False:
+                return api_error("ACCOUNT_DISABLED", "This account is no longer active", 401)
             if user["role"] == "artist" and user.get("artistProfile", {}).get("onboardingStatus") != "approved":
-                return api_error("ARTIST_NOT_APPROVED", "Artist access is not approved", 403)
+                return api_error("ARTIST_NOT_APPROVED", artist_not_approved_message(user), 403)
             if roles and user["role"] not in roles:
                 return api_error("FORBIDDEN", "You are not allowed to perform this action", 403)
             g.current_user = user

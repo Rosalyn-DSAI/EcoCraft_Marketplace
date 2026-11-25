@@ -1,0 +1,58 @@
+<section class="page" id="page-artist-dashboard" hidden>
+  <div class="section-heading inner">
+    <h3>My creations</h3>
+    <div class="actions">
+      <button id="artist-add-product" class="primary" data-page="artist-add-product">
+        Add product
+      </button>
+      <button id="artist-refresh" class="secondary">Refresh products</button>
+    </div>
+  </div>
+
+  <p class="hint catalog-meta" id="product-count" role="status" aria-live="polite"></p>
+  <div class="artist-products-layout">
+    <div class="catalog-results-column">
+      <div id="artist-products" class="product-grid"></div>
+    </div>
+    <aside class="catalog-filters product-filters" aria-labelledby="product-filters-title">
+      <h3 id="product-filters-title">Filter &amp; sort</h3>
+      <div class="form">
+        <label
+          >Search by title<input
+            id="product-search"
+            type="search"
+            maxlength="80"
+            placeholder="Search your products"
+        /></label>
+        <div class="artist-filter-list">
+          <label class="artist-filter-item"
+            ><input id="filter-listed" type="checkbox" /><span>Listed</span></label
+          >
+          <label class="artist-filter-item"
+            ><input id="filter-rejected" type="checkbox" /><span>Rejected</span></label
+          >
+          <label class="artist-filter-item"
+            ><input id="filter-deleted" type="checkbox" /><span>Deleted</span></label
+          >
+        </div>
+        <label
+          >Category<select id="product-category">
+            <option value="">All categories</option>
+          </select></label
+        >
+        <label
+          >Sort by<select id="product-sort">
+            <option value="newest">Newest first</option>
+            <option value="title">Title A–Z</option>
+            <option value="priceHigh">Price: high to low</option>
+            <option value="priceLow">Price: low to high</option>
+            <option value="stockHigh">Stock: high to low</option>
+          </select></label
+        >
+        <button class="outline" id="clear-product-filters" type="button">
+          Clear filters
+        </button>
+      </div>
+    </aside>
+  </div>
+</section>

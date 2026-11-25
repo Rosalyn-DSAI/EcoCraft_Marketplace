@@ -1,0 +1,33 @@
+<header class="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo" id="home-logo"
+      ><img
+        src="{{ url_for('static',filename='images/logo/Logo.png') }}"
+        alt="EcoCraft — Made with Purpose"
+    /></a>
+    <nav aria-label="Main navigation">
+      <button class="nav-tab" id="dashboard-nav" data-page="dashboard" hidden>
+        My studio / account</button
+      ><button class="nav-tab" data-page="auth" id="auth-nav">
+        Sign in / Sign up</button
+      ><button class="nav-tab" data-page="artist-orders" id="orders-nav" hidden>
+        Orders</button
+      ><button class="nav-tab" data-page="artist-insights" id="insights-nav" hidden>
+        Insights</button
+      ><button class="nav-tab" data-page="customer-orders" id="customer-orders-nav" hidden>
+        Orders</button
+      ><button class="nav-tab" data-page="customer-cart" id="cart-nav" hidden>
+        Cart<span class="cart-badge" id="cart-count" hidden></span></button
+      ><span
+        id="sign-in-message"
+        class="sign-in-message"
+        role="status"
+        aria-live="polite"
+        hidden
+      ></span
+      ><button class="nav-tab" id="sign-out" type="button" hidden>
+        Sign out
+      </button>
+    </nav>
+  </div>
+</header>

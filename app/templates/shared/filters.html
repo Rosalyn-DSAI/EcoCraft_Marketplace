@@ -1,0 +1,75 @@
+<aside
+  class="catalog-filters"
+  id="catalog-filters"
+  aria-labelledby="filters-title"
+  tabindex="0"
+>
+  <h3 id="filters-title">Shop by</h3>
+  <form id="search-form" class="form">
+    <label
+      >Search<input
+        id="search"
+        type="search"
+        maxlength="80"
+        placeholder="Titles, descriptions or tags"
+    /></label>
+    <fieldset class="filter-checks" id="category-checks">
+      <legend>Category</legend>
+    </fieldset>
+    <fieldset class="filter-checks" id="material-checks">
+      <legend>Materials</legend>
+    </fieldset>
+    <fieldset class="filter-checks" id="practice-checks">
+      <legend>Sustainability</legend>
+      <label
+        ><input type="checkbox" value="recycled_materials" /> Recycled materials</label
+      >
+      <label><input type="checkbox" value="upcycled" /> Upcycled</label>
+      <label><input type="checkbox" value="organic" /> Organic</label>
+      <label
+        ><input type="checkbox" value="locally_sourced" /> Locally sourced</label
+      >
+      <label
+        ><input type="checkbox" value="zero_waste_packaging" /> Zero-waste packaging</label
+      >
+      <label
+        ><input type="checkbox" value="handmade_small_batch" /> Handmade small batch</label
+      >
+      <label
+        ><input type="checkbox" value="non_toxic_finishes" /> Non-toxic finishes</label
+      >
+    </fieldset>
+    <label
+      >Sort by<select id="sort">
+        <option value="newest">Newest</option>
+        <option value="price_asc">Price: low to high</option>
+        <option value="price_desc">Price: high to low</option>
+      </select></label
+    >
+    <fieldset class="price-range">
+      <legend>Price</legend>
+      <label
+        >Min<input
+          id="min-price"
+          type="number"
+          min="0"
+          step="0.01"
+          inputmode="decimal"
+          placeholder="Any"
+      /></label>
+      <label
+        >Max<input
+          id="max-price"
+          type="number"
+          min="0"
+          step="0.01"
+          inputmode="decimal"
+          placeholder="Any"
+      /></label>
+    </fieldset>
+    <button class="primary" type="submit">Apply filters</button>
+    <button class="outline" id="clear-search" type="button">
+      Clear filters
+    </button>
+  </form>
+</aside>

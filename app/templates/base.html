@@ -1,0 +1,50 @@
+<!doctype html>
+<!-- Marketplace shell: stable element IDs bind to the marketplace script; role visibility is not authorization. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="EcoCraft sustainable handmade marketplace coursework app"
+    />
+    <title>EcoCraft | Sustainable Marketplace</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='css/base.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='css/pages/marketplace.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='css/pages/marketpulse.css') }}"
+    />
+    <script
+      src="{{ url_for('static',filename='js/pages/marketpulse-data.js') }}"
+      defer
+    ></script>
+    <script
+      src="{{ url_for('static',filename='js/pages/marketpulse-charts.js') }}"
+      defer
+    ></script>
+    <script
+      src="{{ url_for('static',filename='js/pages/marketpulse.js') }}"
+      defer
+    ></script>
+    <script
+      src="{{ url_for('static',filename='js/pages/artist-insights.js') }}"
+      defer
+    ></script>
+    <script
+      src="{{ url_for('static',filename='js/pages/marketplace.js') }}"
+      defer
+    ></script>
+  </head>
+  <body>
+    {% include 'shared/header.html' %}
+    <main>{% block content %}{% endblock %}</main>
+    {% include 'shared/footer.html' %}
+  </body>
+</html>

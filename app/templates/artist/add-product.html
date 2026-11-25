@@ -1,0 +1,134 @@
+<section class="page" id="page-artist-add-product" hidden>
+  <div class="section-heading inner">
+    <div>
+      <p class="kicker">MY CREATIONS</p>
+      <h3 id="product-form-title">List a product</h3>
+    </div>
+    <button class="outline" data-page="dashboard">
+      Back to my products
+    </button>
+  </div>
+  <article class="panel product-form-panel">
+    <form id="product-form" class="form">
+      <input type="hidden" name="editingId" /><label
+        >Product title<input name="title" maxlength="120" required /></label
+      ><label
+        >Description<textarea
+          name="description"
+          maxlength="3000"
+          required
+        ></textarea>
+      </label>
+      <div class="two">
+        <label
+          >Price (USD)<input
+            name="price"
+            type="number"
+            min="0.01"
+            max="9999999.99"
+            step="0.01"
+            required /></label
+        ><label
+          >Inventory quantity<input
+            name="quantityAvailable"
+            type="number"
+            min="0"
+            step="1"
+            required
+        /></label>
+      </div>
+      <label>Category<input name="category" maxlength="100" required /></label
+      ><label
+        >Materials (comma-separated)<input
+          name="materials"
+          placeholder="Recycled cotton, linen"
+          required /></label
+      ><label
+        >Tags (comma-separated)<input name="tags" placeholder="eco, handmade"
+      /></label>
+      <fieldset class="sustainability-fieldset">
+        <legend>Sustainability (optional)</legend>
+        <p class="hint">
+          Describe how this product supports sustainability. Certifications stay
+          artist-declared until an EcoCraft admin verifies them.
+        </p>
+        <p class="hint" id="sustainability-locked" hidden>
+          This product is listed, so its sustainability details are managed by EcoCraft admins.
+        </p>
+        <div id="sustainability-practices" class="practice-options"></div>
+        <label
+          >Sustainability summary<textarea
+            id="sustainability-summary"
+            maxlength="500"
+          ></textarea
+        ></label>
+        <div id="certification-list" class="stack"></div>
+        <button class="outline" id="add-certification" type="button">
+          Add certification
+        </button>
+      </fieldset>
+      <template id="certification-template">
+        <div class="certification-row">
+          <label
+            >Certification name<input
+              data-cert="name"
+              maxlength="100"
+          /></label>
+          <label>Issuer<input data-cert="issuer" maxlength="100" /></label>
+          <label
+            >Certificate link (https, optional)<input
+              data-cert="certificateUrl"
+              type="url"
+              maxlength="1024"
+          /></label>
+          <button class="danger-btn" type="button" data-remove-certification>
+            Remove certification
+          </button>
+        </div>
+      </template>      <label
+        >Product photo (optional)
+        <input
+          id="product-image-file"
+          name="imageFile"
+          type="file"
+          accept="image/png,image/jpeg,image/webp"
+      /></label>
+      <p class="hint image-help">
+        Choose a PNG, JPG, or WebP photograph (up to 4 MB). Uploading from your
+        computer requires Cloudinary configuration.
+      </p>
+      <label
+        >Or use an existing HTTPS image URL<input
+          id="product-image-url"
+          name="imageUrl"
+          type="url"
+          maxlength="1024"
+          placeholder="https://example.com/my-product.jpg"
+      /></label>
+      <p class="hint image-help">
+        Choose a file OR enter an image URL, not both. Product image is optional
+        while testing.
+      </p>
+      <img
+        id="product-image-preview"
+        class="image-preview"
+        alt="Selected product image preview"
+        hidden
+      />
+      <label class="image-remove"
+        ><input
+          id="product-image-remove"
+          type="checkbox"
+          name="removeImage"
+        />
+        Remove current image when editing</label
+      >
+      <div class="form-actions">
+        <button class="primary" id="save-product">Submit for approval</button>
+        <button class="outline" id="clear-product" type="button">
+          Clear form
+        </button>
+      </div>
+    </form>
+  </article>
+</section>

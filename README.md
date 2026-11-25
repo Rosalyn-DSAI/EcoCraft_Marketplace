@@ -10,12 +10,12 @@ We built EcoCraft for our NoSQL database project. The focus is on using MongoDB 
 
 | Role | Main actions |
 | --- | --- |
-| Visitor | Browse approved products, search by keyword or category, read reviews, view category insights. |
+| Visitor | Browse approved products, search by keyword, filter by category, material or sustainability practice, sort and set a price range, and read reviews. |
 | Customer | Register, sign in, manage a cart, place demo orders, cancel eligible unshipped items, and manage reviews of purchased products. |
 | Artist | Register for approval, sign in after approval, create/edit/delete eligible listings, add product photos, and update shipping progress for their own order items. |
-| Admin | Review artist applications, approve or reject new listings, and set product commission rates. |
+| Admin | Review artist applications (request documents, then approve, reject, or ask for more info), review new products, approve and list them with a commission rate, and view MarketPulse analytics. |
 
-The **Insights** page runs a MongoDB aggregation pipeline to group approved products by category and calculate product counts and average prices.
+The admin **MarketPulse** dashboard shows marketplace growth, revenue, and performance analytics with a global date-range selector. It currently runs on mock data (`USE_MOCK` in `marketpulse-data.js`).
 
 ## Built with
 
@@ -23,20 +23,12 @@ The **Insights** page runs a MongoDB aggregation pipeline to group approved prod
 - **Database:** MongoDB Atlas (five collections: `users`, `products`, `cart`, `orders`, `reviews`)
 - **Frontend:** HTML, CSS, JavaScript served by Flask
 - **Images:** HTTPS image URLs; optional Cloudinary upload from the artist form
-- **Tests:** pytest/unittest and Node.js frontend regression scripts
 
 ## Run locally
 
-The steps below use **Windows PowerShell** from the project root. You'll need Python, access to a MongoDB Atlas database, and Node.js only if you want to run the JavaScript regression scripts.
+The steps below use **Windows PowerShell** from the project root. You'll need Python and access to a MongoDB Atlas database.
 
-1. Clone the repository and open the folder in VS Code (replace `USERNAME/REPOSITORY` with the actual GitHub location):
-
-   ```powershell
-   git clone https://github.com/Rosalyn-DSAI/EcoCraft_Marketplace.git
-   cd EcoCraft_Marketplace
-   ```
-
-   If you downloaded the repository as a ZIP instead, extract it and open the folder containing `app/`, `requirements.txt`, and `README.md`. Use that folder for the commands below.
+1. Get the project folder from the team's shared copy, or extract the ZIP if you downloaded it that way. Open the folder containing `app/`, `requirements.txt`, and `README.md` in VS Code. Use that folder for the commands below.
 
 2. Create a virtual environment and install the dependencies:
 
@@ -75,37 +67,24 @@ The steps below use **Windows PowerShell** from the project root. You'll need Py
 
    Product uploads from your computer also require Cloudinary settings in `.env`. You can use a direct HTTPS image URL instead; see [Product images](docs/PRODUCT_IMAGE_UPLOAD.md).
 
-## Try the marketplace
+## Try the full workflow
 
-A full demo is easiest to follow with three accounts: customer, artist, and an existing team admin. Public registration does **not** create administrator accounts.
+You need three accounts: a customer, an artist, and an existing team admin. Public registration does **not** create administrator accounts.
 
-1. Open **Explore** to browse and search the approved catalog. Open **Insights** to see the MongoDB category aggregation.
-2. Register a customer and an artist. The new artist must be approved before signing in.
-3. Sign in as a team admin, open **My studio / account**, and approve the new artist.
-4. Sign in as that artist and submit a product. Add a photo if you have one. The product starts pending review.
-5. Return as admin to approve the product and, if needed, set its commission rate.
-6. As a customer, add the newly approved product to your cart, adjust quantity, and check out. Confirm the order and inventory change in Atlas.
-7. Test the order workflow: an eligible item can be cancelled before shipping, or the artist can mark it shipped and then delivered. Customers can review products they purchased.
+1. **Open the admin dashboard.** Sign in as the team admin and open **My studio / account**. The admin shortcuts are **Meet the Makers** (artist onboarding), **Curate the Catalog** (product review), and **MarketPulse** (analytics).
+2. **Register the accounts.** Use **Sign in / Sign up**, then the register form, to create a customer and an artist. A new artist cannot sign in until approved. Signing in shows a message that explains which onboarding stage the account is in.
+3. **Approve the artist (admin).** In the admin **Meet the Makers** screen (artist onboarding), move the artist through the approval states with the buttons on each card:
+   - **New artist requests** → *Request documents*
+   - **Waiting for documents** → *Documents received*
+   - **Under review** → *Request additional info*, *Approve*, or *Reject*
+   - **Approved** artists can sign in.
+4. **Submit a product (artist).** Sign in as the artist and open **My studio / account**. Add a product with a direct HTTPS image URL, or upload a photo if Cloudinary is configured. The product starts as a new submission waiting for review.
+5. **Approve and list the product (admin).** In **Curate the Catalog**, open **New products**, enter a commission percentage, and choose *Approve and list* or *Reject*. Listed products appear in the catalog.
+6. **Shop (customer).** On the home page (click the EcoCraft logo), open a product, add it to the cart, adjust the quantity, and check out. Checkout is a demo: no payment is taken, stock is reduced, and the cart is cleared. Confirm the order and stock change in Atlas.
+7. **Ship (artist).** Open **Your orders**. It shows all order items by default; choose **To ship** on the right to filter. Enter a tracking ID for a pending item, then choose *Mark shipped*. The customer sees the tracking ID in their order history.
+8. **Cancel and review (customer).** In **Your orders**, cancel an item that has not shipped, which restores its stock. After an item ships, leave a review on the product. You can edit or delete only your own reviews.
 
 **Why the extra accounts?** Products from the original seeded dataset can be viewed, but the protected shared-database demo only allows purchases and edits involving newly eligible demo records.
-
-## Tests
-
-Run from the project root:
-
-```powershell
-.\.venv\Scripts\python.exe -m pytest -q
-node scripts/test_frontend_auth.cjs
-node scripts/test_frontend_images.cjs
-```
-
-The Python and JavaScript suites check application behavior without changing the live Atlas data. To check your running server using read-only requests:
-
-```powershell
-.\.venv\Scripts\python.exe scripts/smoke_api.py
-```
-
-The smoke-test script also supports an **explicit write mode**, which creates real demo records. Read [Testing and verification](docs/TEST_PLAN.md) before using it. Manual frontend testing and database inspection are part of the course demonstration; automated tests alone do not cover every live transaction scenario.
 
 ## MongoDB design
 
@@ -119,28 +98,42 @@ Our database uses five collections:
 
 The project uses references between collections where data has an independent lifecycle, and embedding where related information is normally retrieved together. MongoDB validators and indexes enforce additional constraints, including unique emails and cart ownership.
 
-Professor Yu's database recreation requirement is included as `scripts/recreate_demo.js`. **It recreates only the isolated `ecocraft_submission_dev` database**, not the shared `ecocraft` database. Do not run it as part of normal app startup.
-
 ## Project files
 
 ```text
-app/                 Flask routes, validation, authentication and web UI
-scripts/             Atlas audit, test helpers and isolated recreation script
-tests/               Python test suite
-reports/             Schema/index audit used by the tests
-docs/                 API details, architecture, image setup and test checklist
-.env.example         Configuration template (no working credentials)
-requirements*.txt    Python dependencies
+app/                  Flask application package
+  __init__.py         App factory and blueprint registration
+  db.py               MongoDB connection and client setup
+  security.py         JWT auth, roles, and onboarding messages
+  image_uploads.py    Product image handling (URLs and optional Cloudinary upload)
+  domain/             Validation and business rules (accounts, products, orders, sustainability)
+  routes/
+    auth.py           Registration and sign-in
+    health.py         Health checks
+    admin/            Admin artist approvals and product moderation
+    shop/             Catalog, artist products, cart, orders, reviews, and insights
+  static/             CSS, JavaScript pages, and images
+  templates/          HTML pages grouped by role
+scripts_admin/    Opt-in helper script (shared admin creation)
+docs/                 API details, architecture, and image setup
+.env.example          Configuration template (no working credentials)
+requirements*.txt     Python dependencies
 ```
 
 ## Documentation
 
-- [Architecture and database flow](docs/ARCHITECTURE.md)
+- [Requirements and business rules](docs/REQUIREMENTS.md)
+- [Architecture and technical design](docs/ARCHITECTURE_AND_TECHNICAL_DESIGN.md)
 - [API endpoints and validation](docs/API_CONTRACT.md)
 - [Product images and Cloudinary setup](docs/PRODUCT_IMAGE_UPLOAD.md)
-- [Testing and manual verification](docs/TEST_PLAN.md)
 - [Contributing and repository guidelines](CONTRIBUTING.md)
 
 ## Notes
 
-EcoCraft is a local coursework application, not a public shopping service. It does not process payments or provide password recovery, returns/refunds, or production audit logging. For a shared class demo, use only records the team has approved for testing, and keep the Atlas/Cloudinary secrets outside Git.
+EcoCraft is a local coursework application, not a public shopping service. Key limits:
+
+- It does not process payments.
+- It does not provide password recovery, returns/refunds, or production audit logging.
+- For a shared class demo, use only records the team has approved for testing.
+- Keep the Atlas and Cloudinary secrets out of shared files and chat messages.
+

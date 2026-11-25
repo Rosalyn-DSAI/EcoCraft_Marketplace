@@ -2,34 +2,28 @@
 
 EcoCraft is a shared class project. Please keep changes focused and review them with the team before merging. The existing Flask backend, frontend and MongoDB schema are already integrated; changes to any one of those areas can affect the others.
 
-## Before you change anything
+## Before you start
 
-- Create a branch for your work instead of editing the main branch directly.
+- Create a branch for your work instead of editing the main branch directly, then tell your teammates when it is ready to merge.
 - Read the root [README](README.md), especially the database write safeguards.
 - Keep your personal `.env`, virtual environment and credentials on your computer.
 - Do not change or delete the original seeded Atlas records as part of a test.
 
-## Test your changes
+## Check your changes
 
-Run the Python suite after backend or shared-model changes:
-
-```powershell
-.\.venv\Scripts\python.exe -m pytest -q
-```
-
-For frontend changes, also run:
+For frontend changes, at least check the JavaScript syntax:
 
 ```powershell
-node scripts/test_frontend_auth.cjs
-node scripts/test_frontend_images.cjs
-node --check app/static/marketplace.js
+node --check app/static/js/pages/marketplace.js
 ```
 
-If you change an API contract, update [docs/API_CONTRACT.md](docs/API_CONTRACT.md). If you change setup or a user-facing feature, update the README or relevant guide. For manual workflow checks, use the [test plan](docs/TEST_PLAN.md).
+Then check the affected pages in a browser at desktop, tablet, and mobile widths.
+
+If you change an API contract, update [docs/API_CONTRACT.md](docs/API_CONTRACT.md). If you change setup or a user-facing feature, update the README or relevant guide.
 
 ## Database and security
 
-The shared database is `ecocraft`. Only newly eligible demo accounts and their related documents should be used for write testing. The original user and product records must remain unchanged. Routine tests should not run admin-creation scripts, database preparation scripts, or the separate database recreation script.
+The shared database is `ecocraft`. Only newly eligible demo accounts and their related documents should be used for write testing. The original user and product records must remain unchanged. Routine checks should not run admin-creation scripts.
 
 `.gitignore` excludes `.env`, local environments, caches, database backups and editor/runtime state. It does not erase a secret already committed in Git history. If credentials were accidentally committed, rotate them and correct the repository history before publishing.
 

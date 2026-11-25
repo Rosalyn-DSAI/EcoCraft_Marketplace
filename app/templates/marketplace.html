@@ -1,26 +1,41 @@
-<!doctype html>
-<!-- Marketplace shell: stable element IDs bind to static/marketplace.js; role visibility is not authorization. -->
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="EcoCraft sustainable handmade marketplace coursework app"><title>EcoCraft | Sustainable Marketplace</title><link rel="stylesheet" href="{{ url_for('static',filename='marketplace.css') }}"><script src="{{ url_for('static',filename='marketplace.js') }}" defer></script></head>
-<body>
-<header class="nav"><div class="nav-inner"><a href="/" class="logo"><span class="logo-icon">✿</span> EcoCraft <small>MADE WITH PURPOSE</small></a><nav aria-label="Main navigation"><button class="nav-tab active" data-page="catalog">Explore</button><button class="nav-tab" data-page="analytics">Insights</button><button class="nav-tab" data-page="dashboard">My studio / account</button><button class="nav-tab" data-page="auth" id="auth-nav">Sign in</button></nav></div></header>
-<main>
-  <section class="hero"><div class="hero-inner"><p class="kicker">THE SUSTAINABLE EDIT</p><h1>Handmade treasures.<br><em>A lighter footprint.</em></h1><p>Discover thoughtful creations from independent makers. Explore, manage a studio, and learn how a document database supports a real marketplace.</p><button id="hero-browse" class="primary">Explore the collection →</button></div><div class="hero-art" aria-hidden="true"><div class="orb orb-one"></div><div class="orb orb-two"></div><span class="hero-leaf">❧</span></div></section>
-  <div id="notice" role="status" aria-live="polite" class="notice" hidden></div>
-  <section class="page" id="page-catalog"><div class="section-heading"><div><p class="kicker">CURATED AND CONSCIOUS</p><h2>Discover handmade goods</h2></div><p>Only approved, listed products appear in the public collection.</p></div><form id="search-form" class="search-bar"><label><span>Search handmade goods</span><input id="search" placeholder="Search names, materials, descriptions..."></label><label><span>Category</span><input id="category" placeholder="All categories"></label><button class="primary">Search products</button></form><div id="product-list" class="product-grid"></div><div class="panel" id="reviews-panel" hidden><div class="spaced"><h3>Product reviews</h3><button class="outline" id="close-reviews" type="button">Close reviews</button></div><div id="reviews-list"></div></div><div class="hint">Items from the original team dataset are read-only. To test orders, use a newly approved demo artist's product.</div></section>
-  <section class="page" id="page-analytics" hidden><div class="section-heading"><div><p class="kicker">REAL MONGODB PIPELINE</p><h2>Marketplace insights</h2></div><p>This report runs MongoDB $match → $group → $sort → $limit.</p></div><button id="refresh-analytics" class="secondary">Refresh aggregation</button><div id="analytics-result" class="analytics-list"></div></section>
-  <section class="page" id="page-auth" hidden><div class="section-heading"><div><p class="kicker">YOUR ECOCRAFT JOURNEY</p><h2>Welcome in</h2></div></div><div class="dual"><article class="panel"><h3>Sign in</h3><p class="hint">Use your registered account or an existing team admin account.</p><form id="login-form" class="form"><label>Email <input type="email" name="email" required autocomplete="username"></label><label>Password <input type="password" name="password" required autocomplete="current-password"></label><button class="primary">Sign in →</button></form></article><article class="panel"><h3>Create an account</h3><p class="hint">Customers can sign in immediately. New artists require an admin's approval.</p><form id="register-form" class="form"><div class="two"><label>First name <input name="firstName" maxlength="100" required></label><label>Last name <input name="lastName" maxlength="100" required></label></div><label>Email <input type="email" name="email" required></label><label>Password <input name="password" type="password" minlength="10" maxlength="128" autocomplete="new-password" required></label><label>Account type<select id="register-role" name="role"><option value="customer">Customer</option><option value="artist">Artist</option></select></label><label id="origin-wrap" hidden>My maker story<textarea name="originStory" maxlength="2000" rows="3" placeholder="Tell us about your sustainable art"></textarea></label><button class="primary">Create account →</button></form></article></div></section>
-  <section class="page" id="page-dashboard" hidden><div class="section-heading"><div><p class="kicker">YOUR SPACE</p><h2>Marketplace workspace</h2></div><div><span id="identity">Not signed in</span><button id="sign-out" class="outline" hidden>Sign out</button></div></div><div id="login-prompt" class="panel"><h3>Sign in to use your workspace</h3><p>Customers manage carts, orders, and reviews. Artists list and manage creations. Administrators approve makers and products.</p><button class="primary" id="go-login">Sign in / Register</button></div><div id="workspace" hidden>
-  <article class="panel compact"><h3>My profile</h3><p id="profile-description" class="hint"></p><form id="profile-form" class="inline-form"><label>First name<input name="firstName" required></label><label>Last name<input name="lastName" required></label><label>Mobile (optional)<input name="mobile" maxlength="30"></label><button class="secondary">Save profile</button></form></article>
-  <div id="artist-workspace" hidden><div class="section-heading inner"><h3>My creations</h3><button id="artist-refresh" class="secondary">Refresh products</button></div><div class="dual"><article class="panel"><h4 id="product-form-title">List a product</h4><form id="product-form" class="form"><input type="hidden" name="editingId"><label>Product title<input name="title" maxlength="120" required></label><label>Description<textarea name="description" maxlength="3000" required></textarea></label><div class="two"><label>Price (USD)<input name="price" type="number" min="0.01" max="9999999.99" step="0.01" required></label><label>Inventory quantity<input name="quantityAvailable" type="number" min="0" step="1" required></label></div><label>Category<input name="category" maxlength="100" required></label><label>Materials (comma-separated)<input name="materials" placeholder="Recycled cotton, linen" required></label><label>Tags (comma-separated)<input name="tags" placeholder="eco, handmade"></label>
-<label>Product photo (optional) <input id="product-image-file" name="imageFile" type="file" accept="image/png,image/jpeg,image/webp"></label>
-<p class="hint image-help">Choose a PNG, JPG, or WebP photograph (up to 4 MB). Uploading from your computer requires Cloudinary configuration.</p>
-<label>Or use an existing HTTPS image URL<input id="product-image-url" name="imageUrl" type="url" maxlength="1024" placeholder="https://example.com/my-product.jpg"></label>
-<p class="hint image-help">Choose a file OR enter an image URL, not both. Product image is optional while testing.</p>
-<img id="product-image-preview" class="image-preview" alt="Selected product image preview" hidden>
-<label class="image-remove"><input id="product-image-remove" type="checkbox" name="removeImage"> Remove current image when editing</label>
-<button class="primary" id="save-product">Submit for approval</button><button class="outline" id="clear-product" type="button">Clear form</button></form></article><article class="panel"><h4>Your product listings</h4><div id="artist-products"></div></article></div><div class="section-heading inner"><h3>Orders to ship</h3><button class="secondary" id="sales-refresh">Refresh sales</button></div><div class="panel" id="artist-sales"></div></div>
-  <div id="customer-workspace" hidden><div class="section-heading inner"><h3>Your shopping cart</h3><button class="secondary" id="cart-refresh">Refresh cart</button></div><div class="dual"><article class="panel"><div id="cart-items"></div></article><article class="panel"><h4>Checkout</h4><p class="hint">Educational demonstration only — no real payments.</p><form id="checkout-form" class="form"><label>Street<input name="street" required></label><div class="two"><label>City<input name="city" required></label><label>State<input name="state" required></label></div><div class="two"><label>ZIP / postal code<input name="zipCode" required></label><label>Country<input name="country" value="United States" required></label></div><button class="primary">Place demo order</button></form></article></div><div class="section-heading inner"><h3>Your order history</h3><button class="secondary" id="orders-refresh">Refresh orders</button></div><div id="customer-orders" class="stack"></div></div>
-  <div id="admin-workspace" hidden><div class="section-heading inner"><h3>Artist approvals</h3><button class="secondary" id="approvals-refresh">Refresh artists</button></div><div id="admin-artists" class="stack"></div><div class="section-heading inner"><h3>Product moderation & commission</h3><button class="secondary" id="moderation-refresh">Refresh products</button></div><div id="admin-products" class="stack"></div></div>
-  </div></section>
-</main><footer><span>✿ EcoCraft</span><span>Independent makers · Sustainable living · MongoDB coursework</span><span>Built with Flask + PyMongo</span></footer>
-</body></html>
+{% extends 'base.html' %} {% block content %}
+<section class="hero" id="home-hero">
+  <div class="hero-inner">
+    <p class="kicker">THE SUSTAINABLE EDIT</p>
+    <h1>A little craft. A lot of heart. A world of wonder.</h1>
+    <p>
+      Discover handmade treasures, earthy creations and clever upcycled finds.
+      Celebrate creativity, embrace thoughtful living and bring home something
+      that makes you smile.
+    </p>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+    <span class="hero-leaf">❧</span>
+  </div>
+</section>
+<div
+  id="page-banner"
+  class="page-banner"
+  tabindex="0"
+  aria-label="EcoCraft message"
+  hidden
+>
+  <p>
+    Discover handmade treasures, earthy creations and clever upcycled finds.
+    Celebrate creativity, embrace thoughtful living and bring home something
+    that makes you smile.
+  </p>
+</div>
+<div id="notice" role="status" aria-live="polite" class="notice" hidden></div>
+<div class="page-layout" id="page-layout">
+  <div class="page-content">
+    {% include 'pages/catalog.html' %} {% include 'pages/marketpulse.html' %} {% include 'artist/insights.html' %} {%
+    include 'pages/auth.html' %} {% include 'pages/dashboard.html' %} {% include
+    'pages/about.html' %} {% include 'pages/contributors.html' %} {% include
+    'pages/build.html' %} {% include 'pages/data.html' %}
+  </div>
+  {% include 'shared/filters.html' %}
+</div>
+{% endblock %}

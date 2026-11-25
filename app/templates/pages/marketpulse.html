@@ -1,0 +1,120 @@
+<section class="page mp-page" id="page-admin-analytics" hidden>
+  <button class="outline" type="button" data-page="dashboard">
+    Back to dashboard
+  </button>
+  <div class="section-heading mp-header">
+    <div>
+      <p class="kicker">ADMIN ANALYTICS</p>
+      <h2>MarketPulse</h2>
+      <p class="mp-tagline"><em>Marketplace intelligence at a glance.</em></p>
+    </div>
+    <div class="mp-toolbar">
+      <label
+        >Time period
+        <select id="mp-range">
+          <option value="7d">Last 7 Days</option>
+          <option value="30d" selected>Last 30 Days</option>
+          <option value="3m">Last 3 Months</option>
+          <option value="6m">Last 6 Months</option>
+          <option value="year">This Year</option>
+          <option value="custom">Custom Date Range</option>
+        </select></label
+      >
+      <div id="mp-custom" class="mp-custom" hidden>
+        <label>From<input type="date" id="mp-start" /></label>
+        <label>To<input type="date" id="mp-end" /></label>
+        <button class="secondary" type="button" id="mp-apply">Apply</button>
+      </div>
+      <button class="outline" type="button" id="mp-refresh">Refresh</button>
+    </div>
+  </div>
+  <p class="mp-meta">
+    <span id="mp-period-label"></span>
+    <span id="mp-refreshed"></span>
+  </p>
+
+  <section class="mp-section" id="mp-growth" aria-labelledby="mp-growth-title">
+    <div class="mp-section-head">
+      <h3 id="mp-growth-title">Marketplace Growth &amp; Sales</h3>
+      <p class="hint">
+        Track sales performance, sales growth, customer acquisition, and
+        marketplace activity.
+      </p>
+    </div>
+    <div class="mp-kpis" id="mp-growth-kpis"></div>
+    <div class="mp-grid" id="mp-growth-body">
+      <article class="panel mp-card">
+        <div class="mp-card-head">
+          <h4>Gross sales over time</h4>
+          <div class="mp-segment" role="group" aria-label="Chart metric">
+            <button
+              type="button"
+              class="secondary active"
+              data-metric="revenue"
+              aria-pressed="true"
+            >
+              Gross sales
+            </button>
+            <button
+              type="button"
+              class="outline"
+              data-metric="commission"
+              aria-pressed="false"
+            >
+              Commission
+            </button>
+          </div>
+        </div>
+        <div id="mp-revenue-chart" class="mp-chart"></div>
+      </article>
+      <article class="panel mp-card">
+        <h4>Sales by category</h4>
+        <div id="mp-category-chart" class="mp-chart"></div>
+      </article>
+      <article class="panel mp-card mp-wide">
+        <h4>Top-selling products</h4>
+        <div id="mp-top-products" class="mp-table-wrap"></div>
+      </article>
+    </div>
+    <div id="mp-growth-state" class="mp-state" hidden></div>
+  </section>
+
+  <section
+    class="mp-section"
+    id="mp-performance"
+    aria-labelledby="mp-performance-title"
+  >
+    <div class="mp-section-head">
+      <h3 id="mp-performance-title">Marketplace Performance Insights</h3>
+      <p class="hint">
+        Understand which artists, products, and customers are driving
+        marketplace performance.
+      </p>
+    </div>
+    <div class="mp-kpis" id="mp-performance-kpis"></div>
+    <div class="mp-grid" id="mp-performance-body">
+      <article class="panel mp-card">
+        <h4>Top artists by gross sales</h4>
+        <div id="mp-top-artists" class="mp-chart"></div>
+      </article>
+      <article class="panel mp-card">
+        <div class="mp-card-head">
+          <h4>Slow-moving products</h4>
+          <span class="mp-hint">In stock, no sale in the last 60 days</span>
+        </div>
+        <div id="mp-slow-table" class="mp-table-wrap"></div>
+        <div class="mp-more">
+          <button class="outline" id="mp-slow-more" type="button" hidden>
+            Show more
+          </button>
+        </div>
+      </article>
+      <article class="panel mp-card mp-wide">
+        <h4>Admin attention required</h4>
+        <div id="mp-attention" class="mp-attention"></div>
+        <div id="mp-attention-detail" class="mp-attention-detail"></div>
+      </article>
+    </div>
+    <div id="mp-performance-state" class="mp-state" hidden></div>
+  </section>
+</section>

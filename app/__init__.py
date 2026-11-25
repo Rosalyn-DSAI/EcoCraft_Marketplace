@@ -3,13 +3,13 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template
 from flask_cors import CORS
 
 from .routes.health import health_bp
 from .routes.auth import auth_bp
 from .routes.admin import admin_bp
-from .routes.marketplace import shop_bp
+from .routes.shop import shop_bp
 
 
 def create_app(test_config=None):
@@ -48,14 +48,6 @@ def create_app(test_config=None):
     @app.get("/")
     def marketplace_home():
         return render_template("marketplace.html")
-
-    @app.get("/demo")
-    def temporary_frontend():
-        """Retained localhost-only account-testing page; the marketplace uses the same APIs."""
-        if request.remote_addr not in {"127.0.0.1", "::1"}:
-            return jsonify(error={"code": "LOCAL_ONLY", "message": "Demo page is local-only"}), 403
-        return render_template("demo.html")
-
 
     @app.errorhandler(404)
     def route_not_found(_error):

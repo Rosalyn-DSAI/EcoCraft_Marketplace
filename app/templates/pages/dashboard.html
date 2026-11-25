@@ -1,0 +1,88 @@
+<section class="page" id="page-dashboard" hidden>
+  <nav
+    id="admin-shortcuts"
+    class="admin-shortcuts"
+    aria-label="Admin shortcuts"
+    hidden
+  >
+    <a
+      class="panel admin-shortcut"
+      href="#page-admin-artists"
+      data-page="admin-artists"
+      ><strong>Meet the Makers</strong><span>Artist Onboarding</span></a
+    >
+    <a
+      class="panel admin-shortcut"
+      href="#page-admin-products"
+      data-page="admin-products"
+      ><strong>Curate the Catalog</strong
+      ><span>Product moderation -> Add commission -> List product</span></a
+    >
+    <a
+      class="panel admin-shortcut"
+      href="#page-admin-analytics"
+      data-page="admin-analytics"
+      ><strong>MarketPulse</strong><span>Marketplace insights</span></a
+    >
+  </nav>
+  <div id="workspace-details">
+    <div class="section-heading">
+      <div>
+        <p class="kicker">YOUR SPACE</p>
+        <h2 id="workspace-title">Marketplace workspace</h2>
+      </div>
+      <span id="identity">Not signed in</span>
+    </div>
+    <div id="login-prompt" class="panel">
+      <h3>Sign in to use your workspace</h3>
+      <p>
+        Customers manage carts, orders, and reviews. Artists list and manage
+        creations. Administrators approve makers and products.
+      </p>
+      <button class="primary" id="go-login">Sign in / Register</button>
+    </div>
+    <div id="workspace" hidden>
+      <div id="workspace-profile">
+        <article class="panel compact account-panel" id="profile-panel">
+          <div class="account-layout">
+            <section class="account-card" id="account-card">
+              <div class="account-card-head">
+                <button class="icon-button" id="account-edit" type="button" aria-label="Edit account details" title="Edit account details">✎</button>
+              </div>
+              <dl class="account-details" id="account-details"></dl>
+            </section>
+            <form id="account-edit-form" class="form account-edit" hidden>
+              <h3>Edit account</h3>
+              <div class="two">
+                <label>First name<input name="firstName" required maxlength="100" /></label
+                ><label>Last name<input name="lastName" required maxlength="100" /></label>
+              </div>
+              <label data-roles="customer artist">Mobile (optional)<input name="mobile" maxlength="30" /></label>
+              <label data-roles="artist">Origin story<textarea name="originStory" rows="5" maxlength="2000"></textarea></label>
+              <fieldset class="address-fields" data-roles="customer">
+                <legend>Address</legend>
+                <label>Street<input name="street" maxlength="200" /></label>
+                <div class="two">
+                  <label>City<input name="city" maxlength="100" /></label
+                  ><label>State<input name="state" maxlength="100" /></label>
+                </div>
+                <div class="two">
+                  <label>ZIP / postal code<input name="zipCode" maxlength="20" /></label
+                  ><label>Country<input name="country" maxlength="100" /></label>
+                </div>
+              </fieldset>
+              <div class="actions">
+                <button class="primary" id="account-save">Save</button>
+                <button class="secondary" id="account-cancel" type="button">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+{% include 'admin/dashboard.html' %} {% include 'artist/dashboard.html' %} {%
+include 'artist/profile.html' %} {% include 'artist/orders.html' %} {%
+include 'artist/add-product.html' %} {% include 'customer/cart.html' %} {%
+include 'customer/orders.html' %}
