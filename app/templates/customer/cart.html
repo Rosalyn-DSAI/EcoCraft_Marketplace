@@ -1,14 +1,33 @@
 <section class="page" id="page-customer-cart" hidden>
-  <button class="outline" type="button" data-page="catalog">
+  <button class="outline customer-cart-back" type="button" data-page="catalog">
     Back to shop
   </button>
-  <div class="section-heading inner">
-    <h3>Your shopping cart</h3>
-    <button class="secondary" id="cart-refresh">Refresh cart</button>
-  </div>
-  <div class="inner cart-page">
-    <div id="cart-items" class="cart-list"></div>
-    <div class="cart-footer">
+  <header class="customer-cart-hero" aria-labelledby="customer-cart-hero-title">
+    <div class="customer-cart-hero-copy">
+      <p class="customer-cart-eyebrow">A COLLECTION OF THOUGHTFUL CHOICES</p>
+      <h1 id="customer-cart-hero-title">
+        Little treasures.<br /><em>Big meaning.</em>
+      </h1>
+      <p>
+        A collection of things that speak to you. Review your favorite finds
+        and take the next step toward making them yours.
+      </p>
+    </div>
+    <img
+      class="customer-cart-hero-art"
+      src="{{ url_for('static',filename='images/project/customer/customer-cart-hero.svg') }}"
+      alt="Illustration of a thoughtfully collected bag, accessories, home details and a gift parcel."
+      width="760"
+      height="460"
+    />
+  </header>
+  <div class="section-heading inner customer-cart-heading">
+    <div>
+      <p class="customer-cart-section-eyebrow">YOUR THOUGHTFUL SELECTIONS</p>
+      <h2>Your shopping cart</h2>
+    </div>
+    <div class="customer-cart-controls">
+      <button class="secondary" id="cart-refresh">Refresh cart</button>
       <button
         class="primary"
         id="checkout-toggle"
@@ -18,22 +37,47 @@
       >
         Checkout
       </button>
+      <article class="panel checkout-panel" id="checkout-panel" hidden>
+        <h4>Shipping address</h4>
+        <p class="hint">Educational demonstration only. No real payments.</p>
+        <div class="spaced address-confirm">
+          <div id="address-summary"></div>
+          <button class="outline" id="edit-checkout-address" type="button">Edit</button>
+        </div>
+        <label class="confirm-address"
+          ><input type="checkbox" id="confirm-address" /> I confirm this is my shipping address</label
+        >
+        <div>
+          <button class="primary" id="place-order" type="button" disabled>
+            Place order
+          </button>
+        </div>
+      </article>
     </div>
-    <article class="panel checkout-panel" id="checkout-panel" hidden>
-      <h4>Shipping address</h4>
-      <p class="hint">Educational demonstration only. No real payments.</p>
-      <div class="spaced address-confirm">
-        <div id="address-summary"></div>
-        <button class="outline" id="edit-checkout-address" type="button">Edit</button>
-      </div>
-      <label class="confirm-address"
-        ><input type="checkbox" id="confirm-address" /> I confirm this is my shipping address</label
-      >
-      <div>
-        <button class="primary" id="place-order" type="button" disabled>
-          Place order
-        </button>
-      </div>
-    </article>
+  </div>
+  <div class="inner cart-page">
+    <div class="cart-items-column">
+      <section id="cart-empty-state" class="cart-empty-state" hidden>
+        <img
+          class="cart-empty-art"
+          src="{{ url_for('static',filename='images/project/customer/customer-empty-cart.svg') }}"
+          alt="An empty EcoCraft shopping bag with a few gentle botanical details."
+          width="460"
+          height="360"
+        />
+        <div class="cart-empty-copy">
+          <p class="cart-empty-eyebrow">A LITTLE SPACE FOR SOMETHING LOVELY</p>
+          <h3>Good things are waiting to be discovered.</h3>
+          <p>
+            Your cart is currently empty. Explore EcoCraft and discover
+            something that feels uniquely yours.
+          </p>
+          <button class="primary" type="button" data-page="catalog">
+            Explore the marketplace
+          </button>
+        </div>
+      </section>
+      <div id="cart-items" class="cart-list"></div>
+    </div>
   </div>
 </section>

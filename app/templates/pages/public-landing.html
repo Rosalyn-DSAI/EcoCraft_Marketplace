@@ -1,0 +1,180 @@
+<section class="page public-landing" id="page-public-landing">
+  <section class="landing-hero" aria-labelledby="landing-hero-title">
+    <picture class="landing-hero-media">
+      <source
+        media="(max-width: 700px)"
+        srcset="{{ url_for('static',filename='images/landing/ecocraft-hero-mobile.webp') }}"
+      />
+      <img
+        class="landing-hero-image"
+        src="{{ url_for('static',filename='images/landing/ecocraft-hero.webp') }}"
+        alt="Handmade soaps arranged on soft natural textiles beside dried flowers."
+        width="1000"
+        height="700"
+        fetchpriority="high"
+      />
+    </picture>
+    <div class="landing-hero-copy">
+      <p class="landing-eyebrow">THE SUSTAINABLE EDIT</p>
+      <h1 id="landing-hero-title">
+        A little craft.<br />
+        A lot of heart.<br />
+        <em>A world of wonder.</em>
+      </h1>
+      <p class="landing-hero-description">
+        Discover extraordinary creations, celebrate independent artists and
+        embrace a more thoughtful way to shop.
+      </p>
+      <div class="landing-actions">
+        <a
+          class="landing-button landing-button--forest"
+          href="#page-catalog"
+          data-page="catalog"
+        >
+          Explore the marketplace <span aria-hidden="true">→</span>
+        </a>
+        <a
+          class="landing-button landing-button--quiet"
+          href="#page-auth"
+          data-page="auth"
+        >
+          Join EcoCraft
+        </a>
+      </div>
+    </div>
+    <p class="landing-hero-caption">
+      Editorial photography · products shown are illustrative
+    </p>
+  </section>
+
+  <section
+    class="landing-story landing-finds"
+    aria-labelledby="landing-finds-title"
+  >
+    <div class="landing-story-copy">
+      <p class="landing-eyebrow">DISCOVER SOMETHING DIFFERENT</p>
+      <h2 id="landing-finds-title">Thoughtful Finds</h2>
+      <p>
+        From expressive fashion to imaginative home décor, discover products
+        that celebrate individuality, creativity and thoughtful living.
+      </p>
+      <a
+        class="landing-text-link"
+        href="#page-catalog"
+        data-page="catalog"
+      >
+        Explore the marketplace <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <figure class="landing-story-image landing-story-image--finds">
+      <img
+        src="{{ url_for('static',filename='images/landing/thoughtful-finds.webp') }}"
+        alt="A collection of handmade beaded necklaces and bracelets arranged on a weathered tabletop."
+        width="1000"
+        height="700"
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>
+        Editorial imagery. Visit the catalog for current marketplace listings.
+      </figcaption>
+    </figure>
+    <span class="landing-side-note" aria-hidden="true">Made to be kept</span>
+  </section>
+
+  <section
+    class="landing-story landing-makers"
+    aria-labelledby="landing-makers-title"
+  >
+    <figure class="landing-story-image landing-story-image--makers">
+      <img
+        src="{{ url_for('static',filename='images/landing/meet-the-makers.webp') }}"
+        alt="Colorful yarn, crochet work and tools arranged together in a handmade textile still life."
+        width="1000"
+        height="700"
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>
+        An editorial still life; no EcoCraft artist or member is represented.
+      </figcaption>
+    </figure>
+    <div class="landing-story-copy">
+      <p class="landing-eyebrow">BEHIND EVERY CREATION</p>
+      <h2 id="landing-makers-title">Meet the Makers</h2>
+      <p>
+        Discover the people, ideas and stories behind the products that make
+        EcoCraft unique.
+      </p>
+      <a
+        class="landing-text-link"
+        href="#page-catalog"
+        data-page="catalog"
+        data-browse-makers="true"
+      >
+        Meet the maker community <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <section
+    class="landing-artist"
+    aria-labelledby="landing-artist-title"
+  >
+    <div class="landing-artist-copy">
+      <p class="landing-eyebrow">MAKE SOMETHING MEANINGFUL</p>
+      <h2 id="landing-artist-title">Your creativity belongs here.</h2>
+      <p>
+        Have something unique to share? Become part of a marketplace that
+        celebrates creativity and gives independent artists a space to grow.
+      </p>
+      <a
+        class="landing-button landing-button--cream"
+        href="#page-auth"
+        data-page="auth"
+        data-registration-role="artist"
+      >
+        Become an artist <span aria-hidden="true">→</span>
+      </a>
+    </div>
+    <figure class="landing-artist-image">
+      <img
+        src="{{ url_for('static',filename='images/landing/become-an-artist.webp') }}"
+        alt="A small-business owner prepares an online order among boxes, packing materials and a laptop."
+        width="1000"
+        height="700"
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>
+        Editorial stock photography; the person shown is not an EcoCraft artist.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="landing-closing" aria-labelledby="landing-closing-title">
+    <p class="landing-eyebrow">A MARKETPLACE WITH MEANING</p>
+    <h2 id="landing-closing-title">
+      Shop thoughtfully.<br />
+      Create meaningfully.<br />
+      <em>Live with purpose.</em>
+    </h2>
+    <p>Find your place in the EcoCraft community.</p>
+    <div class="landing-actions">
+      <a
+        class="landing-button landing-button--cream"
+        href="#page-catalog"
+        data-page="catalog"
+      >
+        Explore the marketplace <span aria-hidden="true">→</span>
+      </a>
+      <a
+        class="landing-button landing-button--outline"
+        href="#page-auth"
+        data-page="auth"
+      >
+        Join EcoCraft
+      </a>
+    </div>
+  </section>
+</section>

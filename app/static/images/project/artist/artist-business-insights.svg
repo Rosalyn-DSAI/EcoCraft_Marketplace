@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 480" role="img" aria-labelledby="title desc">
+  <title id="title">A creative business in motion</title>
+  <desc id="desc">Original illustration connecting an online storefront, product symbols and a rising unlabeled trend line.</desc>
+  <path d="M409 22c153-25 311 60 345 186 36 132-49 241-184 261-145 22-329-20-365-143C170 202 225 53 409 22Z" fill="#456e59"/>
+  <circle cx="582" cy="145" r="107" fill="#789273" opacity=".58"/>
+  <path d="M129 385h557" stroke="#d7e5d6" stroke-width="3" opacity=".7"/>
+  <path d="M165 217h230v168H165z" fill="#f3eee2"/>
+  <path d="M149 220h262l-26-57H175Z" fill="#d5aa78"/>
+  <path d="M195 163v57m51-57v57m51-57v57m51-57v57" stroke="#f3d9b7" stroke-width="8"/>
+  <path d="M193 277h55v108h-55z" fill="#a8bd9b"/>
+  <path d="M264 256h103v69H264z" fill="#d4b68a"/>
+  <path d="M286 278h60m-60 17h42" stroke="#896a4d" stroke-width="5" stroke-linecap="round"/>
+  <path d="M447 337 499 278l55 25 78-105" fill="none" stroke="#e8bc91" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m613 198 22-7-2 23" fill="none" stroke="#e8bc91" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="447" cy="337" r="8" fill="#e8bc91"/><circle cx="499" cy="278" r="8" fill="#e8bc91"/><circle cx="554" cy="303" r="8" fill="#e8bc91"/>
+  <path d="M479 354h18v31h-18zm52-40h18v71h-18zm53 15h18v56h-18zm53-76h18v132h-18z" fill="#b9d0b4" opacity=".78"/>
+  <path d="M129 136c-15-30-10-57 14-81 22 29 23 55-14 81Zm7-22c18-17 39-24 63-19-16 22-36 29-63 19Z" fill="#b6cba8"/>
+  <path d="M674 318c29-16 58-19 86-7" fill="none" stroke="#d7e5d6" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="711" cy="104" r="8" fill="#e7b28a"/>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" role="img" aria-labelledby="title desc">
+  <title id="title">A seller profile and creative story</title>
+  <desc id="desc">Original illustration of a profile card, a maker silhouette, product tags and a small brand-story notebook.</desc>
+  <path d="M357 26c145-35 308 29 362 145 50 108-17 222-137 261-141 45-351 8-397-103C137 220 202 63 357 26Z" fill="#d9e7d8"/>
+  <circle cx="551" cy="131" r="91" fill="#ecd9b8"/>
+  <rect x="194" y="72" width="370" height="318" rx="22" fill="#fffdf8" stroke="#c7d8c8" stroke-width="4"/>
+  <path d="M194 94c0-12 10-22 22-22h326c12 0 22 10 22 22v31H194Z" fill="#1e4b3d"/>
+  <circle cx="222" cy="99" r="5" fill="#dce9dc"/><circle cx="242" cy="99" r="5" fill="#dce9dc"/><circle cx="262" cy="99" r="5" fill="#dce9dc"/>
+  <circle cx="303" cy="207" r="57" fill="#e9d7bd"/>
+  <path d="M268 204c1-32 16-52 37-52s37 20 38 52c-19 18-56 18-75 0Z" fill="#704d3d"/>
+  <path d="M258 283c8-39 24-58 47-58s40 19 48 58" fill="#729072"/>
+  <path d="M277 209c16 10 36 10 52 0m-48 18h44" fill="none" stroke="#a86a4c" stroke-width="4" stroke-linecap="round"/>
+  <path d="M390 173h128m-128 24h99m-99 24h115" stroke="#cad8c9" stroke-width="8" stroke-linecap="round"/>
+  <rect x="390" y="250" width="122" height="48" rx="10" fill="#eef5ec"/>
+  <path d="M409 275h85" stroke="#6b876d" stroke-width="7" stroke-linecap="round"/>
+  <path d="M390 328h129m-129 20h103" stroke="#d8c5a5" stroke-width="6" stroke-linecap="round"/>
+  <path d="M583 213h95v113h-95z" fill="#c57a55"/>
+  <path d="M601 213c0-29 12-45 30-45s30 16 30 45m-46 0v-26m16 26v-35m16 35v-26" fill="none" stroke="#f2dec2" stroke-width="5" stroke-linecap="round"/>
+  <path d="M137 187c-14-31-10-59 13-84 23 28 24 56-13 84Zm3-23c17-17 37-25 61-22-15 22-35 30-61 22Z" fill="#8ba487"/>
+  <path d="M130 343c32-22 59-28 83-17m447-5c24 6 41 18 54 37" fill="none" stroke="#69856b" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="149" cy="130" r="8" fill="#bf7954"/><circle cx="684" cy="137" r="7" fill="#bf7954"/>
+</svg>

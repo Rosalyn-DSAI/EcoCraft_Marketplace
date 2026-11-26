@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-labelledby="title desc">
+  <title id="title">EcoCraft marketplace community</title>
+  <desc id="desc">Original illustration of makers and handmade goods connected by a growing botanical network.</desc>
+  <path d="M512 44c150 7 284 99 316 230 27 113-53 227-166 277-126 55-317 27-377-86C225 360 294 83 512 44Z" fill="#527557" opacity=".58"/>
+  <circle cx="640" cy="170" r="114" fill="#789272" opacity=".55"/>
+  <circle cx="427" cy="282" r="207" fill="none" stroke="#d7e5d6" stroke-width="2" opacity=".28"/>
+  <path d="M269 442c130-88 228-130 367-133m-366 133c94-130 196-223 321-281m-322 281c168-22 307-7 423 63" fill="none" stroke="#d7e5d6" stroke-width="3" stroke-dasharray="4 12" opacity=".7"/>
+  <g fill="#e5b28a">
+    <circle cx="269" cy="442" r="9"/><circle cx="590" cy="161" r="9"/><circle cx="693" cy="505" r="9"/>
+    <circle cx="636" cy="309" r="9"/><circle cx="410" cy="415" r="9"/>
+  </g>
+  <path d="M165 450h575v88H165z" fill="#b87851"/>
+  <path d="M165 450h575v15H165z" fill="#d39a72"/>
+  <path d="M202 538v43m500-43v43" stroke="#744d3a" stroke-width="15"/>
+  <g transform="translate(255 249)">
+    <path d="M21 168c-9-67 13-118 68-155 27 61 19 113-24 158 57-55 114-70 170-46-48 61-106 76-174 46Z" fill="#9db48c"/>
+    <path d="M86 168c2-48-13-88-46-121m55 112c33-37 72-57 120-58m-127 64c-38-22-75-30-116-24" fill="none" stroke="#d7e5d6" stroke-width="6" stroke-linecap="round"/>
+    <path d="M56 172c-4-55 17-92 62-113 17 51 9 90-26 118Z" fill="#c77b51"/>
+    <path d="M46 177c29-16 58-19 88-8l-10 73H55Z" fill="#e0b38e"/>
+    <path d="M60 196h49m-46 17h42" stroke="#a76345" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(478 298)">
+    <path d="M27 116c0-57 26-95 77-113 28 45 26 88-8 128Z" fill="#c77b51"/>
+    <path d="M36 122c27-18 59-22 92-10l13 73H28Z" fill="#e0b38e"/>
+    <path d="M52 144h62m-58 18h54" stroke="#a76345" stroke-width="5" stroke-linecap="round"/>
+    <path d="M64 39c-9-44 4-77 40-100 19 42 13 74-18 101Z" fill="#91aa83"/>
+  </g>
+  <g transform="translate(663 320)">
+    <path d="M2 75h101l-12 104H15Z" fill="#d8b789" stroke="#936347" stroke-width="3"/>
+    <path d="M23 77c0-37 14-57 31-57s31 20 31 57M36 80V43m18 37V30m18 50V43" fill="none" stroke="#936347" stroke-width="5" stroke-linecap="round"/>
+    <path d="M22 103h63m-60 21h56m-54 21h51" stroke="#bd8a5e" stroke-width="4"/>
+  </g>
+  <g fill="#dce8d8" opacity=".9">
+    <path d="M166 203c-16-30-12-58 12-84 23 30 25 58-12 84Zm7-23c17-17 37-26 62-24-16 23-36 32-62 24Z"/>
+    <path d="M788 207c-4-35 10-61 43-78 11 34 1 61-29 81Zm16-12c21-13 43-17 66-9-19 19-41 22-66 9Z"/>
+    <path d="M733 103c-3-26 7-45 30-58 9 25 2 45-19 60Z"/>
+  </g>
+  <path d="M149 510c40-47 79-68 118-63m397-292c44-18 79-18 109 1m-83 380c32 4 59 16 83 38" fill="none" stroke="#d7e5d6" stroke-width="4" stroke-linecap="round"/>
+</svg>

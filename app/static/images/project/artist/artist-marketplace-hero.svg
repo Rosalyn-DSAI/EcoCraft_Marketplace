@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-labelledby="title desc">
+  <title id="title">A creative marketplace collection</title>
+  <desc id="desc">Original display of clothing, a handbag, jewelry, home decor and thoughtfully packaged products.</desc>
+  <path d="M470 44c166-26 329 64 365 211 32 131-61 259-202 303-155 48-363 10-411-128C177 298 274 76 470 44Z" fill="#c6d9c4"/>
+  <circle cx="625" cy="208" r="151" fill="#e9d8b8" opacity=".8"/>
+  <path d="M136 449h627v22H136z" fill="#8a6547"/>
+  <path d="M165 471v61m568-61v61" stroke="#75543e" stroke-width="14" stroke-linecap="round"/>
+  <path d="M260 104h218m-109-3v33m-97-30 17 42m177-42-17 42" fill="none" stroke="#496a53" stroke-width="8" stroke-linecap="round"/>
+  <path d="M308 145c-27 21-43 50-43 88v119h209V233c0-38-16-67-43-88l-34 25h-55Z" fill="#d47f59"/>
+  <path d="m342 148 28 40 27-40m-82 104h111" fill="none" stroke="#f3d9bd" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M520 302h139l-14 129H535z" fill="#c48b5e" stroke="#875f42" stroke-width="4"/>
+  <path d="M547 303c0-46 17-70 43-70s43 24 43 70m-70 0v-45m27 45v-61m28 61v-47" fill="none" stroke="#875f42" stroke-width="6" stroke-linecap="round"/>
+  <path d="M690 368h94v78h-94z" fill="#e7c98f" stroke="#a57b50" stroke-width="4"/>
+  <path d="M690 389h94m-47-21v78" fill="none" stroke="#b37c52" stroke-width="5"/>
+  <path d="M150 274h70v77h-70z" fill="#739174"/>
+  <path d="M185 274v77m-35-39h70" stroke="#dce8d8" stroke-width="4"/>
+  <path d="M167 266c-33-45-24-77 9-97 26 35 23 67-9 97Zm13-5c20-43 48-58 82-45-15 38-42 54-82 45Z" fill="#88a786"/>
+  <path d="M491 142c13 28 13 54 0 78-14-24-14-50 0-78Zm0 78c-26 11-50 8-72-9 25-15 49-12 72 9Zm0 0c24-17 49-20 74-5-21 20-46 22-74 5Z" fill="none" stroke="#a66348" stroke-width="5"/>
+  <circle cx="491" cy="220" r="8" fill="#a66348"/>
+  <path d="M106 389c24-27 49-39 76-36m614-131c30-16 57-18 83-6" fill="none" stroke="#68836a" stroke-width="4" stroke-linecap="round"/>
+</svg>

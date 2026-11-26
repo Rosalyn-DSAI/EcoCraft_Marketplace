@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 360" role="img" aria-labelledby="title desc">
+  <title id="title">An empty EcoCraft shopping bag</title>
+  <desc id="desc">Original illustration of an empty shopping bag surrounded by gentle leaves and small decorative shapes.</desc>
+  <path d="M230 20c91 0 173 38 201 110 30 77-11 177-83 206-68 29-192 4-247-38C28 250 35 143 82 82c35-45 89-62 148-62Z" fill="#e6f2e7"/>
+  <circle cx="334" cy="83" r="38" fill="#ecd9b8"/>
+  <circle cx="230" cy="184" r="132" fill="none" stroke="#69856b" stroke-width="2" opacity=".22"/>
+  <path d="M78 263c40-47 83-77 135-79 51-2 104 17 152 67" fill="none" stroke="#789272" stroke-width="3" stroke-dasharray="4 10" opacity=".52"/>
+  <circle cx="78" cy="263" r="6" fill="#c1754c"/>
+  <circle cx="213" cy="184" r="6" fill="#c1754c"/>
+  <circle cx="365" cy="251" r="6" fill="#c1754c"/>
+  <g transform="translate(124 107)">
+    <path d="M28 66h164l-15 148H43Z" fill="#c1754c" stroke="#914f38" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M63 68c0-54 18-83 47-83s47 29 47 83" fill="none" stroke="#914f38" stroke-width="10" stroke-linecap="round"/>
+    <path d="M64 68c0-47 17-70 46-70s46 23 46 70" fill="none" stroke="#f7e5d2" stroke-width="5" stroke-linecap="round"/>
+    <path d="M56 116h108m-102 21h96" stroke="#e5b28a" stroke-width="5" stroke-linecap="round"/>
+    <path d="M58 157h102" stroke="#f7e5d2" stroke-width="4" stroke-linecap="round" opacity=".85"/>
+    <path d="M81 188c12-11 24-11 36 0s24 11 36 0" fill="none" stroke="#f7e5d2" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <path d="M72 113c-13-25-10-46 9-66 19 24 20 45-9 66Zm5-18c15-14 32-21 51-18-12 18-29 24-51 18Z" fill="#91aa83"/>
+  <path d="M83 125v36m15-18c-5-8-11-14-20-19" fill="none" stroke="#69856b" stroke-width="4" stroke-linecap="round"/>
+  <path d="M351 154c-3-25 7-44 30-58 9 24 2 43-21 59Zm11-13c15-9 30-12 47-6-14 14-29 16-47 6Z" fill="#9db48c"/>
+  <path d="M361 169v34m15-17c-4-8-10-13-18-18" fill="none" stroke="#69856b" stroke-width="4" stroke-linecap="round"/>
+  <path d="m93 208 5 11 11 5-11 5-5 11-5-11-11-5 11-5Zm277-90 4 9 9 4-9 4-4 9-4-9-9-4 9-4Z" fill="#d3a25d"/>
+</svg>

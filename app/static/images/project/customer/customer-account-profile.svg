@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" role="img" aria-labelledby="title desc">
+  <title id="title">A customer's EcoCraft space</title>
+  <desc id="desc">Original illustration of a personal profile card with thoughtful purchases, a gift parcel, shopping bag and botanical details.</desc>
+  <path d="M383 22c131-24 281 37 333 138 52 102 1 217-103 268-122 60-321 26-367-76C197 246 230 51 383 22Z" fill="#d9e7d8"/>
+  <circle cx="548" cy="124" r="87" fill="#ecd9b8"/>
+  <circle cx="382" cy="235" r="188" fill="none" stroke="#69856b" stroke-width="2" opacity=".22"/>
+  <path d="M132 334c112-74 208-103 336-105m-336 105c91-109 168-182 294-228m-294 228c143-3 257 20 373 77" fill="none" stroke="#789272" stroke-width="3" stroke-dasharray="4 11" opacity=".58"/>
+  <g fill="#c1754c">
+    <circle cx="132" cy="334" r="8"/>
+    <circle cx="426" cy="101" r="8"/>
+    <circle cx="468" cy="229" r="8"/>
+    <circle cx="505" cy="411" r="8"/>
+  </g>
+  <rect x="194" y="58" width="370" height="340" rx="22" fill="#fffdf8" stroke="#c7d8c8" stroke-width="4"/>
+  <path d="M216 58h326c12 0 22 10 22 22v35H194V80c0-12 10-22 22-22Z" fill="#1e4b3d"/>
+  <circle cx="222" cy="87" r="5" fill="#dce9dc"/>
+  <circle cx="241" cy="87" r="5" fill="#dce9dc"/>
+  <circle cx="260" cy="87" r="5" fill="#dce9dc"/>
+  <path d="M302 88h108" stroke="#dce9dc" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+  <circle cx="277" cy="183" r="47" fill="#e9d7bd"/>
+  <path d="M247 181c1-27 13-44 31-44s30 17 31 44c-15 14-47 14-62 0Z" fill="#704d3d"/>
+  <path d="M237 239c7-34 21-51 41-51s35 17 42 51" fill="#789272"/>
+  <path d="M258 184c12 8 26 8 38 0m-34 18h29" fill="none" stroke="#a86a4c" stroke-width="3" stroke-linecap="round"/>
+  <path d="M346 146h180m-180 20h137" stroke="#cad8c9" stroke-width="7" stroke-linecap="round"/>
+  <rect x="346" y="188" width="163" height="35" rx="9" fill="#eef5ec"/>
+  <path d="m360 205 6 6 12-14" fill="none" stroke="#527557" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M388 205h103" stroke="#789272" stroke-width="5" stroke-linecap="round"/>
+  <path d="M221 268h317" stroke="#e4ebe3" stroke-width="2"/>
+  <rect x="222" y="289" width="84" height="77" rx="10" fill="#f3eadc"/>
+  <path d="M239 334c14-22 33-22 48-2m-43-17h39" fill="none" stroke="#b87851" stroke-width="4" stroke-linecap="round"/>
+  <path d="M321 300h191m-191 16h142" stroke="#d8c5a5" stroke-width="6" stroke-linecap="round"/>
+  <rect x="321" y="339" width="91" height="25" rx="12" fill="#e6f2e7"/>
+  <path d="M338 351h57" stroke="#789272" stroke-width="5" stroke-linecap="round"/>
+  <g transform="translate(89 282)">
+    <path d="M13 44h102l-10 91H23Z" fill="#c1754c" stroke="#914f38" stroke-width="3"/>
+    <path d="M34 46c0-32 12-49 30-49s30 17 30 49m-44 0V19m14 27V9m15 37V19" fill="none" stroke="#f7e5d2" stroke-width="5" stroke-linecap="round"/>
+    <path d="M34 76h60m-56 17h53" stroke="#e5b28a" stroke-width="4"/>
+  </g>
+  <g transform="translate(590 240)">
+    <path d="M5 43h98v82H5Z" fill="#d9b786" stroke="#9c704a" stroke-width="3"/>
+    <path d="M5 43h98L54 76Z" fill="#edd4ae" stroke="#9c704a" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M47 64h16v61H47Z" fill="#c1754c"/>
+    <path d="M46 43c-28-20-19-43 0-33 10 5 10 24 8 33m10 0c28-20 19-43 0-33-10 5-10 24-8 33" fill="none" stroke="#c1754c" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <path d="M126 177c-14-29-10-55 12-79 22 27 23 53-12 79Zm5-21c17-16 36-24 59-21-14 21-34 29-59 21Z" fill="#91aa83"/>
+  <path d="M141 192v43m18-22c-6-10-13-17-23-23" fill="none" stroke="#69856b" stroke-width="4" stroke-linecap="round"/>
+  <path d="M661 161c-3-29 9-51 36-66 10 28 2 50-25 67Zm13-10c17-11 35-14 54-7-16 16-33 18-54 7Z" fill="#9db48c"/>
+  <path d="M672 178v38m17-20c-5-9-12-15-20-20" fill="none" stroke="#69856b" stroke-width="4" stroke-linecap="round"/>
+</svg>

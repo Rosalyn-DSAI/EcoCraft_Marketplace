@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% block content %}
-<section class="hero" id="home-hero">
+{% include 'pages/public-landing.html' %}
+<section class="hero" id="home-hero" hidden>
   <div class="hero-inner">
     <p class="kicker">THE SUSTAINABLE EDIT</p>
     <h1>A little craft. A lot of heart. A world of wonder.</h1>
@@ -29,7 +30,7 @@
   </p>
 </div>
 <div id="notice" role="status" aria-live="polite" class="notice" hidden></div>
-<div class="page-layout" id="page-layout">
+<div class="page-layout" id="page-layout" hidden>
   <div class="page-content">
     {% include 'pages/catalog.html' %} {% include 'pages/marketpulse.html' %} {% include 'artist/insights.html' %} {%
     include 'pages/auth.html' %} {% include 'pages/dashboard.html' %} {% include

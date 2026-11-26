@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 420" role="img" aria-labelledby="title desc">
+  <title id="title">Curate handmade creations</title>
+  <desc id="desc">Original still-life illustration of pottery, a woven basket, linen and leafy stems arranged for a product review.</desc>
+  <circle cx="296" cy="209" r="178" fill="#e9ddc9"/>
+  <path d="M59 352h446" stroke="#987052" stroke-width="11" stroke-linecap="round"/>
+  <path d="M109 352v45m348-45v45" stroke="#987052" stroke-width="11"/>
+  <path d="M88 343c13-34 41-53 85-54l22 54Zm94 0c11-42 40-64 87-66l22 66Z" fill="#bc7956"/>
+  <path d="M96 328h92m-79-20h62m-66 31h74m12-11h92m-79-20h61m-68 31h77" fill="none" stroke="#e0b38e" stroke-width="5" stroke-linecap="round"/>
+  <path d="M214 312c-10-47-4-85 20-118 32 29 43 68 30 117Z" fill="#c7835e"/>
+  <path d="M232 199c-8-43 7-76 45-100 20 39 14 72-21 101Z" fill="#748d68"/>
+  <path d="M250 199c20-27 45-43 78-47m-80 62c-25-10-50-11-77-4" fill="none" stroke="#47694c" stroke-width="5" stroke-linecap="round"/>
+  <path d="M281 296c-5-60 15-103 61-130 25 54 17 98-26 134Z" fill="#8f9c76"/>
+  <path d="M303 289c-1-42-13-77-39-105m56 95c30-33 64-51 105-54" fill="none" stroke="#536f51" stroke-width="6" stroke-linecap="round"/>
+  <path d="M324 347c-3-49 14-82 53-101 20 44 14 79-22 104Z" fill="#b96f4d"/>
+  <path d="M365 347c1-52 19-87 55-105 24 43 20 79-14 109Z" fill="#d6b98b"/>
+  <path d="M404 348c-5-55 13-91 51-108 24 46 18 85-21 113Z" fill="#d7a982"/>
+  <path d="M358 352c17-39 38-74 62-105m-17 104c19-39 39-71 61-97" fill="none" stroke="#8d6949" stroke-width="4"/>
+  <path d="M435 231c-7-36 4-65 33-86 18 34 13 63-14 88Z" fill="#728b66"/>
+  <path d="M448 231c17-23 39-37 67-41" fill="none" stroke="#47694c" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="474" cy="135" r="33" fill="none" stroke="#587254" stroke-width="8"/>
+  <path d="m499 159 37 37" stroke="#587254" stroke-width="11" stroke-linecap="round"/>
+  <circle cx="474" cy="135" r="19" fill="#f3eddf" opacity=".7"/>
+  <path d="M124 204c25 15 50 22 77 19m-83-32c29 8 55 8 79-1" fill="none" stroke="#a68a67" stroke-width="5" stroke-linecap="round"/>
+</svg>

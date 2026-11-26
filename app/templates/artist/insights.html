@@ -1,7 +1,29 @@
 <section class="page mp-page" id="page-artist-insights" hidden>
-  <button class="outline" type="button" data-page="dashboard">
+  <button class="outline artist-back" type="button" data-page="dashboard">
     Back to dashboard
   </button>
+  <section
+    class="artist-intro artist-intro--insights"
+    aria-labelledby="artist-insights-intro-title"
+  >
+    <div class="artist-intro-copy">
+      <p class="artist-eyebrow">YOUR BUSINESS IN FOCUS</p>
+      <h1 id="artist-insights-intro-title">
+        See how your <em>business grows.</em>
+      </h1>
+      <p>
+        Understand your sales, track your earnings and discover how your
+        products are performing.
+      </p>
+    </div>
+    <img
+      class="artist-intro-art"
+      src="{{ url_for('static',filename='images/project/artist/artist-business-insights.svg') }}"
+      alt="An abstract storefront, connected product symbols and a rising, unlabeled business trend."
+      width="780"
+      height="480"
+    />
+  </section>
   <div class="section-heading mp-header">
     <div>
       <p class="kicker">ARTIST INSIGHTS</p>

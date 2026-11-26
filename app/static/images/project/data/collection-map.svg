@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 780" role="img" aria-labelledby="title desc">
+  <title id="title">Five collections connected in a marketplace</title>
+  <desc id="desc">Original EcoCraft data illustration with a marketplace document connected to users, products, cart, orders and reviews.</desc>
+  <rect width="1100" height="780" fill="#e7eee1"/>
+  <circle cx="550" cy="382" r="250" fill="#d5e0d1"/>
+  <circle cx="550" cy="382" r="194" fill="none" stroke="#b8cbb8" stroke-width="2" stroke-dasharray="3 11"/>
+  <path d="M550 382 259 195M550 382 834 189M550 382 180 543M550 382 920 539M550 382 550 678" fill="none" stroke="#91aa91" stroke-width="4"/>
+  <path d="M550 382 259 195M550 382 834 189M550 382 180 543M550 382 920 539M550 382 550 678" fill="none" stroke="#f7f5ef" stroke-width="1.5" stroke-dasharray="6 10"/>
+  <g transform="translate(400 238)">
+    <path d="M20 24 150 0l129 24-129 27Z" fill="#1e4b3d"/>
+    <path d="M20 24v205l130 34V51Z" fill="#315f4c"/>
+    <path d="M150 51v212l129-34V24Z" fill="#799272"/>
+    <path d="m60 87 90-23m-90 49 90-23m-90 49 90-23" stroke="#dce8d8" stroke-width="10" stroke-linecap="round"/>
+    <path d="m184 84 54-14m-54 45 54-14m-54 45 54-14" stroke="#e9eee6" stroke-width="8" stroke-linecap="round"/>
+    <text x="150" y="300" text-anchor="middle" fill="#153d30" font-family="Georgia,serif" font-size="26">marketplace</text>
+    <text x="150" y="324" text-anchor="middle" fill="#677b6f" font-family="Arial,sans-serif" font-size="13">documents in motion</text>
+  </g>
+  <g transform="translate(118 104)">
+    <rect width="230" height="118" rx="6" fill="#f7f5ef" stroke="#c7d6c6" stroke-width="2"/>
+    <circle cx="43" cy="43" r="19" fill="#d8b38f"/>
+    <path d="M12 95c5-21 17-31 31-31s27 10 32 31" fill="#799272"/>
+    <path d="M101 35h95M101 59h72M101 83h84" stroke="#c4d2c3" stroke-width="7" stroke-linecap="round"/>
+    <text x="115" y="147" text-anchor="middle" fill="#153d30" font-family="Georgia,serif" font-size="22">users</text>
+  </g>
+  <g transform="translate(748 96)">
+    <rect width="235" height="118" rx="6" fill="#f7f5ef" stroke="#c7d6c6" stroke-width="2"/>
+    <path d="M30 78 70 31l34 47Z" fill="#c77b51"/>
+    <path d="M49 78 93 43l39 35Z" fill="#d6b77f"/>
+    <path d="M144 38h65m-65 23h52m-52 23h61" stroke="#c4d2c3" stroke-width="7" stroke-linecap="round"/>
+    <text x="118" y="147" text-anchor="middle" fill="#153d30" font-family="Georgia,serif" font-size="22">products</text>
+  </g>
+  <g transform="translate(58 478)">
+    <rect width="235" height="118" rx="6" fill="#f7f5ef" stroke="#c7d6c6" stroke-width="2"/>
+    <path d="M53 27h111l-10 68H63Z" fill="#d7e3d3" stroke="#557b5a" stroke-width="3"/>
+    <path d="M77 46h65m-62 19h58" stroke="#799272" stroke-width="6" stroke-linecap="round"/>
+    <text x="117" y="147" text-anchor="middle" fill="#153d30" font-family="Georgia,serif" font-size="22">cart</text>
+  </g>
+  <g transform="translate(806 476)">
+    <rect width="235" height="118" rx="6" fill="#f7f5ef" stroke="#c7d6c6" stroke-width="2"/>
+    <path d="M56 30h104l17 22v51H56Z" fill="#e6d2b2" stroke="#b87851" stroke-width="3"/>
+    <path d="M160 30v23h18M76 62h81m-81 19h62" stroke="#a96b48" stroke-width="5"/>
+    <text x="117" y="147" text-anchor="middle" fill="#153d30" font-family="Georgia,serif" font-size="22">orders</text>
+  </g>
+  <g transform="translate(435 616)">
+    <rect width="230" height="118" rx="6" fill="#f7f5ef" stroke="#c7d6c6" stroke-width="2"/>
+    <path d="m54 45 8 18 20 2-15 13 5 20-18-11-18 11 5-20-15-13 20-2Z" fill="#bd714f"/>
+    <path d="M100 43h93m-93 23h72m-72 23h86" stroke="#c4d2c3" stroke-width="7" stroke-linecap="round"/>
+    <text x="115" y="147" text-anchor="middle" fill="#153d30" font-family="Georgia,serif" font-size="22">reviews</text>
+  </g>
+  <circle cx="550" cy="382" r="7" fill="#bd714f"/>
+</svg>

@@ -1,0 +1,283 @@
+#page-admin-profile .admin-account-back {
+  margin-bottom: 18px;
+}
+
+#page-admin-profile .admin-account-hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(250px, 0.92fr);
+  align-items: center;
+  gap: 20px;
+  min-height: 270px;
+  margin: 0 0 34px;
+  padding: clamp(24px, 4vw, 46px);
+  overflow: hidden;
+  border: 1px solid rgba(230, 242, 231, 0.16);
+  border-radius: 18px;
+  background: var(--forest);
+  color: var(--cream);
+}
+
+#page-admin-profile .admin-account-hero::before,
+#page-admin-profile .admin-account-hero::after {
+  position: absolute;
+  z-index: -1;
+  border: 1px solid rgba(230, 242, 231, 0.16);
+  border-radius: 50%;
+  content: "";
+}
+
+#page-admin-profile .admin-account-hero::before {
+  top: -190px;
+  right: 8%;
+  width: 400px;
+  height: 400px;
+}
+
+#page-admin-profile .admin-account-hero::after {
+  right: 23%;
+  bottom: -270px;
+  width: 430px;
+  height: 430px;
+}
+
+#page-admin-profile .admin-account-hero-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 650px;
+}
+
+#page-admin-profile .admin-account-eyebrow {
+  margin: 0 0 9px;
+  color: var(--terracotta);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.17em;
+  line-height: 1.5;
+}
+
+#page-admin-profile .admin-account-hero .admin-account-eyebrow {
+  color: #e5b28a;
+}
+
+#page-admin-profile .admin-account-hero h1 {
+  margin: 0;
+  color: var(--cream);
+  font: normal clamp(38px, 5vw, 62px) / 1.02 Georgia, serif;
+  letter-spacing: -0.045em;
+}
+
+#page-admin-profile .admin-account-hero h1 em {
+  color: #d7e5d6;
+  font-weight: 400;
+}
+
+#page-admin-profile .admin-account-hero-copy > p:last-child {
+  max-width: 540px;
+  margin: 16px 0 0;
+  color: #e0eadf;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+#page-admin-profile .admin-account-hero-art {
+  display: block;
+  width: min(100%, 430px);
+  max-height: 260px;
+  justify-self: center;
+  object-fit: contain;
+}
+
+#page-admin-profile .admin-account-content {
+  margin: 0 0 32px;
+}
+
+#page-admin-profile .admin-account-section-heading {
+  margin: 0 0 15px;
+}
+
+#page-admin-profile .admin-account-section-heading .admin-account-eyebrow {
+  margin-bottom: 6px;
+}
+
+#page-admin-profile .admin-account-section-heading h2 {
+  margin: 0;
+  color: var(--ink);
+  font: normal clamp(28px, 3vw, 38px) / 1.1 Georgia, serif;
+  letter-spacing: -0.03em;
+}
+
+#page-admin-profile .admin-account-panel {
+  display: grid;
+  grid-template-columns: minmax(205px, 0.72fr) minmax(0, 1.8fr);
+  align-items: start;
+  gap: 26px;
+  padding: 26px;
+  border: 1px solid #d3e2d5;
+  border-radius: 16px;
+  background: #fff;
+}
+
+#page-admin-profile .admin-profile-summary {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 10px 20px 10px 4px;
+  border-right: 1px solid #e4ebe3;
+}
+
+#page-admin-profile .admin-profile-avatar {
+  display: grid;
+  width: 88px;
+  height: 88px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid #c9dbc9;
+  border-radius: 50%;
+  background: #e6f2e7;
+  color: var(--forest);
+  font: normal 31px / 1 Georgia, serif;
+  letter-spacing: -0.04em;
+}
+
+#page-admin-profile .admin-profile-name {
+  min-width: 0;
+}
+
+#page-admin-profile .admin-profile-name h3 {
+  margin: 0;
+  color: var(--ink);
+  font: normal clamp(22px, 2.2vw, 29px) / 1.15 Georgia, serif;
+  overflow-wrap: anywhere;
+}
+
+#page-admin-profile .admin-profile-name span {
+  display: inline-block;
+  margin-top: 9px;
+  padding: 5px 9px;
+  border: 1px solid #ead3c5;
+  border-radius: 999px;
+  background: #fbf3ed;
+  color: #804b34;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+}
+
+#page-admin-profile #admin-profile {
+  min-width: 0;
+}
+
+#page-admin-profile #admin-profile #profile-panel {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+#page-admin-profile #admin-profile .account-layout {
+  display: block;
+}
+
+#page-admin-profile #admin-profile .account-card {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+#page-admin-profile #admin-profile .account-card-head {
+  display: none;
+}
+
+#page-admin-profile #admin-profile #account-edit-form {
+  display: none !important;
+}
+
+#page-admin-profile #admin-profile .account-details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+#page-admin-profile #admin-profile .account-details > div {
+  display: block;
+  min-width: 0;
+  padding: 14px 15px;
+  border: 1px solid #e4ebe3;
+  border-radius: 11px;
+  background: var(--cream);
+}
+
+#page-admin-profile #admin-profile .account-details dt {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+#page-admin-profile #admin-profile .account-details dd {
+  margin: 7px 0 0;
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+  #page-admin-profile .admin-account-hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+    padding: 28px 24px 18px;
+  }
+
+  #page-admin-profile .admin-account-hero h1 {
+    font-size: clamp(36px, 9vw, 52px);
+  }
+
+  #page-admin-profile .admin-account-hero-art {
+    width: min(100%, 330px);
+    max-height: 195px;
+    justify-self: end;
+    margin-top: -5px;
+  }
+
+  #page-admin-profile .admin-account-panel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    padding: 21px;
+  }
+
+  #page-admin-profile .admin-profile-summary {
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    padding: 0 0 17px;
+    border-right: 0;
+    border-bottom: 1px solid #e4ebe3;
+  }
+
+  #page-admin-profile .admin-profile-avatar {
+    width: 72px;
+    height: 72px;
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 520px) {
+  #page-admin-profile .admin-account-panel {
+    gap: 16px;
+    padding: 17px;
+  }
+
+  #page-admin-profile #admin-profile .account-details {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

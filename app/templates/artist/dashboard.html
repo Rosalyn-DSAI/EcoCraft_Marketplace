@@ -1,58 +1,101 @@
 <section class="page" id="page-artist-dashboard" hidden>
-  <div class="section-heading inner">
-    <h3>My creations</h3>
-    <div class="actions">
-      <button id="artist-add-product" class="primary" data-page="artist-add-product">
-        Add product
-      </button>
-      <button id="artist-refresh" class="secondary">Refresh products</button>
+  <section
+    class="artist-intro artist-intro--studio"
+    aria-labelledby="artist-studio-title"
+  >
+    <div class="artist-intro-copy">
+      <p class="artist-eyebrow">YOUR CREATIVE STUDIO</p>
+      <h1 id="artist-studio-title">
+        Your vision.<br /><em>Your marketplace.</em>
+      </h1>
+      <p>
+        Showcase your products, manage your collection and grow your business
+        with purpose.
+      </p>
     </div>
-  </div>
+    <img
+      class="artist-intro-art"
+      src="{{ url_for('static',filename='images/project/artist/artist-marketplace-hero.svg') }}"
+      alt="A collection of fashion, accessories, home decor and packaged creations ready for an online shop."
+      width="900"
+      height="600"
+    />
+  </section>
 
-  <p class="hint catalog-meta" id="product-count" role="status" aria-live="polite"></p>
-  <div class="artist-products-layout">
-    <div class="catalog-results-column">
-      <div id="artist-products" class="product-grid"></div>
-    </div>
-    <aside class="catalog-filters product-filters" aria-labelledby="product-filters-title">
-      <h3 id="product-filters-title">Filter &amp; sort</h3>
-      <div class="form">
-        <label
-          >Search by title<input
-            id="product-search"
-            type="search"
-            maxlength="80"
-            placeholder="Search your products"
-        /></label>
-        <div class="artist-filter-list">
-          <label class="artist-filter-item"
-            ><input id="filter-listed" type="checkbox" /><span>Listed</span></label
-          >
-          <label class="artist-filter-item"
-            ><input id="filter-rejected" type="checkbox" /><span>Rejected</span></label
-          >
-          <label class="artist-filter-item"
-            ><input id="filter-deleted" type="checkbox" /><span>Deleted</span></label
-          >
-        </div>
-        <label
-          >Category<select id="product-category">
-            <option value="">All categories</option>
-          </select></label
-        >
-        <label
-          >Sort by<select id="product-sort">
-            <option value="newest">Newest first</option>
-            <option value="title">Title A–Z</option>
-            <option value="priceHigh">Price: high to low</option>
-            <option value="priceLow">Price: low to high</option>
-            <option value="stockHigh">Stock: high to low</option>
-          </select></label
-        >
-        <button class="outline" id="clear-product-filters" type="button">
-          Clear filters
-        </button>
+  <section class="artist-collection" aria-labelledby="artist-collection-title">
+    <header class="artist-section-heading">
+      <div>
+        <p class="artist-eyebrow">CRAFTED BY YOU</p>
+        <h2 id="artist-collection-title">My creations</h2>
+        <p>
+          Every product tells a story. Manage your collection, showcase your
+          creativity and bring your next idea to the marketplace.
+        </p>
       </div>
-    </aside>
-  </div>
+      <div class="actions">
+        <button
+          id="artist-add-product"
+          class="primary"
+          data-page="artist-add-product"
+        >
+          Add product
+        </button>
+        <button id="artist-refresh" class="secondary">Refresh products</button>
+      </div>
+    </header>
+    <p
+      class="hint catalog-meta"
+      id="product-count"
+      role="status"
+      aria-live="polite"
+    ></p>
+    <div class="artist-products-layout">
+      <div class="catalog-results-column">
+        <div id="artist-products" class="product-grid"></div>
+      </div>
+      <aside
+        class="catalog-filters product-filters"
+        aria-labelledby="product-filters-title"
+      >
+        <h3 id="product-filters-title">Filter &amp; sort</h3>
+        <div class="form">
+          <label
+            >Search by title<input
+              id="product-search"
+              type="search"
+              maxlength="80"
+              placeholder="Search your products"
+          /></label>
+          <div class="artist-filter-list">
+            <label class="artist-filter-item"
+              ><input id="filter-listed" type="checkbox" /><span>Listed</span></label
+            >
+            <label class="artist-filter-item"
+              ><input id="filter-rejected" type="checkbox" /><span>Rejected</span></label
+            >
+            <label class="artist-filter-item"
+              ><input id="filter-deleted" type="checkbox" /><span>Deleted</span></label
+            >
+          </div>
+          <label
+            >Category<select id="product-category">
+              <option value="">All categories</option>
+            </select></label
+          >
+          <label
+            >Sort by<select id="product-sort">
+              <option value="newest">Newest first</option>
+              <option value="title">Title A–Z</option>
+              <option value="priceHigh">Price: high to low</option>
+              <option value="priceLow">Price: low to high</option>
+              <option value="stockHigh">Stock: high to low</option>
+            </select></label
+          >
+          <button class="outline" id="clear-product-filters" type="button">
+            Clear filters
+          </button>
+        </div>
+      </aside>
+    </div>
+  </section>
 </section>

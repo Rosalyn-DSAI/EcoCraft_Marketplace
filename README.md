@@ -61,7 +61,9 @@ The steps below use **Windows PowerShell** from the project root. You'll need Py
    .\.venv\Scripts\python.exe -m flask --app app run --host 127.0.0.1 --port 5000
    ```
 
-5. Open **http://127.0.0.1:5000/** in your browser.
+5. Open **http://127.0.0.1:5000/** in your browser to see the public EcoCraft
+   introduction. Choose **Explore the marketplace** to browse the existing
+   catalog without signing in.
 
    Use `/api/health` to check the Flask service and `/api/health/db` to check the MongoDB connection. A successful database check returns `{"database":"ecocraft","status":"ok"}` when configured for the shared database.
 

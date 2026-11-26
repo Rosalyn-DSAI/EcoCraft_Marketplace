@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" role="img" aria-labelledby="title desc">
+  <title id="title">A thoughtful order's journey</title>
+  <desc id="desc">Original illustration of an online order, a shopping bag, a folded accessory, a gift parcel and the path to delivery.</desc>
+  <path d="M383 22c131-24 281 37 333 138 52 102 1 217-103 268-122 60-321 26-367-76C197 246 230 51 383 22Z" fill="#d9e7d8"/>
+  <circle cx="548" cy="124" r="87" fill="#ecd9b8"/>
+  <circle cx="382" cy="235" r="188" fill="none" stroke="#69856b" stroke-width="2" opacity=".22"/>
+  <path d="M101 341c94-108 151-173 232-194 92-24 161 2 225 28 37 15 71 42 100 82" fill="none" stroke="#789272" stroke-width="3" stroke-dasharray="4 11" opacity=".58"/>
+  <g fill="#c1754c">
+    <circle cx="101" cy="341" r="8"/>
+    <circle cx="333" cy="147" r="8"/>
+    <circle cx="558" cy="175" r="8"/>
+    <circle cx="658" cy="257" r="8"/>
+  </g>
+  <rect x="190" y="52" width="374" height="352" rx="22" fill="#fffdf8" stroke="#c7d8c8" stroke-width="4"/>
+  <path d="M212 52h330c12 0 22 10 22 22v38H190V74c0-12 10-22 22-22Z" fill="#1e4b3d"/>
+  <circle cx="220" cy="82" r="5" fill="#dce9dc"/>
+  <circle cx="239" cy="82" r="5" fill="#dce9dc"/>
+  <circle cx="258" cy="82" r="5" fill="#dce9dc"/>
+  <path d="M300 83h96" stroke="#dce9dc" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+  <rect x="430" y="68" width="104" height="27" rx="13" fill="#dce9dc"/>
+  <path d="M447 81h68" stroke="#527557" stroke-width="5" stroke-linecap="round"/>
+  <path d="M218 135h220m-220 16h142" stroke="#cad8c9" stroke-width="7" stroke-linecap="round"/>
+  <rect x="464" y="132" width="70" height="27" rx="13" fill="#eef5ec"/>
+  <path d="M479 145h40" stroke="#789272" stroke-width="5" stroke-linecap="round"/>
+  <path d="M214 177h326" stroke="#e4ebe3" stroke-width="2"/>
+  <rect x="218" y="193" width="83" height="81" rx="10" fill="#f3eadc"/>
+  <path d="M236 226h47l-5 34h-37Zm7 0c0-22 7-33 17-33s17 11 17 33" fill="#c1754c" stroke="#914f38" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M324 205h196m-196 15h132" stroke="#d8c5a5" stroke-width="6" stroke-linecap="round"/>
+  <rect x="324" y="238" width="118" height="23" rx="11" fill="#eef5ec"/>
+  <path d="M341 250h83" stroke="#789272" stroke-width="5" stroke-linecap="round"/>
+  <path d="M214 289h326" stroke="#e4ebe3" stroke-width="2"/>
+  <rect x="218" y="305" width="83" height="77" rx="10" fill="#e6f2e7"/>
+  <path d="M235 351c10-23 27-32 44-27l9 23c-14 13-34 16-53 4Z" fill="#789272"/>
+  <path d="M247 335c6-11 13-17 23-19" fill="none" stroke="#527557" stroke-width="3" stroke-linecap="round"/>
+  <path d="M324 318h196m-196 15h150" stroke="#d8c5a5" stroke-width="6" stroke-linecap="round"/>
+  <rect x="324" y="351" width="105" height="22" rx="11" fill="#f3eadc"/>
+  <path d="M341 362h71" stroke="#b87851" stroke-width="5" stroke-linecap="round"/>
+  <g transform="translate(78 288)">
+    <path d="M12 43h102l-10 91H22Z" fill="#c1754c" stroke="#914f38" stroke-width="3"/>
+    <path d="M34 45c0-32 12-49 30-49s30 17 30 49m-44 0V18m14 27V8m15 37V18" fill="none" stroke="#f7e5d2" stroke-width="5" stroke-linecap="round"/>
+    <path d="M33 76h62m-57 17h53" stroke="#e5b28a" stroke-width="4"/>
+  </g>
+  <g transform="translate(576 262)">
+    <path d="M5 43h98v82H5Z" fill="#d9b786" stroke="#9c704a" stroke-width="3"/>
+    <path d="M5 43h98L54 76Z" fill="#edd4ae" stroke="#9c704a" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M47 64h16v61H47Z" fill="#c1754c"/>
+    <path d="M46 43c-28-20-19-43 0-33 10 5 10 24 8 33m10 0c28-20 19-43 0-33-10 5-10 24-8 33" fill="none" stroke="#c1754c" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <path d="M126 177c-14-29-10-55 12-79 22 27 23 53-12 79Zm5-21c17-16 36-24 59-21-14 21-34 29-59 21Z" fill="#91aa83"/>
+  <path d="M141 192v43m18-22c-6-10-13-17-23-23" fill="none" stroke="#69856b" stroke-width="4" stroke-linecap="round"/>
+  <path d="M661 161c-3-29 9-51 36-66 10 28 2 50-25 67Zm13-10c17-11 35-14 54-7-16 16-33 18-54 7Z" fill="#9db48c"/>
+  <path d="M672 178v38m17-20c-5-9-12-15-20-20" fill="none" stroke="#69856b" stroke-width="4" stroke-linecap="round"/>
+</svg>

@@ -1,8 +1,40 @@
 <section class="page" id="page-artist-profile" hidden>
-  <button class="outline" type="button" data-page="dashboard">
+  <button class="outline artist-back" type="button" data-page="dashboard">
     Back to dashboard
   </button>
-  <div class="section-heading inner"><h3>My account</h3></div>
-  <div id="artist-profile"></div>
+  <section
+    class="artist-intro artist-intro--account"
+    aria-labelledby="artist-account-intro-title"
+  >
+    <div class="artist-intro-copy">
+      <p class="artist-eyebrow">THE PERSON BEHIND THE BRAND</p>
+      <h1 id="artist-account-intro-title">
+        Your story <em>starts here.</em>
+      </h1>
+      <p>
+        Manage your personal information and the story behind your EcoCraft
+        journey.
+      </p>
+    </div>
+    <img
+      class="artist-intro-art"
+      src="{{ url_for('static',filename='images/project/artist/artist-account-story.svg') }}"
+      alt="An illustrated seller profile and story card surrounded by creative business details."
+      width="760"
+      height="460"
+    />
+  </section>
+  <section
+    class="artist-profile-content"
+    aria-labelledby="artist-account-title"
+  >
+    <div class="artist-section-heading artist-section-heading--compact">
+      <div>
+        <p class="artist-eyebrow">YOUR PROFILE</p>
+        <h2 id="artist-account-title">My account</h2>
+      </div>
+    </div>
+    <div id="artist-profile"></div>
+  </section>
 </section>
 </section>

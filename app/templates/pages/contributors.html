@@ -1,38 +1,148 @@
 <section
-  class="page project-page"
+  class="page project-page story-page story-page--team"
   id="page-contributors"
   aria-labelledby="contributors-title"
   hidden
 >
-  <p class="kicker">THE PEOPLE BEHIND THE PROJECT</p>
-  <h2 id="contributors-title">The Hands Behind EcoCraft</h2>
-  <p class="project-intro">
-    EcoCraft is a shared class project bringing together marketplace design,
-    application development and database work.
-  </p>
-  <div class="project-cards">
-    <article class="panel">
-      <h3>Design &amp; experience</h3>
-      <p>
-        Creating the marketplace interface and shaping the browsing experience.
+  <div class="story-wrap">
+    <button
+      class="outline story-dashboard-button"
+      type="button"
+      data-page="dashboard"
+      hidden
+    >
+      Back to dashboard
+    </button>
+    <header class="story-hero story-hero--team">
+      <div class="story-hero-copy">
+        <p class="story-eyebrow">THE PEOPLE BEHIND THE PROJECT <span>04 / 04</span></p>
+        <p class="story-page-title">The Hands Behind EcoCraft</p>
+        <h1 id="contributors-title">
+          Different minds.<br /><em>One shared vision.</em>
+        </h1>
+        <p class="story-standfirst">
+          Built through collaboration, curiosity and a shared passion for
+          creating something meaningful.
+        </p>
+      </div>
+      <figure class="story-art story-art--team">
+        <img
+          src="{{ url_for('static',filename='images/project/team/profile-placeholder.svg') }}"
+          alt="Illustrated portrait placeholder, ready to be replaced with a confirmed EcoCraft team member photograph."
+          width="720"
+          height="720"
+        />
+        <figcaption>Team portrait placeholder — replace when approved photos are available.</figcaption>
+      </figure>
+    </header>
+
+    <section class="story-introduction story-introduction--team">
+      <p class="story-overline">A COLLABORATIVE JOURNEY</p>
+      <p class="story-intro-copy">
+        Every meaningful creation begins with people. EcoCraft is the result
+        of a collaborative journey that brought together different
+        perspectives, skills and ideas to transform a classroom concept into a
+        working digital marketplace.
       </p>
-    </article>
-    <article class="panel">
-      <h3>Application &amp; data</h3>
-      <p>
-        Connecting application workflows, validation and MongoDB document
-        design.
+      <p class="story-intro-note">
+        Through research, design, development, testing and continuous
+        improvement, our team explored what it means to build a connected
+        application from the ground up.
       </p>
-    </article>
-    <article class="panel">
-      <h3>Testing &amp; presentation</h3>
-      <p>
-        Checking project workflows and communicating the project to the class.
+    </section>
+
+    <section class="story-section story-contributions">
+      <p class="story-overline">A SHARED PRACTICE</p>
+      <div class="story-contribution-list">
+        <article>
+          <span>01</span>
+          <div>
+            <h2>Design &amp; experience</h2>
+            <p>
+              Turning ideas into interfaces people can understand and use:
+              shaping the visual identity, navigation, product discovery and
+              experiences for different marketplace users.
+            </p>
+          </div>
+        </article>
+        <article>
+          <span>02</span>
+          <div>
+            <h2>Application &amp; data</h2>
+            <p>
+              Building the connections behind the experience: designing
+              MongoDB documents, developing application workflows and linking
+              the interface to the information that powers it.
+            </p>
+          </div>
+        </article>
+        <article>
+          <span>03</span>
+          <div>
+            <h2>Testing &amp; refinement</h2>
+            <p>
+              Bringing components together, examining how they interact and
+              improving the experience through testing, troubleshooting and
+              collaborative problem-solving.
+            </p>
+          </div>
+        </article>
+      </div>
+      <p class="story-caveat">
+        These are areas of work, not a one-to-one list of team members.
       </p>
-    </article>
+    </section>
+
+    <section class="story-section story-team-section">
+      <div class="story-section-heading story-section-heading--wide">
+        <div>
+          <p class="story-overline">MEET THE TEAM</p>
+          <h2>People make the work their own.</h2>
+        </div>
+        <p>
+          Names, portraits, roles and individual contributions will be added
+          once the team has confirmed them.
+        </p>
+      </div>
+      <article class="story-profile-placeholder">
+        <div class="story-profile-art">
+          <img
+            src="{{ url_for('static',filename='images/project/team/profile-placeholder.svg') }}"
+            alt=""
+            width="720"
+            height="720"
+          />
+        </div>
+        <div class="story-profile-copy">
+          <p class="story-overline">REUSABLE PROFILE PLACEHOLDER</p>
+          <h3>Team member name to be added</h3>
+          <p class="story-profile-role">Role or area of contribution to be confirmed</p>
+          <p>
+            Add an approved photograph and a short description of this person's
+            contribution here. Duplicate this profile layout only for
+            confirmed team members.
+          </p>
+          <span class="story-profile-links">Optional: LinkedIn · GitHub</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="story-closing story-section">
+      <p class="story-overline">WHAT WE TAKE FORWARD</p>
+      <h2>Created with curiosity.<br />Built through collaboration.<br /><em>Made with purpose.</em></h2>
+      <p>
+        EcoCraft reflects the experience of applying knowledge, navigating
+        challenges, collaborating with others and transforming ideas into
+        practical solutions.
+      </p>
+      <p class="story-credit">EcoCraft · University of Central Missouri · 2026</p>
+    </section>
+
+    <nav class="story-next story-next--return" aria-label="Return to the beginning">
+      <span>Start the story again</span>
+      <a href="#page-about" data-page="about">
+        <small>01 / 04</small> About EcoCraft <span aria-hidden="true">↗</span>
+      </a>
+    </nav>
   </div>
-  <p class="hint">
-    Individual collaborator names and contributions will be added when
-    confirmed.
-  </p>
 </section>

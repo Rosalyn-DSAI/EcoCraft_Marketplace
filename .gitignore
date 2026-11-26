@@ -26,6 +26,8 @@ coverage.xml
 node_modules/
 dist/
 build/
+!app/static/images/project/build/
+!app/static/images/project/build/system-flow.svg
 
 # Local editor, OS and PowerShell state
 .vscode/
@@ -51,6 +53,9 @@ backups/
 
 # Local development scripts (tests, ingestion, validation); share by email, not Git
 test_scripts/
+
+# Local testing and audit artifacts
+/local_testing/
 
 # Atlas audit reports (local runs; the committed snapshot stays tracked)
 reports/
