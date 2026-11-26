@@ -112,12 +112,12 @@
         money,
       ),
       kpiCard(
-        'Net Payout',
+        'Estimated Net Payout',
         Number(cur.netPayout),
         Number(prev.netPayout),
         money,
       ),
-      kpiCard('Orders', cur.orders, prev.orders, count),
+      kpiCard('Orders with shipped items', cur.orders, prev.orders, count),
     ].join('');
 
     const statusItems = STATUSES.map((s) => ({
@@ -135,7 +135,7 @@
     const top = data.topProducts.slice(0, TOP_LIMIT).map((p) => ({
       label: p.title,
       value: Number(p.grossSales),
-      detail: `${count(p.unitsSold)} sold · ${money(Number(p.netPayout))} net payout`,
+      detail: `${count(p.unitsSold)} sold · ${money(Number(p.netPayout))} estimated net payout`,
     }));
     $('ai-top').innerHTML = CH().hbars(top, {
       format: money,

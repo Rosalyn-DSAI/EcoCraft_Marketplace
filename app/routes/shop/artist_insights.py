@@ -1,4 +1,4 @@
-"""Artist sales insights: KPI and top-product summaries over bounded, same-length comparison windows."""
+"""Artist sales insights backed by order snapshots in MongoDB."""
 from datetime import datetime, timezone
 from decimal import Decimal
 
@@ -39,7 +39,7 @@ def artist_orders_in(db, artist_id, lo, hi):
 
 
 def summarize_insights(orders):
-    """Compute the artist's KPIs from live items only; cancelled items never count toward sales, commission or payout."""
+    """Summarize shipped artist items, while counting every order's status."""
     kpi = {'grossSales': Decimal('0'), 'commission': Decimal('0'), 'netPayout': Decimal('0'), 'orders': 0}
     statuses = {'Shipped': 0, 'Pending': 0, 'Cancelled': 0}
     products = {}
@@ -47,12 +47,11 @@ def summarize_insights(orders):
         # order_status maps to: cancelled, shipped, or pending/partially_shipped.
         state = {'cancelled': 'Cancelled', 'shipped': 'Shipped'}.get(order_status(items), 'Pending')
         statuses[state] += 1
-        if state == 'Cancelled':
+        shipped = [item for item in items if item['status'] == 'active' and item['shipping']['status'] == 'shipped']
+        if not shipped:
             continue
         kpi['orders'] += 1
-        for item in items:
-            if item['status'] != 'active':
-                continue
+        for item in shipped:
             qty = item['quantity']
             gross = item['unitPrice'].to_decimal() * qty
             commission = item['commissionAmount'].to_decimal()

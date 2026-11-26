@@ -33,16 +33,16 @@
   const GROWTH_KPIS = [
     ['totalRevenue', 'Gross Sales', 'money'],
     ['commissionEarned', 'Commission Earned', 'money'],
-    ['totalOrders', 'Total Orders', 'count'],
-    ['totalCancellations', 'Total Cancellations', 'count'],
+    ['totalOrders', 'Orders with shipped items', 'count'],
+    ['totalCancellations', 'Cancelled items', 'count'],
     ['newCustomers', 'New Customers', 'count'],
-    ['newArtists', 'New Artists', 'count'],
+    ['newArtists', 'New artists (currently approved)', 'count'],
   ];
   const PERFORMANCE_KPIS = [
-    ['activeArtists', 'Total Active Artists', 'count'],
-    ['totalProducts', 'Total Products', 'count'],
+    ['activeArtists', 'Artists with shipped sales', 'count'],
+    ['totalProducts', 'Currently listed products', 'count'],
     ['totalReviews', 'Total Reviews', 'count'],
-    ['productsWithoutSales', 'Products Without Sales', 'count'],
+    ['productsWithoutSales', 'Current products without sales', 'count'],
   ];
   const ALERT_LIMIT = 5;
   const SLOW_PAGE = 10;
