@@ -1,38 +1,150 @@
 <section class="page" id="page-dashboard" hidden>
-  <nav
+  <section
     id="admin-shortcuts"
-    class="admin-shortcuts"
-    aria-label="Admin shortcuts"
+    class="admin-shortcuts admin-dashboard"
+    aria-labelledby="admin-dashboard-title"
     hidden
   >
-    <a
-      class="panel admin-shortcut"
-      href="#page-admin-artists"
-      data-page="admin-artists"
-      ><strong>Meet the Makers</strong><span>Artist Onboarding</span></a
-    >
-    <a
-      class="panel admin-shortcut"
-      href="#page-admin-products"
-      data-page="admin-products"
-      ><strong>Curate the Catalog</strong
-      ><span>Product moderation -> Add commission -> List product</span></a
-    >
-    <a
-      class="panel admin-shortcut"
-      href="#page-admin-analytics"
-      data-page="admin-analytics"
-      ><strong>MarketPulse</strong><span>Marketplace insights</span></a
-    >
-  </nav>
-  <div id="workspace-details">
-    <div class="section-heading">
-      <div>
-        <p class="kicker">YOUR SPACE</p>
-        <h2 id="workspace-title">Marketplace workspace</h2>
+    <header class="admin-welcome">
+      <div class="admin-welcome-copy">
+        <p class="admin-eyebrow">THE ECOCRAFT CONTROL CENTER</p>
+        <h1 id="admin-dashboard-title">
+          Cultivate creativity.<br /><em>Grow with purpose.</em>
+        </h1>
+        <p>
+          Welcome back! Manage the people, products and insights that bring
+          EcoCraft to life. Every thoughtful decision helps shape a more
+          meaningful marketplace.
+        </p>
       </div>
-      <span id="identity">Not signed in</span>
-    </div>
+      <img
+        class="admin-welcome-art"
+        src="{{ url_for('static',filename='images/project/admin/admin-marketplace-hero.svg') }}"
+        alt="Illustration of makers, handmade products and growing community connected through the EcoCraft marketplace."
+        width="900"
+        height="600"
+      />
+    </header>
+
+    <section class="admin-glance" aria-labelledby="admin-glance-title">
+      <div class="admin-glance-heading">
+        <div>
+          <p class="admin-eyebrow">THE WORK IN MOTION</p>
+          <h2 id="admin-glance-title">Marketplace at a glance</h2>
+        </div>
+        <p>Live counts from EcoCraft's existing admin queues.</p>
+      </div>
+      <div class="admin-overview-grid">
+        <article class="admin-metric admin-metric--attention">
+          <span>Artist applications in progress</span>
+          <strong id="admin-pending-artists" aria-live="polite">—</strong>
+          <small>Across all non-final onboarding stages</small>
+        </article>
+        <article class="admin-metric admin-metric--attention">
+          <span>Products awaiting moderation</span>
+          <strong id="admin-pending-products" aria-live="polite">—</strong>
+          <small>Submitted and waiting for review</small>
+        </article>
+        <article class="admin-metric">
+          <span>Active product listings</span>
+          <strong id="admin-active-products" aria-live="polite">—</strong>
+          <small>Approved products not soft-deleted</small>
+        </article>
+      </div>
+      <p class="admin-glance-note">
+        Total marketplace orders are not currently exposed through an admin
+        summary endpoint.
+      </p>
+    </section>
+
+    <section class="admin-workspace" aria-labelledby="admin-workspace-title">
+      <div class="admin-workspace-heading">
+        <div>
+          <p class="admin-eyebrow">YOUR MARKETPLACE WORKSPACE</p>
+          <h2 id="admin-workspace-title">People, products, possibility.</h2>
+        </div>
+        <p>Three ways to care for what EcoCraft is becoming.</p>
+      </div>
+      <nav class="admin-workspace-grid" aria-label="Admin shortcuts">
+        <a
+          class="panel admin-shortcut admin-workspace-card admin-workspace-card--makers"
+          href="#page-admin-artists"
+          data-page="admin-artists"
+        >
+          <span class="admin-card-copy">
+            <span class="admin-card-number">AREA 01</span>
+            <span class="admin-card-eyebrow">THE PEOPLE BEHIND THE PRODUCTS</span>
+            <strong>Meet the Makers</strong>
+            <span class="admin-card-description">
+              Every great marketplace begins with its people. Discover the
+              creative minds looking to join EcoCraft, review artist
+              applications and welcome new talent into the community.
+            </span>
+            <span class="admin-card-action">Manage artists <span aria-hidden="true">→</span></span>
+          </span>
+          <span class="admin-card-art">
+            <img
+              src="{{ url_for('static',filename='images/project/admin/meet-the-makers.svg') }}"
+              alt="Illustration of an artisan shaping a handmade vessel in a plant-filled workshop."
+              width="560"
+              height="420"
+            />
+          </span>
+        </a>
+        <a
+          class="panel admin-shortcut admin-workspace-card admin-workspace-card--catalog"
+          href="#page-admin-products"
+          data-page="admin-products"
+        >
+          <span class="admin-card-copy">
+            <span class="admin-card-number">AREA 02</span>
+            <span class="admin-card-eyebrow">CREATIONS WORTH DISCOVERING</span>
+            <strong>Curate the Catalog</strong>
+            <span class="admin-card-description">
+              Shape a marketplace that reflects creativity and thoughtful
+              craftsmanship. Review submissions, manage approvals, assign
+              commissions and prepare creations for discovery.
+            </span>
+            <span class="admin-card-action">Manage products <span aria-hidden="true">→</span></span>
+          </span>
+          <span class="admin-card-art">
+            <img
+              src="{{ url_for('static',filename='images/project/admin/curate-the-catalog.svg') }}"
+              alt="Illustration of handmade pottery, a woven basket and natural materials ready for catalog curation."
+              width="560"
+              height="420"
+            />
+          </span>
+        </a>
+        <a
+          class="panel admin-shortcut admin-workspace-card admin-workspace-card--insights"
+          href="#page-admin-analytics"
+          data-page="admin-analytics"
+        >
+          <span class="admin-card-copy">
+            <span class="admin-card-number">AREA 03</span>
+            <span class="admin-card-eyebrow">SEE THE BIGGER PICTURE</span>
+            <strong>MarketPulse</strong>
+            <span class="admin-card-description">
+              Go beyond everyday marketplace operations. Explore customer
+              activity, artist performance, sales trends and emerging
+              opportunities through a centralized analytical experience.
+            </span>
+            <span class="admin-card-action">Explore marketplace insights <span aria-hidden="true">→</span></span>
+          </span>
+          <span class="admin-card-art">
+            <img
+              src="{{ url_for('static',filename='images/project/admin/marketpulse-insights.svg') }}"
+              alt="Illustration of marketplace activity connected to rising analytics charts and new growth."
+              width="760"
+              height="400"
+            />
+          </span>
+        </a>
+      </nav>
+    </section>
+  </section>
+  <div id="workspace-details">
     <div id="login-prompt" class="panel">
       <h3>Sign in to use your workspace</h3>
       <p>
@@ -43,7 +155,45 @@
     </div>
     <div id="workspace" hidden>
       <div id="workspace-profile">
-        <article class="panel compact account-panel" id="profile-panel">
+        <header
+          class="customer-account-hero"
+          aria-labelledby="customer-account-hero-title"
+        >
+          <div class="customer-account-hero-copy">
+            <p class="customer-account-eyebrow">YOUR LITTLE CORNER OF ECOCRAFT</p>
+            <h1 id="customer-account-hero-title">
+              A space that's <em>uniquely yours.</em>
+            </h1>
+            <p>
+              Make yourself at home. Manage your personal information and keep
+              your EcoCraft experience connected to you.
+            </p>
+          </div>
+          <img
+            class="customer-account-hero-art"
+            src="{{ url_for('static',filename='images/project/customer/customer-account-profile.svg') }}"
+            alt="Illustration of a personal EcoCraft profile, thoughtful purchases, shopping bags and botanical details."
+            width="760"
+            height="460"
+          />
+        </header>
+        <div class="section-heading customer-profile-heading">
+          <div>
+            <p class="kicker">YOUR PERSONAL SPACE</p>
+            <h2 id="workspace-title">Marketplace workspace</h2>
+          </div>
+          <span id="identity">Not signed in</span>
+        </div>
+        <article
+          class="panel compact account-panel customer-profile-card"
+          id="profile-panel"
+        >
+          <div
+            class="customer-profile-summary"
+            role="group"
+            aria-label="Customer identity"
+            hidden
+          ></div>
           <div class="account-layout">
             <section class="account-card" id="account-card">
               <div class="account-card-head">

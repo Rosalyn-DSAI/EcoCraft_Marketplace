@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 480" role="img" aria-labelledby="title desc">
+  <title id="title">Products packed for delivery</title>
+  <desc id="desc">Original illustration of a shipping parcel, a reusable bag, a folded garment and a labeled package ready for fulfillment.</desc>
+  <path d="M388 24c151-20 307 61 351 183 47 128-34 229-164 252-136 24-320-17-365-133C162 213 226 45 388 24Z" fill="#e6e9d7"/>
+  <path d="M108 365h574v24H108z" fill="#8b694d"/>
+  <path d="M148 389v49m494-49v49" stroke="#72533d" stroke-width="13" stroke-linecap="round"/>
+  <path d="m265 207 115-61 124 61-122 64Z" fill="#d7b789"/>
+  <path d="M265 207v137l117 66V271Z" fill="#bd895d"/>
+  <path d="M382 271v139l122-66V207Z" fill="#a9744e"/>
+  <path d="m332 172 116 62m-66-36v73" fill="none" stroke="#f4e3c2" stroke-width="10"/>
+  <rect x="413" y="301" width="62" height="42" rx="4" fill="#f3ebd8"/>
+  <path d="M425 314h37m-37 10h25" stroke="#816448" stroke-width="4" stroke-linecap="round"/>
+  <path d="M524 275h94l-13 81h-68Z" fill="#d27d59"/>
+  <path d="M541 277c0-37 13-57 30-57s30 20 30 57m-44 0v-35m14 35v-48m14 48v-34" fill="none" stroke="#8c5944" stroke-width="5" stroke-linecap="round"/>
+  <path d="M146 308h88v57h-88z" fill="#799477"/>
+  <path d="M164 308c0-26 10-39 26-39s26 13 26 39m-39 0v-24m13 24v-34m13 34v-24" fill="none" stroke="#f1dfc2" stroke-width="5" stroke-linecap="round"/>
+  <path d="M545 151h104v67H545z" fill="#e6c993" stroke="#a87d51" stroke-width="4"/>
+  <path d="M545 173h104m-52-22v67" stroke="#b98255" stroke-width="5"/>
+  <path d="M171 177c19-32 44-48 76-47m419-38c27-7 51-3 72 13" fill="none" stroke="#718a70" stroke-width="4" stroke-linecap="round"/>
+  <path d="M197 138c-12-29-8-54 15-75 21 27 21 51-15 75Zm6-18c17-15 35-21 57-17-14 20-33 26-57 17Z" fill="#98ad8d"/>
+  <circle cx="680" cy="107" r="10" fill="#c57a55"/>
+</svg>

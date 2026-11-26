@@ -1,9 +1,43 @@
 <section class="page" id="page-admin-profile" hidden>
-  <button class="outline" type="button" data-page="dashboard">
+  <button class="outline admin-account-back" type="button" data-page="dashboard">
     Back to dashboard
   </button>
-  <div class="section-heading inner"><h3>My account</h3></div>
-  <div id="admin-profile"></div>
+  <header
+    class="admin-account-hero"
+    aria-labelledby="admin-account-hero-title"
+  >
+    <div class="admin-account-hero-copy">
+      <p class="admin-account-eyebrow">THE PEOPLE BEHIND THE PLATFORM</p>
+      <h1 id="admin-account-hero-title">Leading <em>with purpose.</em></h1>
+      <p>
+        Your account, your identity and your role in shaping the EcoCraft
+        marketplace.
+      </p>
+    </div>
+    <img
+      class="admin-account-hero-art"
+      src="{{ url_for('static',filename='images/project/admin/admin-account-profile.svg') }}"
+      alt="Illustration of an administrator profile connected to a growing EcoCraft marketplace."
+      width="900"
+      height="600"
+    />
+  </header>
+  <section class="admin-account-content" aria-labelledby="admin-account-title">
+    <div class="admin-account-section-heading">
+      <div>
+        <p class="admin-account-eyebrow">YOUR ADMINISTRATOR PROFILE</p>
+        <h2 id="admin-account-title">My account</h2>
+      </div>
+    </div>
+    <div class="admin-account-panel">
+      <div
+        class="admin-profile-summary"
+        role="group"
+        aria-label="Administrator identity"
+      ></div>
+      <div id="admin-profile"></div>
+    </div>
+  </section>
 </section>
 <section class="page" id="page-admin-artists" hidden>
   <button class="outline" type="button" data-page="dashboard">

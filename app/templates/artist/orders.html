@@ -1,7 +1,26 @@
 <section class="page" id="page-artist-orders" hidden>
-  <button class="outline" type="button" data-page="dashboard">
+  <button class="outline artist-back" type="button" data-page="dashboard">
     Back to dashboard
   </button>
+  <section
+    class="artist-intro artist-intro--orders"
+    aria-labelledby="artist-orders-intro-title"
+  >
+    <div class="artist-intro-copy">
+      <p class="artist-eyebrow">FROM YOUR MARKETPLACE TO THEIR HOME</p>
+      <h1 id="artist-orders-intro-title">Every order <em>matters.</em></h1>
+      <p>
+        Manage purchases, track fulfillment and keep your products moving.
+      </p>
+    </div>
+    <img
+      class="artist-intro-art"
+      src="{{ url_for('static',filename='images/project/artist/artist-order-fulfillment.svg') }}"
+      alt="A carefully packed parcel, shipping label, accessory and home goods ready for delivery."
+      width="780"
+      height="480"
+    />
+  </section>
   <div class="section-heading inner">
     <h3>Your orders</h3>
     <button class="secondary" id="sales-refresh">Refresh sales</button>

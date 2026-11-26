@@ -1,36 +1,158 @@
 <section
-  class="page project-page"
+  class="page project-page story-page story-page--about"
   id="page-about"
   aria-labelledby="about-title"
   hidden
 >
-  <p class="kicker">OUR COURSE PROJECT</p>
-  <h2 id="about-title">About EcoCraft</h2>
-  <p class="project-intro">
-    A marketplace for thoughtful finds, built to explore how a NoSQL database
-    supports a real application.
-  </p>
-  <div class="project-cards">
-    <article class="panel">
-      <h3>Made with purpose</h3>
-      <p>
-        EcoCraft connects customers with handmade and sustainably made products
-        while giving artists a place to share their creations.
+  <div class="story-wrap">
+    <button
+      class="outline story-dashboard-button"
+      type="button"
+      data-page="dashboard"
+      hidden
+    >
+      Back to dashboard
+    </button>
+    <header class="story-hero story-hero--about">
+      <div class="story-hero-copy">
+        <p class="story-eyebrow">OUR STORY <span>01 / 04</span></p>
+        <p class="story-page-title">About EcoCraft</p>
+        <h1 id="about-title">
+          Thoughtfully made.<br /><em>Meaningfully connected.</em>
+        </h1>
+        <p class="story-standfirst">
+          Bringing creativity, craftsmanship and conscious living together.
+        </p>
+      </div>
+      <figure class="story-art story-art--about">
+        <img
+          src="{{ url_for('static',filename='images/project/about/atelier-story.svg') }}"
+          alt="Original illustration of an artisan shaping a handmade vessel among natural materials and plants."
+          width="1200"
+          height="900"
+        />
+        <figcaption>Made slowly. Shared with purpose.</figcaption>
+      </figure>
+    </header>
+
+    <section class="story-introduction" aria-label="Our beginning">
+      <p class="story-overline">A small idea, made tangible</p>
+      <p class="story-intro-copy">
+        EcoCraft began with a simple idea: creating a space where craftsmanship
+        meets conscious living. A marketplace where artists can share their
+        creativity, customers can discover thoughtfully made products, and
+        everyday purchases can become more meaningful.
       </p>
-    </article>
-    <article class="panel">
-      <h3>More than a catalog</h3>
-      <p>
-        Customers browse, manage a cart and review purchases. Artists manage
-        listings and shipping, and administrators review artists and products.
+      <p class="story-intro-note">
+        Developed as part of our NoSQL database course, EcoCraft brings this
+        vision to life through technology, creativity and a shared commitment
+        to learning.
       </p>
-    </article>
-    <article class="panel">
-      <h3>Built for learning</h3>
+    </section>
+
+    <section class="story-purpose story-section">
+      <div class="story-section-marker">01 <span>MADE WITH PURPOSE</span></div>
+      <div class="story-purpose-copy">
+        <h2>Every handmade creation carries a story.</h2>
+        <p>
+          Behind every handmade creation is a story of creativity, care and
+          craftsmanship. EcoCraft celebrates these stories by giving artists a
+          space to showcase their work, from small-batch creations to products
+          made with recycled, upcycled and locally sourced materials.
+        </p>
+        <p>
+          Our marketplace encourages discovery and more thoughtful purchasing
+          decisions.
+        </p>
+      </div>
+      <p class="story-margin-note">A place for good work to find its people.</p>
+    </section>
+
+    <section class="story-section story-experiences">
+      <div class="story-section-heading">
+        <p class="story-overline">MORE THAN A CATALOG</p>
+        <h2>One marketplace.<br />Different ways to take part.</h2>
+      </div>
+      <div class="story-experience-list">
+        <article class="story-experience">
+          <span class="story-experience-no">01</span>
+          <h3>Discover</h3>
+          <p>
+            Customers explore products, collect favorites in a cart and share
+            feedback after a purchase.
+          </p>
+        </article>
+        <article class="story-experience">
+          <span class="story-experience-no">02</span>
+          <h3>Create</h3>
+          <p>
+            Artists present their work, manage eligible listings and keep
+            customers informed as orders ship.
+          </p>
+        </article>
+        <article class="story-experience">
+          <span class="story-experience-no">03</span>
+          <h3>Curate</h3>
+          <p>
+            Administrators review artist applications and product submissions
+            before they join the marketplace.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="story-sustainability story-section">
+      <div>
+        <p class="story-overline">SUSTAINABILITY IN EVERY DETAIL</p>
+        <h2>More context for more considered discovery.</h2>
+      </div>
+      <div class="story-sustainability-copy">
+        <p>
+          Artists can describe the materials and sustainability practices
+          connected to their products. These details help customers find work
+          that aligns with their preferences—from handmade small-batch
+          production to upcycled materials and zero-waste packaging.
+        </p>
+        <p class="story-caveat">
+          Practice details are artist-provided; EcoCraft does not independently
+          verify every sustainability claim.
+        </p>
+        <ul class="story-practice-list" aria-label="Examples of listed practices">
+          <li>Recycled materials</li>
+          <li>Upcycled</li>
+          <li>Locally sourced</li>
+          <li>Zero-waste packaging</li>
+          <li>Handmade, small batch</li>
+          <li>Organic</li>
+          <li>Non-toxic finishes</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="story-learning story-section">
+      <p class="story-overline">BUILT FOR LEARNING</p>
+      <h2>Classroom knowledge,<br /><em>put into practice.</em></h2>
       <p>
-        This class project demonstrates a working marketplace backed by MongoDB.
-        Checkout is a demonstration and does not process payments.
+        EcoCraft is a practical exploration of how database technology can
+        support real application workflows. Through document modeling,
+        application development, data validation and analytics, our team
+        transformed classroom knowledge into an interactive marketplace
+        experience.
       </p>
-    </article>
+      <aside class="story-disclosure">
+        <span>A note on the demo</span>
+        <p>
+          EcoCraft is an academic demonstration. Checkout simulates marketplace
+          transactions and does not process real payments.
+        </p>
+      </aside>
+    </section>
+
+    <nav class="story-next" aria-label="Continue exploring the project">
+      <span>Continue the story</span>
+      <a href="#page-build" data-page="build">
+        <small>02 / 04</small> How It Came Together <span aria-hidden="true">→</span>
+      </a>
+    </nav>
   </div>
 </section>

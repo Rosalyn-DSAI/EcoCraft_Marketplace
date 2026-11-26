@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">An artisan at work</title>
+  <desc id="desc">Original EcoCraft illustration of a maker shaping a clay vessel at a worktable, surrounded by leaves and handmade objects.</desc>
+  <rect width="1200" height="900" fill="#e6ecdf"/>
+  <circle cx="887" cy="260" r="220" fill="#d3dfcb"/>
+  <circle cx="284" cy="184" r="112" fill="#efe4d2"/>
+  <path d="M75 737c97-99 183-142 292-143 113 0 178 55 295 57 115 2 212-51 464-6v255H75Z" fill="#d7e2d1"/>
+  <path d="M100 640h1000v188H100z" fill="#b87851"/>
+  <path d="M100 640h1000v24H100z" fill="#915b3f"/>
+  <path d="M157 664v164m870-164v164" stroke="#754c3a" stroke-width="18"/>
+  <path d="M219 640c27-77 73-122 134-142-12 75-54 124-134 142Zm42-19c3-73 37-127 99-160-2 75-34 126-99 160Zm-55-29c-39-55-45-111-21-170 42 57 51 113 21 170Z" fill="#5b7d57"/>
+  <path d="M313 495c-5-47-26-83-67-108m78 87c9-54 34-90 76-112m-95 137c-35-33-69-48-111-48" fill="none" stroke="#3d654b" stroke-width="8" stroke-linecap="round"/>
+  <path d="M379 424c-14-79 9-145 67-200 22 78 5 145-67 200Zm23-46c39-67 96-103 170-108-38 70-94 108-170 108Zm-28-63c-58-43-86-101-82-176 63 48 93 106 82 176Z" fill="#78946a"/>
+  <path d="M407 406c-17-53-49-91-98-116m116 80c33-49 77-75 137-83m-147 111c-49-21-94-24-145-10" fill="none" stroke="#446a4c" stroke-width="8" stroke-linecap="round"/>
+  <path d="M593 284c2-66 37-114 105-143 2 68-32 116-105 143Zm27-36c55-43 113-53 175-28-54 49-112 60-175 28Zm-31-38c-39-55-46-111-20-170 42 56 50 112 20 170Z" fill="#66865d"/>
+  <path d="M629 279c-2-49-20-88-58-119m74 98c36-33 78-49 130-47m-146 79c-41-29-82-42-130-37" fill="none" stroke="#3e674a" stroke-width="7" stroke-linecap="round"/>
+  <path d="M750 548c-19-76-11-151 34-223 63 69 83 145 57 229Z" fill="#c7744c"/>
+  <path d="M746 563c28-32 75-39 121-17l17 31c-46 39-101 47-153 18Z" fill="#a96343"/>
+  <path d="M847 536c19-48 54-75 106-85-9 54-42 85-106 95Zm10-17c38-32 80-42 128-28-35 41-77 52-128 36Zm-2-20c-18-43-14-85 13-127 26 45 24 88-13 127Z" fill="#4d7452"/>
+  <path d="M881 538c0-34-12-63-39-88m51 73c26-20 54-29 86-25m-98 44c-28-18-55-26-87-24" fill="none" stroke="#315f45" stroke-width="5" stroke-linecap="round"/>
+  <path d="M420 330c8-65 62-111 136-104 76 8 122 67 114 142l-11 110-243-17 4-131Z" fill="#c88a68"/>
+  <path d="M441 344c12-72 67-110 126-103 57 7 92 48 98 99-37-4-72-23-95-55-25 43-71 65-129 59Z" fill="#3c302b"/>
+  <path d="M500 394c17 10 34 10 51 1m55 8c14 9 29 10 43 2" fill="none" stroke="#533a31" stroke-width="7" stroke-linecap="round"/>
+  <path d="M506 457c31 42 81 49 116 10" fill="none" stroke="#9e5e48" stroke-width="8" stroke-linecap="round"/>
+  <path d="M385 459c13-34 40-55 82-66l116 30c54 7 96 34 117 79l-31 160H400Z" fill="#d29a6c"/>
+  <path d="M407 485c67 22 142 30 223 18l41 158H392Z" fill="#a15f43"/>
+  <path d="M484 486l29 166m70-161-24 165" stroke="#e0b48b" stroke-width="9"/>
+  <path d="M382 497c-54 20-91 51-111 94l87 24c51-37 80-76 89-121Z" fill="#c88a68"/>
+  <path d="M667 489c50 10 94 38 125 82l-75 45c-56-32-91-71-109-117Z" fill="#c88a68"/>
+  <path d="M331 587c34-32 72-43 112-34l38 43c-48 31-97 37-145 17Z" fill="#e1ae86"/>
+  <path d="M708 575c34-31 72-38 113-21l30 46c-50 26-99 26-146 2Z" fill="#e1ae86"/>
+  <path d="M485 565c5-56 26-94 64-113 36 19 57 57 62 113-19 35-41 56-65 65-23-9-44-30-61-65Z" fill="#b96e4a"/>
+  <path d="M509 576h81c-6 55-20 86-41 93-20-7-34-38-40-93Z" fill="#a55e42"/>
+  <path d="M495 563c30 17 70 17 105 0" fill="none" stroke="#d99a70" stroke-width="9"/>
+  <path d="M408 602c38-16 74-18 110-6m100-2c39-13 77-11 114 5" fill="none" stroke="#f0c49d" stroke-width="11" stroke-linecap="round"/>
+  <path d="M210 592c34-40 70-54 108-43 13 40 1 77-35 111-43-11-67-34-73-68Z" fill="#d9b789"/>
+  <path d="M220 603c26-12 53-31 78-58" fill="none" stroke="#a9845b" stroke-width="5"/>
+  <path d="M954 593c15-46 45-70 90-74 25 38 23 78-5 120-44 4-73-12-85-46Z" fill="#e5c28d"/>
+  <path d="M965 602c24-22 46-48 67-77" fill="none" stroke="#aa8659" stroke-width="5"/>
+  <path d="M154 818h890" stroke="#6b4d3d" stroke-width="9" stroke-linecap="round" opacity=".5"/>
+  <circle cx="1020" cy="230" r="10" fill="#bd714f"/>
+  <circle cx="277" cy="298" r="8" fill="#bd714f"/>
+</svg>

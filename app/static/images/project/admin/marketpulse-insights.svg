@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" role="img" aria-labelledby="title desc">
+  <title id="title">MarketPulse insights</title>
+  <desc id="desc">Original illustration of connected product and customer signals flowing into an upward marketplace trend chart with a growing leaf.</desc>
+  <path d="M50 326h660M87 72v254" fill="none" stroke="#98b49b" stroke-width="2"/>
+  <path d="M112 275c87-73 139-95 218-89 71 5 103-45 158-56 47-10 82 8 139-45" fill="none" stroke="#e5b28a" stroke-width="5" stroke-linecap="round"/>
+  <path d="m611 85 17 0-5 18" fill="none" stroke="#e5b28a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M109 326V273h52v53m39 0v-91h52v91m41 0V236h52v90m40 0V195h52v131m40 0V167h52v159m40 0V128h52v198" fill="#d7e5d6" opacity=".88"/>
+  <path d="M109 273h52v53h-52m91-91h52v91h-52m93-90h52v90h-52m92-131h52v131h-52m92-159h52v159h-52m92-198h52v198h-52" fill="none" stroke="#98b49b" stroke-width="2"/>
+  <g fill="#e5b28a" stroke="#1e4b3d" stroke-width="3">
+    <circle cx="135" cy="254" r="10"/><circle cx="226" cy="185" r="10"/><circle cx="318" cy="202" r="10"/>
+    <circle cx="410" cy="162" r="10"/><circle cx="502" cy="142" r="10"/><circle cx="594" cy="91" r="10"/>
+  </g>
+  <path d="M460 77c13-40 43-60 91-60-4 44-29 69-76 72 35-2 61 9 78 35-39 15-71 7-96-25Z" fill="#91aa83"/>
+  <path d="M477 110c25-25 47-48 69-73" fill="none" stroke="#42694e" stroke-width="5" stroke-linecap="round"/>
+  <g transform="translate(38 123)">
+    <circle cx="33" cy="33" r="31" fill="#d7e5d6"/>
+    <circle cx="24" cy="27" r="8" fill="#bd805f"/><circle cx="44" cy="27" r="8" fill="#bd805f"/>
+    <path d="M12 52c4-12 11-18 20-18s16 6 20 18" fill="#688762"/>
+  </g>
+  <g transform="translate(658 243)">
+    <circle cx="33" cy="33" r="31" fill="#e9ddc9"/>
+    <path d="M15 44h36l-4-26H19Zm6-27c0-11 5-17 12-17s12 6 12 17" fill="none" stroke="#a56d4c" stroke-width="4" stroke-linejoin="round"/>
+  </g>
+  <path d="M57 170c21 0 39 12 54 34m510 76c21-13 36-25 49-39" fill="none" stroke="#a6bc9e" stroke-width="3" stroke-dasharray="4 8"/>
+</svg>

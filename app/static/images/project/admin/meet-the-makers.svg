@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 420" role="img" aria-labelledby="title desc">
+  <title id="title">Meet the makers</title>
+  <desc id="desc">Original illustration of an artisan shaping a clay vase in a leafy creative workshop.</desc>
+  <circle cx="303" cy="205" r="180" fill="#d4e4d1"/>
+  <path d="M41 351h469" stroke="#8c6246" stroke-width="12" stroke-linecap="round"/>
+  <path d="M60 352v50m416-50v50" stroke="#8c6246" stroke-width="12"/>
+  <path d="M88 276c-6-53 8-96 43-129 25 47 23 89-8 128 38-42 81-56 130-40-33 50-78 65-135 44Z" fill="#688762"/>
+  <path d="M133 274c-2-39-15-71-41-97m55 86c26-30 58-46 96-49m-106 62c-30-17-60-23-93-18" fill="none" stroke="#42694e" stroke-width="6" stroke-linecap="round"/>
+  <path d="M212 132c-3-48 18-82 64-102 21 45 11 81-30 108Z" fill="#789272"/>
+  <path d="M228 129c19-32 44-53 77-63m-82 77c-27-13-54-17-83-9" fill="none" stroke="#42694e" stroke-width="6" stroke-linecap="round"/>
+  <path d="M234 176c4-48 40-79 84-74 45 6 69 44 61 87l-7 58-141-13Z" fill="#c98d6a"/>
+  <path d="M235 190c10-59 47-89 88-83 36 5 54 29 59 64-27-4-49-16-65-38-18 34-46 52-82 57Z" fill="#4a3c35"/>
+  <path d="M263 230c19 25 47 29 68 7" fill="none" stroke="#9d6049" stroke-width="6" stroke-linecap="round"/>
+  <path d="M183 263c20-47 52-67 97-62l67 22c40 3 65 25 76 63l-26 88H194Z" fill="#bd7652"/>
+  <path d="M211 277c42 14 95 17 157 6l30 91H197Z" fill="#e0b38e"/>
+  <path d="M243 285l17 89m56-87-15 87" stroke="#f1d3b5" stroke-width="7"/>
+  <path d="M203 304c-37 14-62 34-78 62l61 20c36-25 57-52 64-82Zm193-5c39 8 68 28 93 61l-56 26c-39-24-64-52-77-85Z" fill="#c98d6a"/>
+  <path d="M162 345c24-22 52-30 81-23l26 31c-35 23-70 28-105 13Zm218-5c24-23 51-29 80-17l23 32c-36 19-71 19-105 1Z" fill="#ecc9a7"/>
+  <path d="M251 334c4-42 19-70 47-84 28 14 43 42 47 84-14 27-30 42-47 49-18-7-34-22-47-49Z" fill="#a96347"/>
+  <path d="M258 333c23 12 55 12 80 0m-73 7h66" fill="none" stroke="#dca17b" stroke-width="7" stroke-linecap="round"/>
+  <path d="M113 246c18-35 43-52 77-51 8 32-2 60-29 83-35-5-51-15-48-32Z" fill="#d9b786"/>
+  <path d="M122 259c24-22 44-42 62-63" fill="none" stroke="#9b7a56" stroke-width="4"/>
+  <path d="M454 228c17-34 42-50 76-47 9 32 0 59-27 82-35-4-51-15-49-35Z" fill="#d9b786"/>
+  <path d="M463 245c23-21 43-41 61-62" fill="none" stroke="#9b7a56" stroke-width="4"/>
+</svg>

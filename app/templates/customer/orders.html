@@ -1,12 +1,37 @@
 <section class="page" id="page-customer-orders" hidden>
-  <button class="outline" type="button" data-page="catalog">
+  <button class="outline customer-orders-back" type="button" data-page="catalog">
     Back to shop
   </button>
-  <div class="section-heading inner">
-    <h3>Your order history</h3>
+  <header
+    class="customer-orders-hero"
+    aria-labelledby="customer-orders-hero-title"
+  >
+    <div class="customer-orders-hero-copy">
+      <p class="customer-orders-eyebrow">FROM DISCOVERY TO DELIVERY</p>
+      <h1 id="customer-orders-hero-title">
+        Thoughtful finds.<br /><em>Meaningful journeys.</em>
+      </h1>
+      <p>
+        Follow your purchases, revisit your favorite finds and share your
+        experiences with the EcoCraft community.
+      </p>
+    </div>
+    <img
+      class="customer-orders-hero-art"
+      src="{{ url_for('static',filename='images/project/customer/customer-order-journey.svg') }}"
+      alt="Illustration of the journey from online discovery to a delivered EcoCraft parcel, with a shopping bag and accessories."
+      width="760"
+      height="460"
+    />
+  </header>
+  <div class="section-heading inner customer-orders-heading">
+    <div>
+      <p class="customer-orders-section-eyebrow">YOUR SHOPPING JOURNEY</p>
+      <h2>Your order history</h2>
+    </div>
     <button class="secondary" id="orders-refresh">Refresh orders</button>
   </div>
-  <div class="approval-layout">
+  <div class="approval-layout customer-orders-layout">
     <div id="customer-orders" class="stack"></div>
     <nav
       id="order-states"

@@ -1,0 +1,360 @@
+#page-dashboard #admin-shortcuts {
+  display: block;
+  max-width: 1360px;
+  margin: 0 auto 34px;
+}
+#page-dashboard #admin-shortcuts .admin-welcome {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+  align-items: center;
+  min-height: 310px;
+  padding: clamp(26px, 4vw, 52px);
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--forest);
+  color: var(--cream);
+}
+#page-dashboard #admin-shortcuts .admin-welcome::before,
+#page-dashboard #admin-shortcuts .admin-welcome::after {
+  position: absolute;
+  z-index: -1;
+  border: 1px solid rgba(230, 242, 231, 0.18);
+  border-radius: 50%;
+  content: "";
+}
+#page-dashboard #admin-shortcuts .admin-welcome::before {
+  top: -190px;
+  right: 7%;
+  width: 430px;
+  height: 430px;
+}
+#page-dashboard #admin-shortcuts .admin-welcome::after {
+  right: 20%;
+  bottom: -240px;
+  width: 400px;
+  height: 400px;
+}
+#page-dashboard #admin-shortcuts .admin-welcome-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 650px;
+}
+#page-dashboard #admin-shortcuts .admin-eyebrow {
+  margin: 0 0 14px;
+  color: #e4b18a;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.17em;
+  line-height: 1.5;
+}
+#page-dashboard #admin-shortcuts .admin-welcome h1 {
+  margin: 0;
+  color: var(--cream);
+  font: normal clamp(38px, 5vw, 66px) / 1.02 Georgia, serif;
+  letter-spacing: -0.045em;
+}
+#page-dashboard #admin-shortcuts .admin-welcome h1 em {
+  color: #d7e5d6;
+  font-weight: 400;
+}
+#page-dashboard #admin-shortcuts .admin-welcome-copy > p:last-child {
+  max-width: 600px;
+  margin: 18px 0 0;
+  color: #e0eadf;
+  font-size: 14px;
+  line-height: 1.75;
+}
+#page-dashboard #admin-shortcuts .admin-welcome-art {
+  display: block;
+  width: min(100%, 470px);
+  max-height: 280px;
+  justify-self: center;
+  object-fit: contain;
+}
+#page-dashboard #admin-shortcuts .admin-glance {
+  margin: 36px 0 0;
+}
+#page-dashboard #admin-shortcuts .admin-glance-heading,
+#page-dashboard #admin-shortcuts .admin-workspace-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 18px;
+}
+#page-dashboard #admin-shortcuts .admin-glance-heading .admin-eyebrow,
+#page-dashboard #admin-shortcuts .admin-workspace-heading .admin-eyebrow {
+  margin-bottom: 7px;
+  color: var(--terracotta);
+}
+#page-dashboard #admin-shortcuts .admin-glance h2,
+#page-dashboard #admin-shortcuts .admin-workspace h2 {
+  margin: 0;
+  color: var(--ink);
+  font: normal clamp(27px, 3vw, 38px) / 1.1 Georgia, serif;
+  letter-spacing: -0.03em;
+}
+#page-dashboard #admin-shortcuts .admin-glance-heading > p,
+#page-dashboard #admin-shortcuts .admin-workspace-heading > p {
+  max-width: 300px;
+  margin: 0 0 3px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+#page-dashboard #admin-shortcuts .admin-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+#page-dashboard #admin-shortcuts .admin-metric {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: 12px;
+  min-width: 0;
+  padding: 18px 22px;
+}
+#page-dashboard #admin-shortcuts .admin-metric + .admin-metric {
+  border-left: 1px solid var(--line);
+}
+#page-dashboard #admin-shortcuts .admin-metric > span {
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.4;
+}
+#page-dashboard #admin-shortcuts .admin-metric strong {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  color: var(--forest);
+  font: normal clamp(38px, 4vw, 54px) / 1 Georgia, serif;
+  letter-spacing: -0.05em;
+}
+#page-dashboard #admin-shortcuts .admin-metric--attention strong {
+  color: var(--terracotta);
+}
+#page-dashboard #admin-shortcuts .admin-metric small {
+  grid-column: 1;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.45;
+}
+#page-dashboard #admin-shortcuts .admin-glance-note {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+#page-dashboard #admin-shortcuts .admin-workspace {
+  margin-top: 46px;
+}
+#page-dashboard #admin-shortcuts .admin-workspace-heading {
+  margin-bottom: 20px;
+}
+#page-dashboard #admin-shortcuts .admin-workspace-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+#page-dashboard #admin-shortcuts .admin-workspace-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(125px, 0.82fr);
+  align-items: stretch;
+  gap: 10px;
+  min-width: 0;
+  min-height: 300px;
+  padding: 25px;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  box-shadow: none;
+  color: var(--ink);
+  text-decoration: none;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+#page-dashboard #admin-shortcuts .admin-workspace-card--makers {
+  background: #e6f2e7;
+}
+#page-dashboard #admin-shortcuts .admin-workspace-card--catalog {
+  background: #f0ece3;
+}
+#page-dashboard #admin-shortcuts .admin-workspace-card--insights {
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+  min-height: 246px;
+  background: var(--forest);
+  color: var(--cream);
+}
+#page-dashboard #admin-shortcuts .admin-workspace-card:hover {
+  transform: translateY(-3px);
+  border-color: #9eb69f;
+  box-shadow: 0 10px 26px rgba(33, 57, 37, 0.08);
+}
+#page-dashboard #admin-shortcuts .admin-workspace-card:focus-visible {
+  outline: 3px solid #c88a5a;
+  outline-offset: 3px;
+}
+#page-dashboard #admin-shortcuts .admin-card-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+}
+#page-dashboard #admin-shortcuts .admin-card-number {
+  margin-bottom: 17px;
+  color: var(--terracotta);
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.16em;
+}
+#page-dashboard #admin-shortcuts .admin-card-eyebrow {
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  line-height: 1.5;
+}
+#page-dashboard #admin-shortcuts .admin-card-copy > strong {
+  margin: 0;
+  color: var(--ink);
+  font: normal clamp(24px, 2.4vw, 32px) / 1.08 Georgia, serif;
+  letter-spacing: -0.025em;
+}
+#page-dashboard #admin-shortcuts .admin-card-description {
+  display: block;
+  margin-top: 11px;
+  color: #526d5d;
+  font-size: 11px;
+  line-height: 1.65;
+}
+#page-dashboard #admin-shortcuts .admin-card-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: auto;
+  padding-top: 15px;
+  color: var(--forest);
+  font-size: 11px;
+  font-weight: 800;
+}
+#page-dashboard #admin-shortcuts .admin-card-action > span {
+  color: var(--terracotta);
+  font-size: 17px;
+  transition: transform 160ms ease;
+}
+#page-dashboard #admin-shortcuts .admin-workspace-card:hover .admin-card-action > span {
+  transform: translateX(4px);
+}
+#page-dashboard #admin-shortcuts .admin-card-art {
+  display: flex;
+  min-width: 0;
+  align-items: flex-end;
+  justify-content: center;
+}
+#page-dashboard #admin-shortcuts .admin-card-art img {
+  display: block;
+  width: 100%;
+  max-height: 245px;
+  object-fit: contain;
+}
+#page-dashboard #admin-shortcuts .admin-workspace-card--catalog .admin-card-art {
+  align-items: center;
+}
+#page-dashboard #admin-shortcuts .admin-workspace-card--catalog .admin-card-art img {
+  max-height: 220px;
+}
+#page-dashboard #admin-shortcuts .admin-workspace-card--insights .admin-card-number,
+#page-dashboard #admin-shortcuts .admin-workspace-card--insights .admin-card-eyebrow,
+#page-dashboard #admin-shortcuts .admin-workspace-card--insights .admin-card-copy > strong {
+  color: var(--cream);
+}
+#page-dashboard #admin-shortcuts .admin-workspace-card--insights .admin-card-eyebrow {
+  color: #d3e2d7;
+}
+#page-dashboard #admin-shortcuts .admin-workspace-card--insights .admin-card-description {
+  max-width: 560px;
+  color: #d3e2d7;
+}
+#page-dashboard #admin-shortcuts .admin-workspace-card--insights .admin-card-action {
+  color: var(--cream);
+}
+#page-dashboard #admin-shortcuts .admin-workspace-card--insights .admin-card-action > span {
+  color: #e5b28a;
+}
+#page-dashboard #admin-shortcuts .admin-workspace-card--insights .admin-card-art img {
+  max-height: 205px;
+}
+@media (max-width: 900px) {
+  #page-dashboard #admin-shortcuts .admin-welcome {
+    grid-template-columns: minmax(0, 1fr) minmax(230px, 0.8fr);
+  }
+  #page-dashboard #admin-shortcuts .admin-workspace-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #page-dashboard #admin-shortcuts .admin-workspace-card--insights {
+    grid-column: auto;
+  }
+}
+@media (max-width: 620px) {
+  #page-dashboard #admin-shortcuts .admin-welcome {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+    padding: 27px 22px 18px;
+  }
+  #page-dashboard #admin-shortcuts .admin-welcome h1 {
+    font-size: clamp(37px, 10vw, 52px);
+  }
+  #page-dashboard #admin-shortcuts .admin-welcome-art {
+    width: min(100%, 330px);
+    max-height: 190px;
+    justify-self: end;
+    margin-top: -6px;
+  }
+  #page-dashboard #admin-shortcuts .admin-glance-heading,
+  #page-dashboard #admin-shortcuts .admin-workspace-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+  }
+  #page-dashboard #admin-shortcuts .admin-overview-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #page-dashboard #admin-shortcuts .admin-metric {
+    padding: 14px 5px;
+  }
+  #page-dashboard #admin-shortcuts .admin-metric + .admin-metric {
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+  #page-dashboard #admin-shortcuts .admin-workspace-card,
+  #page-dashboard #admin-shortcuts .admin-workspace-card--insights {
+    grid-template-columns: minmax(0, 1fr) minmax(100px, 0.55fr);
+    min-height: 250px;
+    padding: 20px;
+  }
+  #page-dashboard #admin-shortcuts .admin-workspace-card--insights {
+    min-height: 225px;
+  }
+  #page-dashboard #admin-shortcuts .admin-card-art img {
+    max-height: 185px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #page-dashboard #admin-shortcuts *,
+  #page-dashboard #admin-shortcuts *::before,
+  #page-dashboard #admin-shortcuts *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

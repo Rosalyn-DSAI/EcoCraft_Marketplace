@@ -17,6 +17,10 @@
     catalogArtistId: '',
     detailOrigin: 'home',
   };
+  let currentPage = 'public-landing',
+    authReturnPage = 'public-landing',
+    pendingMakerPage = null,
+    pendingProductDetails = null;
   let reviewedProduct = null,
     reviewRequest = 0;
   let cartBusy = false,
@@ -64,6 +68,43 @@
     clearTimeout(flashTimers.get(el));
     flashTimers.delete(el);
     el.hidden = true;
+  }
+  async function refreshAdminOverview(token) {
+    $('admin-pending-artists').textContent = '—';
+    $('admin-pending-products').textContent = '—';
+    $('admin-active-products').textContent = '—';
+    const artistStatuses = [
+      'request_received',
+      'waiting_for_documents',
+      'received_documents',
+    ];
+    const [artistQueues, pendingProducts, activeProducts] = await Promise.all([
+      Promise.all(
+        artistStatuses.map((status) =>
+          call(`/admin/artists?status=${status}&page=1&pageSize=1`),
+        ),
+      ),
+      call('/admin/products?status=pending_review&page=1'),
+      call('/admin/products?status=approved&page=1'),
+    ]);
+    if (state.token !== token || state.user?.role !== 'admin') return;
+    const count = (response) => {
+      if (!Number.isSafeInteger(response.total) || response.total < 0)
+        throw new Error('The admin overview returned an invalid count.');
+      return response.total;
+    };
+    const pendingArtistCount = artistQueues.reduce(
+      (total, response) => total + count(response),
+      0,
+    );
+    $('admin-pending-artists').textContent =
+      new Intl.NumberFormat().format(pendingArtistCount);
+    $('admin-pending-products').textContent = new Intl.NumberFormat().format(
+      count(pendingProducts),
+    );
+    $('admin-active-products').textContent = new Intl.NumberFormat().format(
+      count(activeProducts),
+    );
   }
   const notify = (msg, ok = true) => {
     const n = $('notice');
@@ -129,10 +170,11 @@
       notify(err?.message || 'Unexpected error', false);
     }
   }
-  function showHomeHero(home) {
+  function showHomeHero(home, publicLanding = false) {
     $('home-hero').hidden = !home;
-    $('page-banner').hidden = home;
-    $('dashboard-nav').hidden = home || !!state.user;
+    $('page-banner').hidden = home || publicLanding;
+    $('dashboard-nav').hidden = true;
+    $('catalog-home-button').hidden = !state.user;
   }
   function page(requested, refreshHomeView = true) {
     const name =
@@ -160,6 +202,13 @@
       notify('Sign in as an artist to open this page.', false);
       return;
     }
+    if (name === 'auth' && currentPage !== 'auth') {
+      authReturnPage = currentPage;
+    } else if (name !== 'auth') {
+      pendingMakerPage = null;
+      pendingProductDetails = null;
+    }
+    currentPage = name;
     clearReviews();
     const admin = state.user?.role === 'admin';
     const artistPage =
@@ -178,6 +227,7 @@
         'data',
         'contributors',
         'auth',
+        'public-landing',
         'artist-profile',
       ].includes(name) ||
       artistPage ||
@@ -196,10 +246,15 @@
     document
       .querySelectorAll('.page')
       .forEach((p) => (p.hidden = p.id !== 'page-' + name));
+    $('page-layout').hidden = name === 'public-landing';
+    document
+      .querySelectorAll('.story-dashboard-button')
+      .forEach((button) => (button.hidden = !state.user));
     document
       .querySelectorAll('.nav-tab')
       .forEach((b) => b.classList.toggle('active', b.dataset.page === navName));
-    showHomeHero(name === 'catalog');
+    showHomeHero(name === 'catalog', name === 'public-landing');
+    $('home-nav').hidden = name !== 'catalog' || !!state.user;
     $('auth-nav').hidden = name === 'auth';
     $('insights-nav').hidden = state.user?.role !== 'artist';
     $('orders-nav').hidden = state.user?.role !== 'artist';
@@ -231,7 +286,16 @@
   document.querySelectorAll('[data-page]').forEach((b) =>
     b.addEventListener('click', (event) => {
       if (b.tagName === 'A') event.preventDefault();
-      page(b.dataset.page);
+      if (b.dataset.registrationRole === 'artist') {
+        $('register-role').value = 'artist';
+        $('register-role').dispatchEvent(new Event('change'));
+      }
+      if (b.dataset.browseMakers === 'true') {
+        page('catalog', false);
+        $('makers-title').click();
+      } else {
+        page(b.dataset.page);
+      }
     }),
   );
   $('home-logo').addEventListener('click', (event) => {
@@ -244,9 +308,35 @@
     )
       return;
     event.preventDefault();
-    page(state.user?.role === 'admin' ? 'dashboard' : 'catalog');
+    const homePage =
+      {
+        admin: 'dashboard',
+        artist: 'dashboard',
+        customer: 'catalog',
+      }[state.user?.role] || 'public-landing';
+    page(homePage);
   });
   $('go-login').onclick = () => page('auth');
+  $('auth-back').onclick = () => {
+    const makerPage = pendingMakerPage;
+    const productPage = pendingProductDetails;
+    pendingMakerPage = null;
+    pendingProductDetails = null;
+    if (authReturnPage === 'catalog' && makerPage?.returnMode === 'makers') {
+      page('catalog', false);
+      openMakers();
+    } else if (authReturnPage === 'catalog' && productPage) {
+      page('catalog', false);
+      if (productPage.returnMode === 'collection') {
+        showHomeHero(false);
+        $('catalog-home').hidden = true;
+        $('catalog-view').hidden = false;
+        $('catalog-filters').hidden = false;
+      }
+    } else {
+      page(authReturnPage);
+    }
+  };
   $('register-role').onchange = () => {
     const artist = $('register-role').value === 'artist';
     $('origin-wrap').hidden = !artist;
@@ -315,7 +405,25 @@
       $('sign-in-message').textContent =
         `Signed in as ${result.user.personalInfo.firstName} (${result.user.role})`;
       flashMessage($('sign-in-message'));
-      page(landing);
+      const makerPage = pendingMakerPage;
+      const productPage = pendingProductDetails;
+      pendingMakerPage = null;
+      pendingProductDetails = null;
+      if (result.user.role === 'customer' && makerPage) {
+        page('catalog', false);
+        openCollection(makerPage.title, { artistId: makerPage.artistId });
+      } else if (result.user.role === 'customer' && productPage) {
+        const product = findProduct(productPage.productId);
+        if (product) {
+          page('catalog', false);
+          showProductDetails(product, productPage.returnMode);
+        } else {
+          page(landing);
+          notify('This product is no longer available. Browse for another.', false);
+        }
+      } else {
+        page(landing);
+      }
     });
   };
   $('sign-out').onclick = () => {
@@ -329,7 +437,7 @@
     $('auth-nav').textContent = 'Sign in / Sign up';
     $('auth-nav').dataset.page = 'auth';
     notify('Signed out from this browser tab');
-    page('catalog');
+    page('public-landing');
   };
   $('search-form').onsubmit = (e) => {
     e.preventDefault();
@@ -409,6 +517,12 @@
     title,
     { category = '', artistId = '' } = {},
   ) {
+    if (artistId && !state.user) {
+      pendingMakerPage = { title, artistId, returnMode: state.catalogMode };
+      notify('Sign in or create an account to view products by this maker.', false);
+      page('auth');
+      return;
+    }
     clearReviews();
     showHomeHero(false);
     $('catalog-home').hidden = true;
@@ -740,7 +854,14 @@
     if (details) {
       event.preventDefault();
       const product = findProduct(details.dataset.details);
-      if (product) showProductDetails(product);
+      if (product && !state.user) {
+        pendingProductDetails = {
+          productId: product._id,
+          returnMode: $('catalog-view').hidden ? 'home' : 'collection',
+        };
+        notify('Sign in or create an account to view product details.', false);
+        page('auth');
+      } else if (product) showProductDetails(product);
       else
         notify(
           'Product details are no longer available. Please refresh the catalog.',
@@ -916,6 +1037,7 @@
     state.user = me.user;
     renderAccount();
     $('admin-shortcuts').hidden = me.user.role !== 'admin';
+    if (me.user.role === 'admin') await refreshAdminOverview(token);
     if (me.user.role === 'artist') await refreshMyProducts();
     if (me.user.role === 'customer') await refreshCart();
   }
@@ -1257,12 +1379,14 @@
   // Customer cart actions use product IDs; server checks ownership, eligibility and available inventory.
   function renderCart() {
     const div = $('cart-items');
+    const items = state.cart.items;
     const unavailable = (x) =>
       !x.product ||
       x.product.quantityAvailable === 0 ||
       x.quantity > x.product.quantityAvailable;
-    div.innerHTML = state.cart.items.length
-      ? state.cart.items
+    $('cart-empty-state').hidden = items.length > 0;
+    div.innerHTML = items.length
+      ? items
           .map((x) => {
             const p = x.product;
             const pid = esc(x.productId);
@@ -1280,7 +1404,7 @@
             return `<article class="cart-line${outOfStock || short ? ' is-unavailable' : ''}"><div class="cart-img">${productImage(p)}</div><div class="cart-info"><h3>${esc(p.title)}</h3><div class="category">${esc(p.category)}</div><div class="price">${money(p.price)}</div>${message ? `<p class="error-text">${message}</p>` : ''}<div class="actions"><button class="secondary" aria-label="Decrease quantity" data-cart-step="-1" data-cart-product="${pid}" ${outOfStock || x.quantity <= 1 ? 'disabled' : ''}>−</button><span class="cart-qty" aria-live="polite">${esc(x.quantity)}</span><button class="secondary" aria-label="Increase quantity" data-cart-step="1" data-cart-product="${pid}" ${outOfStock || atMax ? 'disabled' : ''}>+</button><button class="danger-btn" data-remove-cart="${pid}">Remove</button></div></div></article>`;
           })
           .join('')
-      : '<p class="muted">Your cart is empty. Discover a product to get started.</p>';
+      : '';
     state.cartReady =
       state.cart.items.length > 0 && !state.cart.items.some(unavailable);
     updatePlaceOrder();
@@ -1297,6 +1421,7 @@
     badge.textContent = count > 99 ? '99+' : count;
   }
   async function refreshCart() {
+    $('cart-empty-state').hidden = true;
     const token = state.token,
       version = cartVersion;
     const data = await call('/cart');
@@ -1441,8 +1566,43 @@
     if (u.role === 'artist') rows.push(['Origin story', u.artistProfile?.originStory]);
     return rows;
   }
+  function renderProfileIdentity(container, user, roleLabel, classPrefix) {
+    if (!container) return;
+    if (!user) {
+      container.replaceChildren();
+      container.hidden = true;
+      return;
+    }
+    container.hidden = false;
+    const info = user.personalInfo || {};
+    const nameParts = [info.firstName, info.lastName]
+      .map((name) => String(name || '').trim())
+      .filter(Boolean);
+    const fullName = nameParts.join(' ');
+    const initials = nameParts
+      .map((name) => Array.from(name)[0] || '')
+      .join('')
+      .toUpperCase();
+    container.innerHTML = [
+      `<span class="${classPrefix}-avatar" aria-hidden="true">${esc(initials)}</span>`,
+      `<div class="${classPrefix}-name"><h3>${esc(fullName)}</h3>`,
+      `<span>${esc(roleLabel)}</span></div>`,
+    ].join('');
+  }
   function renderAccount() {
     const role = state.user?.role;
+    renderProfileIdentity(
+      document.querySelector('#page-admin-profile .admin-profile-summary'),
+      role === 'admin' ? state.user : null,
+      'EcoCraft Administrator',
+      'admin-profile',
+    );
+    renderProfileIdentity(
+      document.querySelector('.customer-profile-summary'),
+      role === 'customer' ? state.user : null,
+      'EcoCraft Customer',
+      'customer-profile',
+    );
     $('account-details').innerHTML = accountRows(state.user)
       .map(
         ([label, value]) =>
@@ -1659,7 +1819,7 @@
                     : item.status === 'active' && item.shipping.status === 'shipped'
                       ? `<form class="review-form" data-review-product="${esc(item.productId)}" data-review-order="${esc(orderId)}" hidden><div class="star-picker" role="group" aria-label="Rating">${[1, 2, 3, 4, 5].map((n) => `<button type="button" class="star-btn" data-star="${n}" aria-label="${n} star${n > 1 ? 's' : ''}" aria-pressed="false">☆</button>`).join('')}</div><label>Comment (optional)<input type="text" name="comment" maxlength="100"></label><div class="actions"><button class="primary" type="submit">Submit review</button><button class="secondary" type="button" data-review-cancel>Cancel</button></div></form>`
                       : '';
-                return `<article class="order-card sales-card order-customer-card"><div class="sales-img">${image}</div><div class="sales-body"><div class="spaced"><strong>${esc(item.productSnapshot.title)}</strong><span class="tag">${esc(st.label)}</span></div><div class="order-row"><ul class="sales-facts"><li>Artist: ${esc(item.productSnapshot.artistName)}</li><li>Quantity ordered: ${esc(item.quantity)}</li><li>Amount paid: ${money(amount)}</li>${tracking}</ul><div class="actions">${cancel}</div></div>${review}</div></article>`;
+                return `<article class="order-card sales-card order-customer-card"><div class="sales-img">${image}</div><div class="sales-body"><div class="spaced"><strong>${esc(item.productSnapshot.title)}</strong><span class="tag order-status--${esc(st.key)}">${esc(st.label)}</span></div><div class="order-row"><ul class="sales-facts"><li>Artist: ${esc(item.productSnapshot.artistName)}</li><li>Quantity ordered: ${esc(item.quantity)}</li><li>Amount paid: ${money(amount)}</li>${tracking}</ul><div class="actions">${cancel}</div></div>${review}</div></article>`;
               })
               .join('');
             const placed = group.placed
@@ -2202,6 +2362,5 @@
     });
   };
 
-  // Initial page always gives visitors usable browse and aggregation without authentication.
-  run(refreshHome);
+  page('public-landing');
 })();

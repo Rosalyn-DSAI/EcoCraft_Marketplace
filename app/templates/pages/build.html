@@ -1,37 +1,150 @@
 <section
-  class="page project-page"
+  class="page project-page story-page story-page--build"
   id="page-build"
   aria-labelledby="build-title"
   hidden
 >
-  <p class="kicker">FROM BROWSER TO DATABASE</p>
-  <h2 id="build-title">How It Came Together</h2>
-  <p class="project-intro">
-    From a customer’s browser to MongoDB: a look at how EcoCraft comes together.
-  </p>
-  <div class="project-cards">
-    <article class="panel">
-      <p class="kicker">01 · THE EXPERIENCE</p>
-      <h3>HTML, CSS &amp; JavaScript</h3>
-      <p>
-        The Flask-served interface handles browsing and sends requests to the
-        application API.
-      </p>
-    </article>
-    <article class="panel">
-      <p class="kicker">02 · THE APPLICATION</p>
-      <h3>Python &amp; Flask</h3>
-      <p>
-        Flask handles API requests, validation and role-based permissions;
-        PyMongo connects the application to the database.
-      </p>
-    </article>
-    <article class="panel">
-      <p class="kicker">03 · THE DATA</p>
-      <h3>MongoDB Atlas</h3>
-      <p>
-        MongoDB stores the marketplace data used throughout the application.
-      </p>
-    </article>
+  <div class="story-wrap">
+    <button
+      class="outline story-dashboard-button"
+      type="button"
+      data-page="dashboard"
+      hidden
+    >
+      Back to dashboard
+    </button>
+    <header class="story-hero story-hero--build">
+      <div class="story-hero-copy">
+        <p class="story-eyebrow">FROM CONCEPT TO CREATION <span>02 / 04</span></p>
+        <p class="story-page-title">How It Came Together</p>
+        <h1 id="build-title">
+          From a simple idea<br /><em>to a connected experience.</em>
+        </h1>
+        <p class="story-standfirst">
+          The technology, decisions and development behind EcoCraft.
+        </p>
+        <p class="story-hero-note">
+          From the first interaction in a customer's browser to information
+          stored in MongoDB, every layer works together to bring the marketplace
+          to life.
+        </p>
+      </div>
+      <div class="story-build-index" aria-hidden="true">
+        <span>IDEA</span><i></i><span>EXPERIENCE</span>
+      </div>
+    </header>
+
+    <section class="story-section story-journey-section">
+      <div class="story-section-heading story-section-heading--wide">
+        <div>
+          <p class="story-overline">THE DEVELOPMENT JOURNEY</p>
+          <h2>Five ideas that brought the pieces together.</h2>
+        </div>
+        <p>
+          A conceptual view of the work—not a dated project timeline.
+        </p>
+      </div>
+      <ol class="story-journey">
+        <li>
+          <span class="story-journey-number">01</span>
+          <h3>The Idea</h3>
+          <p>Define the marketplace, its users and the experiences it should support.</p>
+        </li>
+        <li>
+          <span class="story-journey-number">02</span>
+          <h3>The Foundation</h3>
+          <p>Shape MongoDB collections, document structures, relationships and rules.</p>
+        </li>
+        <li>
+          <span class="story-journey-number">03</span>
+          <h3>Bringing It to Life</h3>
+          <p>Connect the browser experience to the Python and Flask application.</p>
+        </li>
+        <li>
+          <span class="story-journey-number">04</span>
+          <h3>Connecting Experiences</h3>
+          <p>Bring customer, artist and administrator workflows into one system.</p>
+        </li>
+        <li>
+          <span class="story-journey-number">05</span>
+          <h3>Refining the Experience</h3>
+          <p>Test interactions, improve the interface and introduce analytics.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="story-section story-stack-section">
+      <div class="story-section-heading">
+        <p class="story-overline">THREE LAYERS, WORKING TOGETHER</p>
+        <h2>Each layer has a part to play.</h2>
+      </div>
+      <div class="story-stack">
+        <article class="story-stack-row">
+          <span class="story-stack-number">01</span>
+          <div class="story-stack-title">
+            <p>THE EXPERIENCE</p>
+            <h3>HTML, CSS &amp; JavaScript</h3>
+          </div>
+          <p>
+            The Flask-served frontend brings product discovery, shopping,
+            artist tools and administration into an interactive browser
+            experience.
+          </p>
+        </article>
+        <article class="story-stack-row">
+          <span class="story-stack-number">02</span>
+          <div class="story-stack-title">
+            <p>THE APPLICATION</p>
+            <h3>Python, Flask &amp; PyMongo</h3>
+          </div>
+          <p>
+            Flask receives API requests, applies validation and permissions,
+            and coordinates the marketplace's business rules. PyMongo connects
+            the application to MongoDB.
+          </p>
+        </article>
+        <article class="story-stack-row">
+          <span class="story-stack-number">03</span>
+          <div class="story-stack-title">
+            <p>THE DATA</p>
+            <h3>MongoDB Atlas</h3>
+          </div>
+          <p>
+            The cloud-hosted NoSQL database stores the users, products, carts,
+            orders and reviews that support marketplace workflows.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="story-architecture story-section">
+      <div class="story-architecture-heading">
+        <p class="story-overline">A REQUEST, AND ITS WAY BACK</p>
+        <h2>Working together as one system.</h2>
+        <p>
+          A browser request travels through Flask and PyMongo to MongoDB Atlas.
+          The resulting information returns through the same application path.
+        </p>
+      </div>
+      <figure class="story-architecture-figure">
+        <img
+          src="{{ url_for('static',filename='images/project/build/system-flow.svg') }}"
+          alt="Original diagram showing browser, Flask application, PyMongo and MongoDB Atlas connected by request and response flows."
+          width="1400"
+          height="620"
+        />
+        <figcaption>
+          Browser → Flask application → PyMongo → MongoDB Atlas, with the
+          response returning to the browser.
+        </figcaption>
+      </figure>
+    </section>
+
+    <nav class="story-next" aria-label="Continue exploring the project">
+      <span>Next chapter</span>
+      <a href="#page-data" data-page="data">
+        <small>03 / 04</small> From Documents to Insights <span aria-hidden="true">→</span>
+      </a>
+    </nav>
   </div>
 </section>

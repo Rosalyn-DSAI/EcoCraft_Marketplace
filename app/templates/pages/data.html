@@ -1,44 +1,202 @@
 <section
-  class="page project-page"
+  class="page project-page story-page story-page--data"
   id="page-data"
   aria-labelledby="data-title"
   hidden
 >
-  <p class="kicker">A CLOSER LOOK AT THE DATA</p>
-  <h2 id="data-title">From Documents to Insights</h2>
-  <p class="project-intro">
-    Explore how MongoDB documents support the EcoCraft marketplace and reveal
-    patterns in its catalog.
-  </p>
-  <div class="project-cards">
-    <article class="panel">
-      <h3>Five collections</h3>
-      <p>
-        Users, products, carts, orders and reviews each have a place in the
-        database.
+  <div class="story-wrap">
+    <button
+      class="outline story-dashboard-button"
+      type="button"
+      data-page="dashboard"
+      hidden
+    >
+      Back to dashboard
+    </button>
+    <header class="story-hero story-hero--data">
+      <div class="story-hero-copy">
+        <p class="story-eyebrow">BEYOND DATA STORAGE <span>03 / 04</span></p>
+        <p class="story-page-title">From Documents to Insights</p>
+        <h1 id="data-title">
+          Behind every interaction<br /><em>is a data story.</em>
+        </h1>
+        <p class="story-standfirst">
+          How EcoCraft organizes information, connects experiences and uncovers
+          insights.
+        </p>
+        <p class="story-hero-note">
+          From an artist creating a listing to a customer completing an order,
+          every interaction depends on information that can be organized,
+          connected and managed.
+        </p>
+      </div>
+      <figure class="story-art story-art--data">
+        <img
+          src="{{ url_for('static',filename='images/project/data/collection-map.svg') }}"
+          alt="Original illustration connecting EcoCraft's five MongoDB collections: users, products, cart, orders and reviews."
+          width="1100"
+          height="780"
+        />
+        <figcaption>Five collections. One connected marketplace.</figcaption>
+      </figure>
+    </header>
+
+    <section class="story-section story-collections">
+      <div class="story-collection-lead">
+        <p class="story-overline">FIVE COLLECTIONS</p>
+        <p class="story-collection-count" aria-label="Five">05</p>
+        <h2>One marketplace.</h2>
+        <p>
+          Each collection supports a distinct part of the experience, while
+          references connect information with its own lifecycle.
+        </p>
+      </div>
+      <ol class="story-collection-list">
+        <li><span>01</span><strong>Users</strong><p>The customers, artists and administrators behind every interaction.</p></li>
+        <li><span>02</span><strong>Products</strong><p>Artist listings with price, materials, inventory and sustainability details.</p></li>
+        <li><span>03</span><strong>Cart</strong><p>A customer's selected products and quantities before checkout.</p></li>
+        <li><span>04</span><strong>Orders</strong><p>Purchases with item, price and fulfillment snapshots.</p></li>
+        <li><span>05</span><strong>Reviews</strong><p>Feedback linked to a customer, product and qualifying order.</p></li>
+      </ol>
+    </section>
+
+    <section class="story-section story-documents">
+      <div class="story-section-heading">
+        <p class="story-overline">CONNECTED DOCUMENTS</p>
+        <h2>Embed what belongs together.<br />Reference what lives on its own.</h2>
+      </div>
+      <div class="story-document-columns">
+        <article>
+          <span class="story-document-label">EMBEDDED</span>
+          <h3>A useful snapshot, close at hand.</h3>
+          <p>
+            Cart items keep a product reference and quantity together. Order
+            items also retain product details and price information as a
+            snapshot, so the record describes the purchase as it was made.
+          </p>
+          <div class="story-document-sample" aria-label="Illustration of embedded order item data">
+            <span>order.items</span>
+            <code>{ productSnapshot, quantity, unitPrice, shipping }</code>
+          </div>
+        </article>
+        <article>
+          <span class="story-document-label">REFERENCED</span>
+          <h3>A connection between separate records.</h3>
+          <p>
+            Products reference their artist. Carts and orders reference their
+            customer, while reviews connect the customer, product and order
+            they belong to.
+          </p>
+          <div class="story-document-sample story-document-sample--reference" aria-label="Illustration of document references">
+            <span>review</span>
+            <code>customerId → productId → orderId</code>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="story-section story-crud">
+      <div class="story-section-heading story-section-heading--wide">
+        <div>
+          <p class="story-overline">CREATING, READING, UPDATING, DELETING</p>
+          <h2>Database operations, made part of the experience.</h2>
+        </div>
+        <p>
+          Validation and role permissions shape which actions are available to
+          each person.
+        </p>
+      </div>
+      <div class="story-crud-list">
+        <article><span>C</span><div><h3>Create</h3><p>Register an account, submit a listing or leave an eligible review.</p></div></article>
+        <article><span>R</span><div><h3>Read</h3><p>Explore products, retrieve orders and view marketplace information.</p></div></article>
+        <article><span>U</span><div><h3>Update</h3><p>Edit eligible listings, adjust a cart or update shipping progress.</p></div></article>
+        <article><span>D</span><div><h3>Delete</h3><p>Remove cart items and other records where the user is permitted.</p></div></article>
+      </div>
+    </section>
+
+    <section class="story-section story-checkout">
+      <div class="story-section-heading">
+        <p class="story-overline">FROM CART TO ORDER</p>
+        <h2>A purchase is a coordinated sequence.</h2>
+        <p>
+          Checkout rechecks product availability and artist eligibility, then
+          updates inventory, creates the order and clears the cart inside a
+          MongoDB transaction. If a transaction step fails, the changes are
+          rolled back together.
+        </p>
+      </div>
+      <ol class="story-checkout-flow">
+        <li><span>01</span><strong>Shopping cart</strong></li>
+        <li><span>02</span><strong>Validate stock</strong></li>
+        <li><span>03</span><strong>Update inventory</strong></li>
+        <li><span>04</span><strong>Create order</strong></li>
+        <li><span>05</span><strong>Clear cart</strong></li>
+      </ol>
+      <p class="story-caveat story-checkout-note">
+        This is a coursework checkout demonstration; no payment is processed.
       </p>
-    </article>
-    <article class="panel">
-      <h3>Connected documents</h3>
-      <p>
-        Products reference their artists, carts embed item quantities, and
-        orders keep product snapshots. Reviews connect customers, products and
-        orders.
-      </p>
-    </article>
-    <article class="panel">
-      <h3>Category insights</h3>
-      <p>
-        A MongoDB aggregation groups approved, listed products by category to
-        calculate product counts and average prices.
-      </p>
-    </article>
-  </div>
-  <div class="panel project-note">
-    <h3>From cart to order</h3>
-    <p>
-      Checkout rechecks availability, updates inventory and creates a demo order
-      using a MongoDB transaction. It does not process payment.
-    </p>
+    </section>
+
+    <section class="story-section story-insights">
+      <div class="story-section-heading">
+        <p class="story-overline">FROM INFORMATION TO INTELLIGENCE</p>
+        <h2>Different questions.<br />Different views of the data.</h2>
+      </div>
+      <div class="story-insight-list">
+        <article>
+          <span class="story-insight-index">01 / CATALOG</span>
+          <h3>Understanding the marketplace</h3>
+          <p>
+            A MongoDB aggregation groups listed, in-stock products by category
+            and calculates product counts and average prices.
+          </p>
+        </article>
+        <article>
+          <span class="story-insight-index">02 / ARTIST TOOLS</span>
+          <h3>Empowering the artists</h3>
+          <p>
+            Artist insights summarize order activity, gross sales, commission,
+            net payout and top products across a selected date range. Cancelled
+            items are excluded from sales and payout totals.
+          </p>
+        </article>
+        <article class="story-marketpulse-note">
+          <span class="story-insight-index">03 / MARKETPULSE</span>
+          <h3>Marketplace intelligence</h3>
+          <p>
+            MarketPulse presents a centralized view of customer engagement,
+            artist performance, sales trends and product activity.
+          </p>
+          <p class="story-demo-caption">Currently displaying demonstration data.</p>
+          <p class="story-caveat">
+            MarketPulse's current placeholder data is not connected to the live
+            database.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="story-trust story-section">
+      <p class="story-overline">BUILDING TRUST THROUGH DATA</p>
+      <div>
+        <h2>Reliable experiences start with careful handling.</h2>
+        <p>
+          EcoCraft combines application-level validation, role-based access and
+          controlled database operations to help protect marketplace
+          information and keep interactions consistent.
+        </p>
+        <p>
+          Project documentation also describes Atlas-side validators and
+          indexes, configured manually, as additional data constraints.
+        </p>
+      </div>
+    </section>
+
+    <nav class="story-next" aria-label="Continue exploring the project">
+      <span>Next chapter</span>
+      <a href="#page-contributors" data-page="contributors">
+        <small>04 / 04</small> The Hands Behind EcoCraft <span aria-hidden="true">→</span>
+      </a>
+    </nav>
   </div>
 </section>

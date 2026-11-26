@@ -1,4 +1,4 @@
-"""Public catalog reads: approved product browsing, category aggregation and maker cards."""
+"""Public catalog reads, with sign-in required for maker-specific product results."""
 import math
 import re
 from collections import Counter
@@ -10,6 +10,7 @@ from flask import jsonify, request
 from ...db import get_database
 from ...domain.sustainability import SUSTAINABILITY_PRACTICES
 from ...domain.validation import BadInput
+from ...security import auth_required
 from .common import ELIGIBLE_ARTIST, add_rating_summaries, eligible_artist_ids, jsonify_doc, safe, shop_bp, LISTED_PRODUCT
 
 MAKER_DEFAULT_LIMIT = 10
@@ -57,10 +58,8 @@ def multi_values(name):
     return values
 
 
-@shop_bp.get('/products')
-@safe
-def browse():
-    """Read only approved/listed products; escape search text before constructing regex filters."""
+def _browse_products():
+    """Read approved/listed products and optionally filter by a signed-in maker ID."""
     page = query_page()
     if isinstance(page, BadInput):
         raise page
@@ -97,6 +96,19 @@ def browse():
     products = list(db.products.find(query).sort(SORT_ORDERS[sort]).skip((page - 1) * 20).limit(20))
     add_rating_summaries(db, products)
     return jsonify(products=jsonify_doc(products), page=page, pageSize=20), 200
+
+
+@auth_required()
+def _browse_artist_products():
+    return _browse_products()
+
+
+@shop_bp.get('/products')
+@safe
+def browse():
+    if request.args.get('artistId', '').strip():
+        return _browse_artist_products()
+    return _browse_products()
 
 
 @shop_bp.get('/analytics/categories')

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" role="img" aria-labelledby="title desc">
+  <title id="title">A collection of thoughtful finds</title>
+  <desc id="desc">Original illustration of a shopping bag, a folded accessory, a small home accent and a carefully wrapped gift.</desc>
+  <path d="M383 22c131-24 281 37 333 138 52 102 1 217-103 268-122 60-321 26-367-76C197 246 230 51 383 22Z" fill="#d9e7d8"/>
+  <circle cx="548" cy="124" r="87" fill="#ecd9b8"/>
+  <circle cx="382" cy="235" r="188" fill="none" stroke="#69856b" stroke-width="2" opacity=".22"/>
+  <path d="M104 340c83-78 147-130 227-144 76-13 159 7 231 42 39 19 75 47 103 82" fill="none" stroke="#789272" stroke-width="3" stroke-dasharray="4 11" opacity=".58"/>
+  <g fill="#c1754c">
+    <circle cx="104" cy="340" r="8"/>
+    <circle cx="331" cy="196" r="8"/>
+    <circle cx="562" cy="238" r="8"/>
+    <circle cx="665" cy="320" r="8"/>
+  </g>
+  <path d="M185 123c0-27 21-48 48-48h284c27 0 48 21 48 48v252H185Z" fill="#fffdf8" stroke="#c7d8c8" stroke-width="4"/>
+  <path d="M185 123c0-27 21-48 48-48h284c27 0 48 21 48 48v24H185Z" fill="#1e4b3d"/>
+  <circle cx="217" cy="111" r="5" fill="#dce9dc"/>
+  <circle cx="236" cy="111" r="5" fill="#dce9dc"/>
+  <circle cx="255" cy="111" r="5" fill="#dce9dc"/>
+  <path d="M301 112h107" stroke="#dce9dc" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+  <rect x="443" y="95" width="92" height="29" rx="14" fill="#dce9dc"/>
+  <path d="M462 110h54" stroke="#527557" stroke-width="5" stroke-linecap="round"/>
+  <path d="M214 177h288" stroke="#e4ebe3" stroke-width="2"/>
+  <rect x="218" y="195" width="112" height="141" rx="14" fill="#f3eadc"/>
+  <path d="M240 251h70l-7 66h-56Zm10 0c0-35 10-53 25-53s25 18 25 53" fill="#c1754c" stroke="#914f38" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M257 280h35m-31 16h27" stroke="#f7e5d2" stroke-width="4" stroke-linecap="round"/>
+  <path d="M351 207h157m-157 16h122" stroke="#d8c5a5" stroke-width="7" stroke-linecap="round"/>
+  <rect x="351" y="241" width="151" height="40" rx="10" fill="#eef5ec"/>
+  <path d="M369 261c17-17 34-17 50 0s33 17 51 0m-101 0v8m50-8v8m51-8v8" fill="none" stroke="#789272" stroke-width="4" stroke-linecap="round"/>
+  <path d="M351 306h157m-157 16h102" stroke="#d8c5a5" stroke-width="6" stroke-linecap="round"/>
+  <path d="M214 354h288" stroke="#e4ebe3" stroke-width="2"/>
+  <rect x="224" y="361" width="73" height="8" rx="4" fill="#e6f2e7"/>
+  <g transform="translate(82 266)">
+    <path d="M12 43h102l-10 91H22Z" fill="#c1754c" stroke="#914f38" stroke-width="3"/>
+    <path d="M34 45c0-32 12-49 30-49s30 17 30 49m-44 0V18m14 27V8m15 37V18" fill="none" stroke="#f7e5d2" stroke-width="5" stroke-linecap="round"/>
+    <path d="M33 76h62m-57 17h53" stroke="#e5b28a" stroke-width="4"/>
+  </g>
+  <g transform="translate(580 279)">
+    <path d="M5 43h98v82H5Z" fill="#d9b786" stroke="#9c704a" stroke-width="3"/>
+    <path d="M5 43h98L54 76Z" fill="#edd4ae" stroke="#9c704a" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M47 64h16v61H47Z" fill="#c1754c"/>
+    <path d="M46 43c-28-20-19-43 0-33 10 5 10 24 8 33m10 0c28-20 19-43 0-33-10 5-10 24-8 33" fill="none" stroke="#c1754c" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <path d="M126 177c-14-29-10-55 12-79 22 27 23 53-12 79Zm5-21c17-16 36-24 59-21-14 21-34 29-59 21Z" fill="#91aa83"/>
+  <path d="M141 192v43m18-22c-6-10-13-17-23-23" fill="none" stroke="#69856b" stroke-width="4" stroke-linecap="round"/>
+  <path d="M661 161c-3-29 9-51 36-66 10 28 2 50-25 67Zm13-10c17-11 35-14 54-7-16 16-33 18-54 7Z" fill="#9db48c"/>
+  <path d="M672 178v38m17-20c-5-9-12-15-20-20" fill="none" stroke="#69856b" stroke-width="4" stroke-linecap="round"/>
+</svg>
