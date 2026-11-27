@@ -14,7 +14,7 @@ Routes are grouped by function under `app/routes/`:
 - `app/image_uploads.py` holds the Cloudinary adapter used by the image upload route.
 - The root `GET /` route is defined in `app/__init__.py`, outside the `/api` prefix.
 
-The browser loads `marketplace.html` and its CSS and JavaScript. JavaScript sends same-origin `/api` requests to Flask. JWT access tokens are held in tab memory and sent as a `Bearer` authorization header, so refreshing the tab requires signing in again. The browser does not connect to Atlas and never receives database or Cloudinary secrets.
+The browser loads `marketplace.html` and its CSS and JavaScript. JavaScript sends same-origin `/api` requests to Flask. JWT access tokens are stored in browser session storage and sent as a `Bearer` authorization header. On refresh the app validates the token with `/auth/me` and restores the current top-level page. Sign-out removes the stored token but does not revoke it server-side; it remains usable until expiry. Session storage is accessible to scripts on the origin, so XSS prevention is important. The browser does not connect to Atlas and never receives database or Cloudinary secrets.
 
 The marketplace template extends `base.html` and includes shared and page-specific sections. Styles are under `static/css/`, the shared marketplace script is under `static/js/pages/`, and branding images are under `static/images/`. The interface is a single-page shell rather than separate Flask routes.
 

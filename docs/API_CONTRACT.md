@@ -1,6 +1,6 @@
 # EcoCraft API contract
 
-Base URL: `http://127.0.0.1:5000/api`. Requests/responses use JSON except the multipart image upload. Protected routes require `Authorization: Bearer <accessToken>`. The frontend holds tokens in tab memory; authentication does not use cookies.
+Base URL: `http://127.0.0.1:5000/api`. Requests/responses use JSON except the multipart image upload. Protected routes require `Authorization: Bearer <accessToken>`. The frontend stores the token in tab session storage; authentication does not use cookies. Sign-out removes it locally but does not revoke an issued token before expiry.
 
 ## Access and shared-data rules
 

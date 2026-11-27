@@ -1,7 +1,7 @@
 /* EcoCraft coursework UI. All write actions call Flask; browser never talks to Atlas. */
 (() => {
   'use strict';
-  // Tab-local identity and UI caches; access tokens are never stored in browser persistence.
+  // Identity and UI caches are rebuilt from the tab's token after a reload.
   const state = {
     token: null,
     user: null,
@@ -25,6 +25,7 @@
     reviewRequest = 0;
   let cartBusy = false,
     cartVersion = 0;
+  let catalogRequest = 0;
   function clearReviews() {
     reviewedProduct = null;
     reviewRequest++;
@@ -113,6 +114,43 @@
     flashMessage(n);
     n.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   };
+  const sessionTokenKey = 'ecocraft.accessToken';
+  const sessionPageKey = 'ecocraft.page';
+  function readTabValue(key) {
+    try {
+      return sessionStorage.getItem(key);
+    } catch (error) {
+      console.error('Unable to read tab session storage', error);
+      notify('Tab storage is unavailable. Sign-in cannot be restored after refresh.', false);
+      return null;
+    }
+  }
+  function writeTabValue(key, value) {
+    try {
+      if (value === null) sessionStorage.removeItem(key);
+      else sessionStorage.setItem(key, value);
+      return true;
+    } catch (error) {
+      console.error('Unable to update tab session storage', error);
+      notify('Tab storage is unavailable. Session changes could not be saved.', false);
+      return false;
+    }
+  }
+  function setAccountNavigation(user) {
+    $('auth-nav').textContent = user ? 'Account' : 'Sign in / Sign up';
+    $('auth-nav').dataset.page = user
+      ? { admin: 'admin-profile', artist: 'artist-profile' }[user.role] || 'dashboard'
+      : 'auth';
+  }
+  function restorablePage(name, role) {
+    const common = ['catalog', 'about', 'build', 'data', 'contributors'];
+    const byRole = {
+      customer: ['dashboard', 'customer-cart', 'customer-orders'],
+      artist: ['artist-dashboard', 'artist-profile', 'artist-insights', 'artist-orders', 'artist-add-product'],
+      admin: ['dashboard', 'admin-profile', 'admin-artists', 'admin-products', 'admin-analytics'],
+    };
+    return common.includes(name) || (byRole[role] || []).includes(name);
+  }
   const formData = (f) => Object.fromEntries(new FormData(f).entries());
   const comma = (s) =>
     s
@@ -209,6 +247,8 @@
       pendingProductDetails = null;
     }
     currentPage = name;
+    if (state.user) writeTabValue(sessionPageKey, name);
+    catalogRequest++;
     clearReviews();
     const admin = state.user?.role === 'admin';
     const artistPage =
@@ -388,20 +428,17 @@
       state.token = result.accessToken;
       state.user = result.user;
       state.cart = null;
+      const sessionSaved = writeTabValue(sessionTokenKey, state.token);
       updateCartControls();
       updateCartBadge();
       form.reset();
-      $('auth-nav').textContent = 'Account';
-      const accountPage =
-        { admin: 'admin-profile', artist: 'artist-profile' }[
-          result.user.role
-        ] || 'dashboard';
+      setAccountNavigation(result.user);
       const landing =
         { admin: 'dashboard', artist: 'dashboard' }[result.user.role] ||
         'catalog';
-      $('auth-nav').dataset.page = accountPage;
       if (result.user.role === 'customer') await refreshCart();
-      $('notice').hidden = true;
+      if (state.token !== result.accessToken) return;
+      if (sessionSaved) $('notice').hidden = true;
       $('sign-in-message').textContent =
         `Signed in as ${result.user.personalInfo.firstName} (${result.user.role})`;
       flashMessage($('sign-in-message'));
@@ -432,14 +469,31 @@
     state.user = null;
     state.cart = null;
     state.orders = [];
+    state.myProducts = [];
+    state.sales = [];
+    orderRows = [];
+    salesRows = [];
+    for (const id of ['customer-orders', 'order-states', 'cart-items', 'artist-sales', 'sales-states', 'artist-products', 'account-details']) {
+      $(id).innerHTML = '';
+    }
+    document.querySelectorAll('.customer-profile-summary, .admin-profile-summary')
+      .forEach((el) => el.replaceChildren());
+    $('account-edit-form').reset();
+    setAccountEditing(false);
+    $('confirm-address').checked = false;
+    $('address-summary').replaceChildren();
+    setCheckoutOpen(false);
+    const tokenRemoved = writeTabValue(sessionTokenKey, null);
+    const pageRemoved = writeTabValue(sessionPageKey, null);
     updateCartControls();
     updateCartBadge();
-    $('auth-nav').textContent = 'Sign in / Sign up';
-    $('auth-nav').dataset.page = 'auth';
-    notify('Signed out from this browser tab');
+    setAccountNavigation(null);
+    if (tokenRemoved && pageRemoved) notify('Signed out from this browser tab');
+    else notify('Signed out, but saved session data could not be cleared. Close this tab.', false);
     page('public-landing');
   };
-  $('search-form').onsubmit = (e) => {
+  const searchForm = $('search-form');
+  searchForm.onsubmit = (e) => {
     e.preventDefault();
     if ($('page-catalog').hidden || $('catalog-view').hidden) {
       page('catalog', false);
@@ -448,10 +502,28 @@
       showHomeHero(false);
       $('collection-title').textContent = 'All products';
     }
+    state.catalogMode = 'all';
     state.catalogPage = 1;
     state.catalogHasNext = false;
     run(refreshCatalog);
   };
+  searchForm.addEventListener('change', (event) => {
+    if (event.target.matches('#sort, #min-price, #max-price, .filter-checks input[type="checkbox"]'))
+      searchForm.requestSubmit();
+  });
+  const filters = $('catalog-filters');
+  if (typeof ResizeObserver !== 'undefined') {
+    const nav = document.querySelector('.nav');
+    const updateFilterPosition = () => {
+      filters.style.setProperty('--filter-height', `${filters.offsetHeight}px`);
+      filters.style.setProperty('--nav-height', `${nav.offsetHeight + 16}px`);
+    };
+    const observer = new ResizeObserver(updateFilterPosition);
+    observer.observe(filters);
+    observer.observe(nav);
+    filters.classList.add('catalog-filters-sticky');
+    updateFilterPosition();
+  }
   function resetFilters() {
     $('search').value = '';
     setChecked('category-checks', []);
@@ -487,7 +559,10 @@
     if (!$('page-catalog').hidden && !$('catalog-view').hidden)
       run(refreshCatalog);
   };
-  $('catalog-home-button').onclick = () => showCatalogHome();
+  $('catalog-home-button').onclick = () => {
+    resetFilters();
+    showCatalogHome();
+  };
   $('catalog-prev').onclick = () => {
     if (state.catalogPage > 1) {
       state.catalogPage -= 1;
@@ -501,6 +576,7 @@
     }
   };
   function showCatalogHome(refresh = true) {
+    catalogRequest++;
     clearReviews();
     showHomeHero(true);
     state.catalogMode = 'all';
@@ -541,6 +617,7 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   function openMakers() {
+    catalogRequest++;
     clearReviews();
     showHomeHero(false);
     $('catalog-home').hidden = true;
@@ -791,6 +868,7 @@
     product,
     origin = $('catalog-view').hidden ? 'home' : 'collection',
   ) {
+    catalogRequest++;
     clearReviews();
     state.detailOrigin = origin;
     showHomeHero(false);
@@ -901,6 +979,7 @@
   });
   async function refreshCatalog() {
     if (state.catalogMode === 'makers') return;
+    const request = ++catalogRequest;
     const search = $('search').value.trim(),
       categories = checkedValues('category-checks'),
       materials = checkedValues('material-checks'),
@@ -922,13 +1001,25 @@
     categories.forEach((v) => params.append('category', v));
     materials.forEach((v) => params.append('material', v));
     practices.forEach((v) => params.append('practice', v));
-    const data = await call('/products?' + params);
+    meta.textContent = 'Loading products...';
+    div.innerHTML = '';
+    pager.hidden = true;
+    let data;
+    try {
+      data = await call('/products?' + params);
+    } catch (error) {
+      if (request !== catalogRequest) return;
+      meta.textContent = 'Products could not be loaded. Change or apply filters to retry.';
+      throw error;
+    }
+    if (request !== catalogRequest) return;
     state.products = data.products;
     state.homeProducts.push(...data.products);
     state.catalogPage = data.page;
     if (data.page > 1 && !data.products.length) {
       state.catalogPage = data.page - 1;
       await refreshCatalog();
+      if (catalogRequest !== request + 1) return;
       state.catalogHasNext = false;
       pager.hidden = false;
       $('catalog-next').hidden = true;
@@ -1274,7 +1365,9 @@
       : `<p class="muted">${all.length ? 'No products match these filters.' : 'No products created yet.'}</p>`;
   }
   async function refreshMyProducts() {
+    const token = state.token;
     const data = await call('/products/mine');
+    if (state.token !== token) return;
     state.myProducts = data.products;
     const categorySelect = $('product-category');
     const previous = categorySelect.value;
@@ -1376,6 +1469,32 @@
     'click',
     handleArtistProductClick,
   );
+  function renderCartTotals(items, unavailable) {
+    let cents = 0;
+    let valid = !items.some(unavailable);
+    for (const item of items) {
+      if (!valid) break;
+      const price = String(item.product.price).match(/^(\d+)\.(\d{2})$/);
+      if (!price || !Number.isSafeInteger(item.quantity) || item.quantity < 1) {
+        valid = false;
+        break;
+      }
+      const unitCents = Number(price[1]) * 100 + Number(price[2]);
+      cents += unitCents * item.quantity;
+      if (!Number.isSafeInteger(unitCents) || !Number.isSafeInteger(cents)) {
+        valid = false;
+        break;
+      }
+    }
+    const total = valid
+      ? `$${Math.floor(cents / 100).toLocaleString('en-US')}.${String(cents % 100).padStart(2, '0')}`
+      : '—';
+    $('cart-subtotal').textContent = total;
+    $('cart-total').textContent = total;
+    $('cart-total-note').textContent = valid
+      ? 'Shipping and taxes are not calculated in this demo. Prices are confirmed at checkout; no payment is processed.'
+      : 'Total unavailable. Check your cart items and refresh before checkout.';
+  }
   // Customer cart actions use product IDs; server checks ownership, eligibility and available inventory.
   function renderCart() {
     const div = $('cart-items');
@@ -1385,6 +1504,8 @@
       x.product.quantityAvailable === 0 ||
       x.quantity > x.product.quantityAvailable;
     $('cart-empty-state').hidden = items.length > 0;
+    $('cart-summary').hidden = items.length === 0;
+    $('cart-summary').parentElement.classList.toggle('is-empty', items.length === 0);
     div.innerHTML = items.length
       ? items
           .map((x) => {
@@ -1407,6 +1528,7 @@
       : '';
     state.cartReady =
       state.cart.items.length > 0 && !state.cart.items.some(unavailable);
+    renderCartTotals(items, unavailable);
     updatePlaceOrder();
     updateCartControls();
     updateCartBadge();
@@ -1777,6 +1899,13 @@
       hourCycle: 'h23',
     });
   }
+  function orderItemImage(item, products) {
+    const product = products.find((p) => p._id === item.productId);
+    const image = item.productSnapshot.image || product?.images?.[0];
+    return image
+      ? `<img src="${esc(image)}" alt="${esc(item.productSnapshot.title)}" loading="lazy">`
+      : productPlaceholder;
+  }
   function renderOrders() {
     renderOrderStates();
     const info = orderStates.find((s) => s.key === orderState);
@@ -1792,13 +1921,10 @@
           .map(([groupId, group]) => {
             const cards = group.rows
               .map(({ orderId, item, index }) => {
-                const product = [
+                const image = orderItemImage(item, [
                   ...(state.products || []),
                   ...(state.homeProducts || []),
-                ].find((p) => p._id === item.productId);
-                const image = product?.images?.[0]
-                  ? `<img src="${esc(product.images[0])}" alt="${esc(item.productSnapshot.title)}" loading="lazy">`
-                  : productPlaceholder;
+                ]);
                 const amount = Number(item.unitPrice) * item.quantity;
                 const st = orderStates.find(
                   (s) => s.key === itemStateKey(item),
@@ -1831,7 +1957,9 @@
       : `<p class="empty">${esc(info.empty)}</p>`;
   }
   async function refreshOrders() {
+    const token = state.token;
     const r = await call('/orders/mine');
+    if (state.token !== token) return;
     state.orders = r.orders;
     orderRows = r.orders.flatMap((o) =>
       o.items.map((item, i) => ({
@@ -1971,12 +2099,7 @@
           .map(([groupId, group]) => {
             const cards = group.rows
               .map(({ item, index }) => {
-                const product = (state.myProducts || []).find(
-                  (p) => p._id === item.productId,
-                );
-                const image = product?.images?.[0]
-                  ? `<img src="${esc(product.images[0])}" alt="${esc(item.productSnapshot.title)}" loading="lazy">`
-                  : productPlaceholder;
+                const image = orderItemImage(item, state.myProducts);
                 const itemKey =
                   item.status !== 'active'
                     ? 'cancelled'
@@ -2003,7 +2126,9 @@
       : `<p class="empty">${esc(info.empty)}</p>`;
   }
   async function refreshSales() {
+    const token = state.token;
     const [r] = await Promise.all([call('/orders/sales'), refreshMyProducts()]);
+    if (state.token !== token) return;
     state.sales = r.sales;
     salesRows = r.sales.flatMap((o) =>
       o.items.map((item, i) => ({
@@ -2362,5 +2487,31 @@
     });
   };
 
-  page('public-landing');
+  async function restoreTabSession() {
+    const token = readTabValue(sessionTokenKey);
+    const savedPage = readTabValue(sessionPageKey);
+    page('public-landing');
+    if (!token) return;
+    state.token = token;
+    try {
+      const result = await call('/auth/me');
+      if (state.token !== token) return;
+      state.user = result.user;
+      setAccountNavigation(result.user);
+      const fallback = result.user.role === 'customer' ? 'catalog' : 'dashboard';
+      page(restorablePage(savedPage, result.user.role) ? savedPage : fallback);
+      if (result.user.role === 'customer') run(refreshCart);
+    } catch (error) {
+      if (state.token !== token) return;
+      state.token = null;
+      if (['TOKEN_EXPIRED', 'INVALID_TOKEN', 'ACCOUNT_DISABLED', 'ARTIST_NOT_APPROVED'].includes(error?.code)) {
+        writeTabValue(sessionTokenKey, null);
+        writeTabValue(sessionPageKey, null);
+        notify(error.message, false);
+      } else {
+        notify(`Could not restore your session: ${error.message}. Refresh to try again.`, false);
+      }
+    }
+  }
+  restoreTabSession();
 })();

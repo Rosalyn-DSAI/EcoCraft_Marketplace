@@ -27,35 +27,10 @@
       <h2>Your shopping cart</h2>
     </div>
     <div class="customer-cart-controls">
-      <button class="secondary" id="cart-refresh">Refresh cart</button>
-      <button
-        class="primary"
-        id="checkout-toggle"
-        type="button"
-        aria-expanded="false"
-        aria-controls="checkout-panel"
-      >
-        Checkout
-      </button>
-      <article class="panel checkout-panel" id="checkout-panel" hidden>
-        <h4>Shipping address</h4>
-        <p class="hint">Educational demonstration only. No real payments.</p>
-        <div class="spaced address-confirm">
-          <div id="address-summary"></div>
-          <button class="outline" id="edit-checkout-address" type="button">Edit</button>
-        </div>
-        <label class="confirm-address"
-          ><input type="checkbox" id="confirm-address" /> I confirm this is my shipping address</label
-        >
-        <div>
-          <button class="primary" id="place-order" type="button" disabled>
-            Place order
-          </button>
-        </div>
-      </article>
+      <button class="secondary" id="cart-refresh" type="button">Refresh cart</button>
     </div>
   </div>
-  <div class="inner cart-page">
+  <div class="inner cart-page is-empty">
     <div class="cart-items-column">
       <section id="cart-empty-state" class="cart-empty-state" hidden>
         <img
@@ -73,11 +48,45 @@
             something that feels uniquely yours.
           </p>
           <button class="primary" type="button" data-page="catalog">
-            Explore the marketplace
+            Continue shopping
           </button>
         </div>
       </section>
       <div id="cart-items" class="cart-list"></div>
     </div>
+    <aside id="cart-summary" class="cart-summary panel" aria-labelledby="cart-summary-title" hidden>
+      <h3 id="cart-summary-title">Order summary</h3>
+      <p class="hint">Review your items and confirm your shipping address to place an order.</p>
+      <div class="cart-totals" aria-live="polite">
+        <div><span>Subtotal</span><strong id="cart-subtotal">—</strong></div>
+        <div class="cart-total"><span>Estimated total</span><strong id="cart-total">—</strong></div>
+        <p class="hint" id="cart-total-note">Shipping and taxes are not calculated in this demo. Prices are confirmed at checkout; no payment is processed.</p>
+      </div>
+      <button
+        class="primary"
+        id="checkout-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="checkout-panel"
+      >
+        Checkout
+      </button>
+      <div class="checkout-panel" id="checkout-panel" hidden>
+        <h4>Shipping address</h4>
+        <p class="hint">Educational demonstration only. No real payments.</p>
+        <div class="spaced address-confirm">
+          <div id="address-summary"></div>
+          <button class="outline" id="edit-checkout-address" type="button">Edit</button>
+        </div>
+        <label class="confirm-address"
+          ><input type="checkbox" id="confirm-address" /> I confirm this is my shipping address</label
+        >
+        <div>
+          <button class="primary" id="place-order" type="button" disabled>
+            Place order
+          </button>
+        </div>
+      </div>
+    </aside>
   </div>
 </section>

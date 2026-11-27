@@ -1006,14 +1006,17 @@ footer {
   }
 }
 .catalog-filters {
-  max-height: 80vh;
-  overflow-y: auto;
-  scrollbar-color: #b9cebe #edf2e8;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 8px 25px rgba(33, 57, 37, 0.025);
+}
+@media (min-width: 1200px) {
+  .catalog-filters-sticky {
+    position: sticky;
+    top: min(var(--nav-height), calc(100vh - var(--filter-height) - 16px));
+  }
 }
 .catalog-filters:focus-visible {
   outline: 3px solid #c88a5a;
@@ -1043,10 +1046,6 @@ footer {
 }
 .catalog-filters fieldset label {
   color: var(--muted);
-}
-.filter-checks {
-  max-height: 200px;
-  overflow-y: auto;
 }
 .filter-checks label {
   display: flex;
@@ -1111,6 +1110,9 @@ footer {
 @media (max-width: 1199px) {
   .page-layout {
     grid-template-columns: minmax(0, 1fr);
+  }
+  #catalog-filters {
+    order: -1;
   }
 }
 @media (max-width: 900px) {
