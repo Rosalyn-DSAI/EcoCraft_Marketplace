@@ -22,6 +22,8 @@ Paths below are relative to `/api`.
 | PATCH | `/auth/me` | Eligible user's own `firstName`, `lastName` and `mobile`. Artists may also send `originStory` (1-2000 characters, stored at `artistProfile.originStory`); other roles get 400 for it. |
 | PUT | `/auth/me/address` | Customer sets their single shipping address at `personalInfo.address` (street, city, state, zipCode, country). Returns the updated user. |
 | GET | `/admin/artists` | Admin artist list. Optional `status` (one of the five onboarding statuses), `q` (name or email search, up to 100 characters), `sort=name` (first/last name order; default newest first), `page` (1–1000), and `pageSize` (1–50, default 20). Returns `artists`, `page`, `pageSize`, `total`. |
+| GET | `/admin/analytics/growth` | Admin-only MarketPulse growth KPIs, chart, categories and top products. See MarketPulse details below. |
+| GET | `/admin/analytics/performance` | Admin-only MarketPulse performance KPIs, top artists, slow movers and attention lists. See MarketPulse details below. |
 | PATCH | `/admin/artists/<id>/approval` | Admin moves an artist's onboarding status. Allowed moves: `request_received` → `waiting_for_documents`; `waiting_for_documents` → `received_documents`; `received_documents` → `waiting_for_documents` (additional info), `approved`, or `rejected`. Any other move returns 409. Unknown status values return 400, and seeded original artists return 403. Only `approved` artists can sign in. |
 | GET | `/products` | Public approved/listed catalog with stock available (`inventory.quantityAvailable > 0`) from artists whose onboarding is `approved` and account is active; optional `search`, repeatable `category` (up to 30), repeatable `material` (up to 15), repeatable `practice` (sustainability practice values, up to 7), `minPrice`, `maxPrice`, `sort` (`newest`, `price_asc`, `price_desc`), `page`; 20/page. Multiple values in one filter match any of them. Invalid values return 400. Supplying `artistId` requires authentication. |
 | GET | `/products/mine` | Artist's own listings, up to 200. |
@@ -39,7 +41,7 @@ Paths below are relative to `/api`.
 | POST | `/orders/checkout` | Customer simulated transaction-based checkout. Returns **201** with `order` and `message`. Each item's `productSnapshot` includes `title`, `image` (the product's first image, or `null`), `artistId` and `artistName`. The order includes `createdAt` (UTC). |
 | GET | `/orders/mine` | Customer's own order history, up to 100. Items include the same `productSnapshot` fields, including `image`. |
 | GET | `/orders/sales` | Artist's own order items, up to 100 orders; each order includes `createdAt`; retains original item indices. |
-| GET | `/orders/insights?start=<ms>&end=<ms>` | Artist-only KPIs by order `createdAt` for `[start,end)` and the equal-length window before it. Returns `period`, `current` and `previous` (`grossSales`, `commission`, `netPayout`, `orders`), `statusCounts` (`Shipped`, `Pending`, `Cancelled`), and `topProducts` (`productId`, `title`, `unitsSold`, `grossSales`, `netPayout`). Window must be 1 ms to 800 days long; orders without `createdAt` are excluded. |
+| GET | `/orders/insights?start=<ms>&end=<ms>` | Artist-only KPIs from the caller's own order items by order `createdAt` for `[start,end)` and the equal-length window before it. Returns `period`, `current` and `previous` (`grossSales`, `commission`, `netPayout`, `orders`), `statusCounts` (`Shipped`, `Pending`, `Cancelled`), and `topProducts` (`productId`, `title`, `unitsSold`, `grossSales`, `netPayout`). Window must be 1 ms to 800 days long; orders without `createdAt` are excluded. See Artist Insights details below. |
 | PATCH | `/orders/<id>/items/<index>/cancel` | Customer cancels own active unshipped item; restores stock once. |
 | PATCH | `/orders/<id>/items/<index>/ship` | Owning artist marks an active pending item as shipped. The returned `order` includes `_id`, `createdAt`, and only the artist's items with original `itemIndex` values; whole-order totals are not returned. |
 | GET | `/products/<id>/reviews` | Public product reviews, up to 100. |
@@ -51,6 +53,35 @@ Paths below are relative to `/api`.
 | GET | `/artists/makers` | Public "Meet the Makers" cards; optional `limit` (default 10, max 100). Returns `id`, `name`, `originStory`, `image` (first product photo or null), `inCarts` (carts holding their listed products) and `soldLast30Days` (units from active order items in the last 30 days). No email, address or account fields. |
 
 ## Request examples and field rules
+
+### Artist Insights
+
+`/orders/insights` uses only the signed-in artist's items. The UI sends local
+preset dates as epoch milliseconds with an exclusive end; the previous window
+has the same elapsed duration.
+
+Sales, commission, estimated payout and top products count each active shipped item, even in a partially shipped order; pending and cancelled items are excluded. The orders KPI counts distinct orders containing shipped items.
+`statusCounts` still includes pending and fully cancelled orders, with partially shipped artist orders counted as `Pending`. 
+Results use the order's creation date and current item statuses, not the shipping date. Payout is an estimate, not a payment or biweekly settlement record. 
+
+### MarketPulse analytics
+
+Both read-only admin endpoints accept inclusive `start` and `end` dates
+(`YYYY-MM-DD`), local-midnight epoch milliseconds (`startMs`, exclusive
+`endMs`, and `previousStartMs`), an IANA `timezone`, and `compare=true` or
+`false`. The previous window has the same number of calendar days. The browser uses its own timezone; ranges are limited to 800 days. Invalid ranges return 400.
+
+Growth returns `period`, `kpis`, `revenueSeries`, `categoryRevenue` and
+`topProducts`; performance returns `period`, `kpis`, `topArtists`, `slowMovers` and `attention`. Money values are decimal strings.
+
+- Metrics use order `createdAt` and current item state, not shipping or
+  cancellation dates. Orders without `createdAt` are excluded. Sales include active shipped items and stored commission; orders are counted distinctly.
+  Cancellations count cancelled items in orders placed in the period.
+- New artists are currently approved artists created in the period. Product
+  counts use currently approved, listed, active products, without a historical  comparison. Category sales use the current category, or `Unknown` if missing. Reviews exclude soft-deleted records.
+- Slow movers are currently approved, listed, active, in-stock products without  a shipped sale from an order placed in the last 60 days; the no-sales attention list uses 30 days. Declining artists have sales more than 20% below the previous period. High-sales, poor-rated products meet or exceed median units sold and have an average period rating below 3.5. Pending approvals include the three non-final onboarding states.
+
+Current-state metrics cannot reconstruct past listing, approval, category or item-status changes.
 
 Customer registration:
 
